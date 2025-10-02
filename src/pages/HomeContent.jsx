@@ -153,7 +153,7 @@ function HomeContent() {
 
                     {/* Анимированный слайдер - только на клиенте */}
                     {isClient && (
-                        <AnimatePresence mode="wait">
+                        <AnimatePresence mode="popLayout">
                             <motion.div
                                 key={currentSlide}
                                 initial={{ opacity: 0 }}
