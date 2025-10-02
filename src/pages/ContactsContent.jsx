@@ -286,133 +286,65 @@ function ContactsContent() {
 
                         {/* Contact Info */}
                         <div className="space-y-8">
-                            {/* Office Card */}
-                            {isClient ? (
-                                <motion.div
-                                    whileHover={{ scale: 1.02, y: -5 }}
-                                    className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-gray-100"
-                                >
-                                    <div className="flex items-center mb-6">
-                                        <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center mr-4">
-                                            <Building className="w-6 h-6 text-white" />
-                                        </div>
+                            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-gray-100">
+                                <div className="flex items-center mb-6">
+                                    <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center mr-4">
+                                        <Building className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <h2 className="text-3xl font-bold text-gray-900">Наш офис</h2>
+                                        <p className="text-gray-600">Приходите в гости обсудить ваше путешествие</p>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-4">
+                                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
+                                        <MapPin className="w-5 h-5 text-cyan-600 flex-shrink-0" />
                                         <div>
-                                            <h2 className="text-3xl font-bold text-gray-900">Наш офис</h2>
-                                            <p className="text-gray-600">Приходите в гости обсудить ваше путешествие</p>
+                                            <div className="font-semibold text-gray-900">Адрес</div>
+                                            <div className="text-gray-600">{office.address}</div>
                                         </div>
                                     </div>
 
-                                    <div className="space-y-4">
-                                        <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
-                                            <MapPin className="w-5 h-5 text-cyan-600 flex-shrink-0" />
-                                            <div>
-                                                <div className="font-semibold text-gray-900">Адрес</div>
-                                                <div className="text-gray-600">{office.address}</div>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
-                                            <Phone className="w-5 h-5 text-cyan-600 flex-shrink-0" />
-                                            <div>
-                                                <div className="font-semibold text-gray-900">Телефон</div>
-                                                <div className="text-gray-600">{office.phone}</div>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
-                                            <Mail className="w-5 h-5 text-cyan-600 flex-shrink-0" />
-                                            <div>
-                                                <div className="font-semibold text-gray-900">Email</div>
-                                                <div className="text-gray-600">{office.email}</div>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
-                                            <Clock className="w-5 h-5 text-cyan-600 flex-shrink-0" />
-                                            <div>
-                                                <div className="font-semibold text-gray-900">Часы работы</div>
-                                                <div className="text-gray-600">{office.hours}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Office Features */}
-                                    <div className="mt-6">
-                                        <h4 className="font-semibold text-gray-900 mb-3">Удобства в офисе:</h4>
-                                        <div className="flex flex-wrap gap-2">
-                                            {office.features.map((feature, idx) => (
-                                                <span
-                                                    key={idx}
-                                                    className="px-3 py-1 bg-cyan-50 text-cyan-700 text-sm rounded-full border border-cyan-200"
-                                                >
-                                                    {feature}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ) : (
-                                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-gray-100">
-                                    <div className="flex items-center mb-6">
-                                        <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center mr-4">
-                                            <Building className="w-6 h-6 text-white" />
-                                        </div>
+                                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
+                                        <Phone className="w-5 h-5 text-cyan-600 flex-shrink-0" />
                                         <div>
-                                            <h2 className="text-3xl font-bold text-gray-900">Наш офис</h2>
-                                            <p className="text-gray-600">Приходите в гости обсудить ваше путешествие</p>
+                                            <div className="font-semibold text-gray-900">Телефон</div>
+                                            <div className="text-gray-600">{office.phone}</div>
                                         </div>
                                     </div>
 
-                                    <div className="space-y-4">
-                                        <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
-                                            <MapPin className="w-5 h-5 text-cyan-600 flex-shrink-0" />
-                                            <div>
-                                                <div className="font-semibold text-gray-900">Адрес</div>
-                                                <div className="text-gray-600">{office.address}</div>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
-                                            <Phone className="w-5 h-5 text-cyan-600 flex-shrink-0" />
-                                            <div>
-                                                <div className="font-semibold text-gray-900">Телефон</div>
-                                                <div className="text-gray-600">{office.phone}</div>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
-                                            <Mail className="w-5 h-5 text-cyan-600 flex-shrink-0" />
-                                            <div>
-                                                <div className="font-semibold text-gray-900">Email</div>
-                                                <div className="text-gray-600">{office.email}</div>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
-                                            <Clock className="w-5 h-5 text-cyan-600 flex-shrink-0" />
-                                            <div>
-                                                <div className="font-semibold text-gray-900">Часы работы</div>
-                                                <div className="text-gray-600">{office.hours}</div>
-                                            </div>
+                                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
+                                        <Mail className="w-5 h-5 text-cyan-600 flex-shrink-0" />
+                                        <div>
+                                            <div className="font-semibold text-gray-900">Email</div>
+                                            <div className="text-gray-600">{office.email}</div>
                                         </div>
                                     </div>
 
-                                    <div className="mt-6">
-                                        <h4 className="font-semibold text-gray-900 mb-3">Удобства в офисе:</h4>
-                                        <div className="flex flex-wrap gap-2">
-                                            {office.features.map((feature, idx) => (
-                                                <span
-                                                    key={idx}
-                                                    className="px-3 py-1 bg-cyan-50 text-cyan-700 text-sm rounded-full border border-cyan-200"
-                                                >
-                                                    {feature}
-                                                </span>
-                                            ))}
+                                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
+                                        <Clock className="w-5 h-5 text-cyan-600 flex-shrink-0" />
+                                        <div>
+                                            <div className="font-semibold text-gray-900">Часы работы</div>
+                                            <div className="text-gray-600">{office.hours}</div>
                                         </div>
                                     </div>
                                 </div>
-                            )}
 
+                                <div className="mt-6">
+                                    <h4 className="font-semibold text-gray-900 mb-3">Удобства в офисе:</h4>
+                                    <div className="flex flex-wrap gap-2">
+                                        {office.features.map((feature, idx) => (
+                                            <span
+                                                key={idx}
+                                                className="px-3 py-1 bg-cyan-50 text-cyan-700 text-sm rounded-full border border-cyan-200"
+                                            >
+                                                {feature}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
                             {/* Map Placeholder */}
                             <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
                                 <h3 className="text-lg font-bold text-gray-900 mb-4">Мы на карте</h3>
