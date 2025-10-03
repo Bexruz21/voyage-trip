@@ -55,7 +55,7 @@ function Navigation() {
                             </Link>
                             <div>
                                 <Link href="/">
-                                    <h1 className="m-0 text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                                    <h1 className="m-0 text-xl sm:text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
                                         VOYAGE TRIP
                                     </h1>
                                 </Link>

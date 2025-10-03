@@ -21,7 +21,7 @@ const advantages = [
 
 export function AdvantagesSection() {
   return (
-    <section className="py-20 bg-gradient-to-r from-cyan-500 to-blue-500 text-white">
+    <section className="py-10 sm:py-20 bg-gradient-to-r from-cyan-500 to-blue-500 text-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center mb-4">
           Наши преимущества

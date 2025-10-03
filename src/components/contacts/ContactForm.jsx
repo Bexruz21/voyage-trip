@@ -46,14 +46,20 @@ export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubm
   };
 
   return (
-    <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-gray-100">
-      <div className="flex items-center mb-6">
-        <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center mr-4">
-          <Send className="w-6 h-6 text-white" />
+    <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-2xl border border-gray-100">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0">
+            <Send className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+          </div>
+          <div className="sm:hidden">
+            <h2 className="text-xl font-bold text-gray-900">Начните свое путешествие</h2>
+            <p className="text-sm text-gray-600">Расскажите о ваших планах, и мы создадим идеальный тур</p>
+          </div>
         </div>
-        <div>
-          <h2 className="text-3xl font-bold text-gray-900">Начните свое путешествие</h2>
-          <p className="text-gray-600">Расскажите о ваших планах, и мы создадим идеальный тур</p>
+        <div className="hidden sm:block">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Начните свое путешествие</h2>
+          <p className="text-sm text-gray-600">Расскажите о ваших планах, и мы создадим идеальный тур</p>
         </div>
       </div>
 

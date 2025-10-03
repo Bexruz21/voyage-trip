@@ -2,7 +2,7 @@ import { Phone } from 'lucide-react';
 
 export function CTASection() {
   return (
-    <div className="bg-gradient-to-r from-cyan-500 to-blue-500 py-16">
+    <div className="bg-gradient-to-r from-cyan-500 to-blue-500 py-10 sm:py-16">
       <div className="max-w-4xl mx-auto text-center px-4">
         <h2 className="text-4xl font-bold text-white mb-4">
           Готовы к приключениям?

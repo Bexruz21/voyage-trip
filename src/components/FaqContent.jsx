@@ -12,7 +12,8 @@ import {
     Shield,
     CheckCircle,
     CreditCard,
-    Plane
+    Plane,
+    ChevronDown
 } from 'lucide-react';
 
 function FaqContent() {
@@ -172,7 +173,7 @@ function FaqContent() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="pt-20 pb-16"
+                        className="py-16"
                     >
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                             <motion.div
@@ -184,7 +185,7 @@ function FaqContent() {
                                 <HelpCircle className="w-10 h-10 text-white" />
                             </motion.div>
                             <motion.h1
-                                className="text-5xl md:text-7xl font-bold text-gray-900 mb-6"
+                                className="text-4xl sm:text-5xl md:text-7xl font-bold text-gray-900 mb-6"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
@@ -202,7 +203,7 @@ function FaqContent() {
                         </div>
                     </motion.div>
                 ) : (
-                    <div className="pt-20 pb-16">
+                    <div className="py-16">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl mb-6">
                                 <HelpCircle className="w-10 h-10 text-white" />
@@ -219,7 +220,7 @@ function FaqContent() {
 
                 {/* Search Section */}
                 <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-gray-100">
+                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 sm:p-8 shadow-2xl border border-gray-100">
                         <div className="relative">
                             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                             <input
@@ -267,7 +268,7 @@ function FaqContent() {
                                 >
                                     <button
                                         onClick={() => toggleItem(item.id)}
-                                        className="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition-all duration-300 group"
+                                        className="w-full p-5 sm:p-8 text-left flex justify-between items-center hover:bg-gray-50 transition-all duration-300 group"
                                     >
                                         <div className="flex items-start space-x-4">
                                             <div className="text-left">
@@ -281,24 +282,31 @@ function FaqContent() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className={`transform transition-transform duration-300 ${openItems[item.id] ? 'rotate-180' : ''}`}>
+                                        <motion.div
+                                            animate={{ rotate: openItems[item.id] ? 180 : 0 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="flex-shrink-0"
+                                        >
                                             <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white">
-                                                ▼
+                                                <ChevronDown className="w-4 h-4" />
                                             </div>
-                                        </div>
+                                        </motion.div>
                                     </button>
                                     {isClient ? (
                                         <AnimatePresence>
                                             {openItems[item.id] && (
                                                 <motion.div
                                                     initial={{ opacity: 0, height: 0 }}
-                                                    animate={{ opacity: 1, height: 'auto' }}
+                                                    animate={{ opacity: 1, height: "auto" }}
                                                     exit={{ opacity: 0, height: 0 }}
-                                                    className="px-8 pb-6"
+                                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                                    className="overflow-hidden"
                                                 >
-                                                    <div className="prose prose-lg max-w-none">
-                                                        <div className="whitespace-pre-line text-gray-700 leading-relaxed">
-                                                            {item.answer}
+                                                    <div className="px-5 sm:px-8 pb-6">
+                                                        <div className="prose prose-lg max-w-none">
+                                                            <div className="whitespace-pre-line text-gray-700 leading-relaxed">
+                                                                {item.answer}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </motion.div>
@@ -306,7 +314,7 @@ function FaqContent() {
                                         </AnimatePresence>
                                     ) : (
                                         openItems[item.id] && (
-                                            <div className="px-8 pb-6">
+                                            <div className="px-5 sm:px-8 pb-6">
                                                 <div className="prose prose-lg max-w-none">
                                                     <div className="whitespace-pre-line text-gray-700 leading-relaxed">
                                                         {item.answer}
@@ -401,7 +409,7 @@ function FaqContent() {
                                             </p>
 
                                             {/* Интерактивный элемент */}
-                                            <div className="mt-3 md:mt-4 flex items-center text-blue-600 font-semibold text-sm opacity-0 group-hover:opacity-100 transform translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                                            <div className="hidden sm:block mt-3 md:mt-4 flex items-center text-blue-600 font-semibold text-sm opacity-0 group-hover:opacity-100 transform translate-y-1 group-hover:translate-y-0 transition-all duration-300">
                                                 <span>Связаться</span>
                                                 <div className="ml-1 w-0 group-hover:w-4 transition-all duration-300 overflow-hidden">
                                                     →

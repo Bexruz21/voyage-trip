@@ -18,7 +18,7 @@ const tours = [
     id: 2,
     name: "Загадочная Япония",
     location: "Токио, Киото, Осака",
-    image: "https://images.unsplash.com/photo-1540959733332-8ab4aab0fcca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    image: "https://resize.tripster.ru/M7GlFVf7e3k6cE15M-Nfjg1bhEw=/fit-in/800x600/filters:no_upscale()/https://cdn.tripster.ru/photos/500cdf6f-f42a-49f9-a9a1-d46f80a560f1.jpg",
     price: "120 000 ₽",
     days: "12 дней",
     rating: 4.8,

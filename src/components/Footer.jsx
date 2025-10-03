@@ -24,8 +24,8 @@ function Footer() {
         },
         {
             icon: Mail,
-            text: "info@voyagetrip.ru",
-            href: "mailto:info@voyagetrip.ru",
+            text: "info@voyagetrip.com",
+            href: "mailto:info@voyagetrip.com",
             description: "Ответим в течение 2 часов"
         },
         {
@@ -67,7 +67,7 @@ function Footer() {
         <footer className="bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 border-t border-gray-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Main Footer Content */}
-                <div className="py-12">
+                <div className="py-8 sm:py-12">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
                         {/* Brand Section */}
                         {isClient ? (

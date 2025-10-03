@@ -2,7 +2,7 @@ import { Phone, Mail, CheckCircle } from 'lucide-react';
 
 export function AboutSection() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-10 sm:py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -25,7 +25,7 @@ export function AboutSection() {
                 </div>
                 <div>
                   <div className="font-semibold text-gray-900">Телефон</div>
-                  <div className="text-gray-600">+7 (999) 123-45-67</div>
+                  <div className="text-gray-600">+998 (77) 122 88 80</div>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -34,7 +34,7 @@ export function AboutSection() {
                 </div>
                 <div>
                   <div className="font-semibold text-gray-900">Email</div>
-                  <div className="text-gray-600">info@voyagetrip.ru</div>
+                  <div className="text-gray-600">info@voyagetrip.com</div>
                 </div>
               </div>
             </div>
@@ -45,7 +45,7 @@ export function AboutSection() {
               alt="Наша команда"
               className="rounded-2xl shadow-lg"
             />
-            <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+            <div className="absolute -bottom-6 translate-x-12 sm:translate-x-0 sm:-left-6 bg-white rounded-2xl p-4 shadow-lg border border-gray-100">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
                   <CheckCircle className="w-6 h-6 text-green-600" />
