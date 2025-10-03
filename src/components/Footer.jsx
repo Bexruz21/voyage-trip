@@ -30,9 +30,9 @@ function Footer() {
         },
         {
             icon: MapPin,
-            text: "г. Ташкент, Seoul Plaza Business Centre, Мирабадский р‑н",
+            text: "г. Ташкент, Seoul Plaza Business Centre",
             href: "#",
-            description: "ул. Шазрисабз, 5А"
+            description: "Мирабадский р‑н, ул. Шазрисабз, 5А"
         }
     ];
 

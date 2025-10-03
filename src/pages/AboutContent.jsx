@@ -3,12 +3,12 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Users, 
-  Target, 
-  Award, 
-  Globe, 
-  Heart, 
+import {
+  Users,
+  Target,
+  Award,
+  Globe,
+  Heart,
   Shield,
   Clock,
   Star,
@@ -17,7 +17,11 @@ import {
   Plane,
   Compass,
   Trophy,
-  CheckCircle
+  CheckCircle,
+  MapPin,
+  TrendingUp,
+  Zap,
+  Lightbulb
 } from 'lucide-react';
 
 function AboutContent() {
@@ -30,10 +34,10 @@ function AboutContent() {
   }, []);
 
   const stats = [
-    { icon: Users, value: "50,000+", label: "Довольных клиентов" },
-    { icon: Globe, value: "150+", label: "Направлений" },
-    { icon: Trophy, value: "15 лет", label: "Опыта работы" },
-    { icon: Star, value: "4.9/5", label: "Рейтинг Trustpilot" }
+    { icon: Users, value: "500+", label: "Довольных клиентов" },
+    { icon: Globe, value: "25+", label: "Направлений" },
+    { icon: MapPin, value: "10+", label: "Стран партнеров" },
+    { icon: Zap, value: "24/7", label: "Поддержка" }
   ];
 
   const values = [
@@ -51,14 +55,14 @@ function AboutContent() {
     },
     {
       icon: Globe,
-      title: "Устойчивость",
-      description: "Поддерживаем ответственный туризм и заботимся о сохранении культурного наследия",
+      title: "Инновации",
+      description: "Постоянно развиваемся и внедряем новые технологии для улучшения сервиса",
       color: "from-green-400 to-emerald-400"
     },
     {
       icon: Award,
-      title: "Инновации",
-      description: "Постоянно развиваемся и внедряем новые технологии для улучшения сервиса",
+      title: "Экспертиза",
+      description: "Профессиональная команда с глубокими знаниями каждого направления",
       color: "from-purple-400 to-indigo-400"
     }
   ];
@@ -66,101 +70,90 @@ function AboutContent() {
   const team = [
     {
       id: 1,
-      name: "Анна Петрова",
-      position: "Основатель компании",
-      experience: "15 лет в туризме",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      bio: "Создала VOYAGE TRIP с целью показать людям настоящую красоту мира. Посетила 67 стран.",
-      specialties: ["Стратегическое планирование", "Разработка маршрутов", "Международные отношения"],
-      contact: "anna@voyagetrip.ru"
-    },
-    {
-      id: 2,
       name: "Максим Иванов",
       position: "Гид-эксперт",
-      experience: "Посетил 40 стран",
+      experience: "Профессиональный гид",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      bio: "Профессиональный гид с лингвистическим образованием. Знает каждый уголок планеты как свои пять пальцев.",
+      bio: "Создает незабываемые экскурсии с глубоким погружением в культуру и историю каждой страны.",
       specialties: ["Экскурсионные программы", "Культурология", "Языки: английский, испанский"],
       contact: "maxim@voyagetrip.ru"
     },
     {
-      id: 3,
+      id: 2,
       name: "Елена Смирнова",
       position: "Менеджер по туризму",
-      experience: "10 лет опыта",
+      experience: "Специалист по турам",
       image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      bio: "Специалист по индивидуальному подбору туров. Помогла осуществить мечты тысячам путешественников.",
+      bio: "Помогает подобрать идеальное путешествие, учитывая все пожелания и предпочтения клиентов.",
       specialties: ["Подбор туров", "Визовая поддержка", "Клиентский сервис"],
       contact: "elena@voyagetrip.ru"
     },
     {
-      id: 4,
+      id: 3,
       name: "Дмитрий Козлов",
       position: "Директор по развитию",
-      experience: "12 лет в индустрии",
+      experience: "Эксперт по новым направлениям",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      bio: "Отвечает за новые направления и партнерства. Создатель эксклюзивных маршрутов по всему миру.",
+      bio: "Отвечает за развитие новых уникальных направлений и партнерских отношений по всему миру.",
       specialties: ["Бизнес-развитие", "Международные переговоры", "Анализ рынка"],
       contact: "dmitry@voyagetrip.ru"
     }
   ];
 
-  const milestones = [
+  const goals = [
     {
-      year: "2008",
-      title: "Основание компании",
-      description: "Открытие первого офиса в Москве и запуск первых групповых туров"
-    },
-    {
-      year: "2012",
+      year: "2024",
       title: "Расширение географии",
-      description: "Добавление 50 новых направлений и открытие направления индивидуальных туров"
+      description: "Запуск 10 новых эксклюзивных направлений в Азии и Южной Америке",
+      icon: MapPin
     },
     {
-      year: "2015",
-      title: "Премия 'Лучший туроператор'",
-      description: "Получение национальной премии в сфере туризма"
+      year: "2024",
+      title: "Цифровизация сервиса",
+      description: "Внедрение мобильного приложения и онлайн-платформы для бронирования",
+      icon: Zap
     },
     {
-      year: "2018",
-      title: "Запуск клуба путешественников",
-      description: "Создание эксклюзивного сообщества для постоянных клиентов"
+      year: "2025",
+      title: "Премиум направление",
+      description: "Запуск VIP-туров с индивидуальным подходом и эксклюзивными условиями",
+      icon: Star
     },
     {
-      year: "2023",
-      title: "50,000 клиентов",
-      description: "Достигнута отметка в 50,000 довольных путешественников"
+      year: "2025",
+      title: "Устойчивый туризм",
+      description: "Развитие экологичных и социально ответственных туров",
+      icon: Globe
     }
   ];
 
-  const achievements = [
-    {
-      icon: Award,
-      title: "Лучший туроператор 2023",
-      description: "Национальная премия в сфере туризма"
-    },
+  const features = [
     {
       icon: Shield,
-      title: "ISO 9001 Certified",
-      description: "Международный сертификат качества услуг"
+      title: "Полная безопасность",
+      description: "Все партнеры проверены, предоставляем страховку и поддержку 24/7"
     },
     {
-      icon: Star,
-      title: "Trustpilot Excellence",
-      description: "Высший рейтинг на платформе отзывов"
+      icon: Clock,
+      title: "Экономия времени",
+      description: "Полный сервис от подбора тура до возвращения домой"
     },
     {
-      icon: Users,
-      title: "Travelers' Choice",
-      description: "Премия по выбору путешественников"
+      icon: TrendingUp,
+      title: "Лучшие цены",
+      description: "Прямые контракты с отелями и авиакомпаниями"
+    },
+    {
+      icon: Lightbulb,
+      title: "Индивидуальный подход",
+      description: "Создаем маршруты с учетом ваших интересов и предпочтений"
     }
   ];
 
   const tabs = [
     { id: 'mission', label: 'Наша миссия' },
-    { id: 'history', label: 'История' },
-    { id: 'achievements', label: 'Достижения' }
+    { id: 'goals', label: 'Наши цели' },
+    { id: 'advantages', label: 'Преимущества' }
   ];
 
   return (
@@ -177,7 +170,7 @@ function AboutContent() {
       <div className="relative z-10">
         {/* Hero Section */}
         {isClient ? (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -192,7 +185,7 @@ function AboutContent() {
               >
                 <Compass className="w-10 h-10 text-white" />
               </motion.div>
-              <motion.h1 
+              <motion.h1
                 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -200,13 +193,13 @@ function AboutContent() {
               >
                 О <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">компании</span>
               </motion.h1>
-              <motion.p 
+              <motion.p
                 className="text-xl text-gray-600 max-w-3xl mx-auto mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                15 лет создаем незабываемые путешествия, открывая для наших клиентов самые удивительные уголки планеты
+                Мы создаем уникальные путешествия, которые вдохновляют и открывают новые горизонты
               </motion.p>
             </div>
           </motion.div>
@@ -220,7 +213,7 @@ function AboutContent() {
                 О <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">компании</span>
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                15 лет создаем незабываемые путешествия, открывая для наших клиентов самые удивительные уголки планеты
+                Мы создаем уникальные путешествия, которые вдохновляют и открывают новые горизонты
               </p>
             </div>
           </div>
@@ -234,7 +227,7 @@ function AboutContent() {
                 <motion.div
                   key={index}
                   className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100"
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.05,
                     boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
                   }}
@@ -258,7 +251,7 @@ function AboutContent() {
           </div>
         </div>
 
-        {/* Mission & Story Section */}
+        {/* Mission & Goals Section */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
@@ -269,11 +262,10 @@ function AboutContent() {
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`flex-1 px-6 py-4 text-lg font-semibold transition-all duration-300 ${
-                        activeTab === tab.id
+                      className={`flex-1 px-6 py-4 text-lg font-semibold transition-all duration-300 ${activeTab === tab.id
                           ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
                           : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
-                      }`}
+                        }`}
                     >
                       {tab.label}
                     </button>
@@ -296,13 +288,13 @@ function AboutContent() {
                         <div>
                           <h2 className="text-4xl font-bold text-gray-900 mb-6">Наша миссия</h2>
                           <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                            Мы верим, что путешествия должны быть доступными, безопасными и незабываемыми. 
-                            С 2008 года мы помогаем людям открывать мир, создавая уникальные маршруты 
-                            и обеспечивая высочайший уровень сервиса.
+                            Мы верим, что путешествия должны быть доступными, безопасными и незабываемыми.
+                            Наша цель - открывать для вас самые удивительные уголки планеты, создавая
+                            уникальные маршруты и обеспечивая высочайший уровень сервиса.
                           </p>
                           <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                            Наша команда - это опытные путешественники и профессионалы туристической 
-                            индустрии, которые знают каждое направление изнутри и готовы поделиться 
+                            Наша команда - это опытные путешественники и профессионалы туристической
+                            индустрии, которые знают каждое направление изнутри и готовы поделиться
                             своими знаниями с вами.
                           </p>
                           <div className="flex items-center space-x-4">
@@ -310,8 +302,8 @@ function AboutContent() {
                               <Target className="w-6 h-6 text-white" />
                             </div>
                             <div>
-                              <div className="font-semibold text-gray-900">Цель на 2025</div>
-                              <div className="text-gray-600">Открыть 25 новых эксклюзивных направлений</div>
+                              <div className="font-semibold text-gray-900">Наша философия</div>
+                              <div className="text-gray-600">Каждое путешествие должно быть уникальным и запоминающимся</div>
                             </div>
                           </div>
                         </div>
@@ -328,7 +320,7 @@ function AboutContent() {
                               </div>
                               <div>
                                 <div className="font-bold text-gray-900">100%</div>
-                                <div className="text-gray-600 text-sm">Гарантия лучшей цены</div>
+                                <div className="text-gray-600 text-sm">Гарантия поддержки</div>
                               </div>
                             </div>
                           </div>
@@ -336,62 +328,64 @@ function AboutContent() {
                       </motion.div>
                     )}
 
-                    {activeTab === 'history' && (
+                    {activeTab === 'goals' && (
                       <motion.div
-                        key="history"
+                        key="goals"
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                       >
-                        <h2 className="text-4xl font-bold text-gray-900 mb-8">Наша история</h2>
-                        <div className="relative">
-                          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-cyan-500"></div>
-                          <div className="space-y-12">
-                            {milestones.map((milestone, index) => (
-                              <motion.div
-                                key={milestone.year}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                className="relative flex items-center"
-                              >
-                                <div className="absolute left-0 w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-lg z-10">
-                                  {milestone.year}
-                                </div>
-                                <div className="ml-24 bg-white p-6 rounded-2xl shadow-lg border border-gray-100 flex-1">
-                                  <h3 className="text-xl font-bold text-gray-900 mb-2">{milestone.title}</h3>
-                                  <p className="text-gray-600">{milestone.description}</p>
-                                </div>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {activeTab === 'achievements' && (
-                      <motion.div
-                        key="achievements"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                      >
-                        <h2 className="text-4xl font-bold text-gray-900 mb-8">Наши достижения</h2>
+                        <h2 className="text-4xl font-bold text-gray-900 mb-8">Наши цели и планы</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                          {achievements.map((achievement, index) => (
+                          {goals.map((goal, index) => (
                             <motion.div
                               key={index}
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: index * 0.1 }}
-                              className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 flex items-center space-x-4"
+                              className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100"
                             >
-                              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
-                                <achievement.icon className="w-8 h-8 text-white" />
+                              <div className="flex items-start space-x-4">
+                                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                                  <goal.icon className="w-6 h-6 text-white" />
+                                </div>
+                                <div>
+                                  <div className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold mb-2">
+                                    {goal.year}
+                                  </div>
+                                  <h3 className="text-xl font-bold text-gray-900 mb-2">{goal.title}</h3>
+                                  <p className="text-gray-600">{goal.description}</p>
+                                </div>
+                              </div>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {activeTab === 'advantages' && (
+                      <motion.div
+                        key="advantages"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                      >
+                        <h2 className="text-4xl font-bold text-gray-900 mb-8">Наши преимущества</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                          {features.map((feature, index) => (
+                            <motion.div
+                              key={index}
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: index * 0.1 }}
+                              className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 flex items-start space-x-4"
+                            >
+                              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <feature.icon className="w-6 h-6 text-white" />
                               </div>
                               <div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-2">{achievement.title}</h3>
-                                <p className="text-gray-600">{achievement.description}</p>
+                                <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
+                                <p className="text-gray-600">{feature.description}</p>
                               </div>
                             </motion.div>
                           ))}
@@ -406,13 +400,13 @@ function AboutContent() {
                       <div>
                         <h2 className="text-4xl font-bold text-gray-900 mb-6">Наша миссия</h2>
                         <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                          Мы верим, что путешествия должны быть доступными, безопасными и незабываемыми. 
-                          С 2008 года мы помогаем людям открывать мир, создавая уникальные маршруты 
-                          и обеспечивая высочайший уровень сервиса.
+                          Мы верим, что путешествия должны быть доступными, безопасными и незабываемыми.
+                          Наша цель - открывать для вас самые удивительные уголки планеты, создавая
+                          уникальные маршруты и обеспечивая высочайший уровень сервиса.
                         </p>
                         <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                          Наша команда - это опытные путешественники и профессионалы туристической 
-                          индустрии, которые знают каждое направление изнутри и готовы поделиться 
+                          Наша команда - это опытные путешественники и профессионалы туристической
+                          индустрии, которые знают каждое направление изнутри и готовы поделиться
                           своими знаниями с вами.
                         </p>
                         <div className="flex items-center space-x-4">
@@ -420,8 +414,8 @@ function AboutContent() {
                             <Target className="w-6 h-6 text-white" />
                           </div>
                           <div>
-                            <div className="font-semibold text-gray-900">Цель на 2025</div>
-                            <div className="text-gray-600">Открыть 25 новых эксклюзивных направлений</div>
+                            <div className="font-semibold text-gray-900">Наша философия</div>
+                            <div className="text-gray-600">Каждое путешествие должно быть уникальным и запоминающимся</div>
                           </div>
                         </div>
                       </div>
@@ -438,7 +432,7 @@ function AboutContent() {
                             </div>
                             <div>
                               <div className="font-bold text-gray-900">100%</div>
-                              <div className="text-gray-600 text-sm">Гарантия лучшей цены</div>
+                              <div className="text-gray-600 text-sm">Гарантия поддержки</div>
                             </div>
                           </div>
                         </div>
@@ -505,7 +499,7 @@ function AboutContent() {
               Профессионалы с огромным опытом, которые сделают ваше путешествие идеальным
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 place-items-center">
               {team.map((member, index) => (
                 isClient ? (
                   <motion.div
@@ -600,7 +594,7 @@ function AboutContent() {
                     <h3 className="text-3xl font-bold text-gray-900 mb-2">{selectedMember.name}</h3>
                     <p className="text-blue-600 font-semibold text-lg mb-4">{selectedMember.position}</p>
                     <p className="text-gray-600 mb-6">{selectedMember.bio}</p>
-                    
+
                     <div className="mb-6">
                       <h4 className="font-semibold text-gray-900 mb-3">Специализация:</h4>
                       <div className="flex flex-wrap gap-2">
@@ -634,7 +628,7 @@ function AboutContent() {
 
         {/* Final CTA */}
         {isClient ? (
-          <motion.section 
+          <motion.section
             className="py-20 bg-gradient-to-r from-blue-500 to-cyan-500"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -646,7 +640,7 @@ function AboutContent() {
                 Готовы отправиться в путешествие?
               </h2>
               <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                Доверьте свою мечту профессионалам с 15-летним опытом
+                Доверьте свою мечту молодой и амбициозной команде профессионалов
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button className="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl transition-all duration-300">
@@ -666,7 +660,7 @@ function AboutContent() {
                 Готовы отправиться в путешествие?
               </h2>
               <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                Доверьте свою мечту профессионалам с 15-летним опытом
+                Доверьте свою мечту молодой и амбициозной команде профессионалов
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button className="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold text-lg">

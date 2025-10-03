@@ -1,6 +1,5 @@
-import ContactsContent from "@/pages/ContactsContent";
+import ContactsContent from "@/pages/contacts/ContactsContent";
 
-// Серверный компонент - для мета-тегов и SEO
 export default function Contacts() {
   return <ContactsContent />;
 }
