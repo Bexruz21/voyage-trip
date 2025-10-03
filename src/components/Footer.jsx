@@ -5,9 +5,9 @@ import {
     Phone,
     Mail,
     MapPin,
-    Plane,
     MessageCircle,
-    Instagram,
+    Send
+
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
@@ -38,16 +38,16 @@ function Footer() {
 
     const socialLinks = [
         {
-            icon: MessageCircle,
-            href: "#",
+            icon: Send,
+            href: "https://t.me/voyagetrip",
             name: "Telegram",
-            color: "hover:bg-blue-500 hover:text-white"
+            color: "bg-[#07b9fa] text-white"
         },
         {
-            icon: Instagram,
+            icon: MessageCircle,
             href: "#",
-            name: "Instagram",
-            color: "hover:bg-pink-500 hover:text-white"
+            name: "Whatsapp",
+            color: "bg-[#25D366] text-white"
         }
     ];
 
@@ -68,7 +68,7 @@ function Footer() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Main Footer Content */}
                 <div className="py-12">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
                         {/* Brand Section */}
                         {isClient ? (
                             <motion.div
@@ -78,9 +78,11 @@ function Footer() {
                                 className="space-y-4"
                             >
                                 <div className="flex items-center space-x-3">
-                                    <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
-                                        <Plane className="w-6 h-6 text-white" />
-                                    </div>
+                                    <img
+                                        src="/logo.png"
+                                        alt="VOYAGE TRIP"
+                                        className="w-16 h-16 object-contain"
+                                    />
                                     <div>
                                         <h2 className="text-xl font-bold text-gray-900">VOYAGE TRIP</h2>
                                         <p className="text-gray-600">Премиум путешествия</p>
@@ -101,7 +103,7 @@ function Footer() {
                                             whileInView={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: index * 0.1 }}
                                             whileHover={{ scale: 1.1, y: -2 }}
-                                            className={`w-10 h-10 bg-white rounded-lg flex items-center justify-center text-gray-600 border border-gray-200 shadow-sm transition-all duration-300 ${social.color}`}
+                                            className={`w-10 h-10 rounded-lg flex items-center justify-center shadow-sm  ${social.color}`}
                                         >
                                             <social.icon className="w-5 h-5" />
                                         </motion.a>
@@ -112,9 +114,11 @@ function Footer() {
                             // Статическая версия для SEO
                             <div className="space-y-4">
                                 <div className="flex items-center space-x-3">
-                                    <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
-                                        <Plane className="w-6 h-6 text-white" />
-                                    </div>
+                                    <img
+                                        src="/logo.png"
+                                        alt="VOYAGE TRIP"
+                                        className="w-16 h-16 object-contain"
+                                    />
                                     <div>
                                         <h2 className="text-xl font-bold text-gray-900">VOYAGE TRIP</h2>
                                         <p className="text-gray-600">Премиум путешествия</p>
@@ -144,7 +148,7 @@ function Footer() {
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: 0.1 }}
-                                className="space-y-4"
+                                className="space-y-4 hidden sm:block"
                             >
                                 <h3 className="font-semibold text-gray-900">Быстрые ссылки</h3>
                                 <div className="grid grid-cols-2 gap-2">
@@ -259,26 +263,6 @@ function Footer() {
                             </p>
                         )}
 
-                        {isClient ? (
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                transition={{ delay: 0.2 }}
-                                className="flex items-center space-x-6 text-sm text-gray-600"
-                            >
-                                <a href="#" className="hover:text-cyan-600 transition-colors duration-300">
-                                    Политика конфиденциальности
-                                </a>
-                                <a href="#" className="hover:text-cyan-600 transition-colors duration-300">
-                                    Условия использования
-                                </a>
-                            </motion.div>
-                        ) : (
-                            <div className="flex items-center space-x-6 text-sm text-gray-600">
-                                <a href="#">Политика конфиденциальности</a>
-                                <a href="#">Условия использования</a>
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>
