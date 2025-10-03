@@ -1,4 +1,4 @@
-import ContactsContent from "@/pages/contacts/ContactsContent";
+import ContactsContent from "@/components/contacts/ContactsContent";
 
 export default function Contacts() {
   return <ContactsContent />;

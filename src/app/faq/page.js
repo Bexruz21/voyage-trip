@@ -1,4 +1,4 @@
-import FaqContent from "@/pages/FaqContent";
+import FaqContent from "@/components/FaqContent";
 
 export default function Faq() {
   return <FaqContent />;
