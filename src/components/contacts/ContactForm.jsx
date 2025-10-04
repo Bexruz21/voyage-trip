@@ -19,11 +19,12 @@ const travelTypes = [
 ];
 
 const budgets = [
-  { value: 'low', label: 'Эконом (до 50 тыс. руб.)' },
-  { value: 'medium', label: 'Стандарт (50-100 тыс. руб.)' },
-  { value: 'high', label: 'Премиум (от 100 тыс. руб.)' },
-  { value: 'luxury', label: 'Люкс (от 200 тыс. руб.)' }
+  { value: 'low', label: 'Эконом (до $500)' },
+  { value: 'medium', label: 'Стандарт ($500–$1000)' },
+  { value: 'high', label: 'Премиум (от $1000)' },
+  { value: 'luxury', label: 'Люкс (от $2000)' }
 ];
+
 
 const benefits = [
   { icon: CheckCircle, text: "Персональный менеджер" },
@@ -107,7 +108,7 @@ export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubm
               onChange={handleChange}
               required
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
-              placeholder="ivan@example.com"
+              placeholder="example@gmail.com"
             />
           </div>
 
@@ -121,7 +122,7 @@ export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubm
               value={formData.phone}
               onChange={handleChange}
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
-              placeholder="+7 (999) 999-99-99"
+              placeholder="+998 xx xxx-xxx-xxx"
             />
           </div>
         </div>

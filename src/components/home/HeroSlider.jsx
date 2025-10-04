@@ -32,6 +32,13 @@ export function HeroSlider({ isClient }) {
         return () => clearInterval(interval);
     }, [isClient]);
 
+    const scrollToTours = () => {
+        const element = document.getElementById('tours');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     if (!isClient) {
         return (
             <div className="relative h-screen overflow-hidden">
@@ -99,6 +106,7 @@ export function HeroSlider({ isClient }) {
 
                             <motion.button
                                 key={`button-${currentSlide}`}
+                                onClick={scrollToTours}
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}

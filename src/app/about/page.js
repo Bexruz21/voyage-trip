@@ -1,4 +1,4 @@
-import AboutContent from "@/components/AboutContent";
+import AboutContent from "@/components/about/AboutContent";
 
 // Серверный компонент - для мета-тегов и SEO
 export default function About() {

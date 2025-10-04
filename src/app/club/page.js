@@ -1,4 +1,4 @@
-import ClubContent from "@/components/ClubContent";
+import ClubContent from "@/components/club/ClubContent";
 
 export default function Club() {
   return <ClubContent />;

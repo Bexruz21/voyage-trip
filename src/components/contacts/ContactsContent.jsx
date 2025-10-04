@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { BackgroundElements } from './BackgroundElements';
 import { HeroSection } from './HeroSection';
 import { StatsSection } from './StatsSection';
 import { ContactForm } from './ContactForm';
@@ -51,9 +50,7 @@ function ContactsContent() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-cyan-50 relative overflow-hidden">
-            <BackgroundElements isClient={isClient} />
-            
+        <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-cyan-50 relative overflow-hidden">            
             <div className="relative z-10">
                 <HeroSection isClient={isClient} />
                 <StatsSection />

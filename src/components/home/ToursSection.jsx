@@ -6,7 +6,7 @@ const tours = [
     name: "Райские пляжи Бали",
     location: "Бали, Индонезия",
     image: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    price: "85 000 ₽",
+    price: "$850",
     days: "10 дней",
     rating: 4.9,
     reviews: 1247,
@@ -19,7 +19,7 @@ const tours = [
     name: "Загадочная Япония",
     location: "Токио, Киото, Осака",
     image: "https://resize.tripster.ru/M7GlFVf7e3k6cE15M-Nfjg1bhEw=/fit-in/800x600/filters:no_upscale()/https://cdn.tripster.ru/photos/500cdf6f-f42a-49f9-a9a1-d46f80a560f1.jpg",
-    price: "120 000 ₽",
+    price: "$1,200",
     days: "12 дней",
     rating: 4.8,
     reviews: 892,
@@ -31,7 +31,7 @@ const tours = [
     name: "Альпийские вершины",
     location: "Швейцария",
     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    price: "95 000 ₽",
+    price: "$950",
     days: "8 дней",
     rating: 4.7,
     reviews: 567,
@@ -43,7 +43,7 @@ const tours = [
     name: "Сафари в Кении",
     location: "Найроби, Кения",
     image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    price: "145 000 ₽",
+    price: "$1,450",
     days: "14 дней",
     rating: 4.9,
     reviews: 321,
@@ -52,13 +52,14 @@ const tours = [
   }
 ];
 
+
 export function ToursSection({ isClient, selectedCategory, favoriteTours, onToggleFavorite }) {
   const filteredTours = tours.filter(tour => {
     return selectedCategory === 'all' || tour.category === selectedCategory;
   });
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white" id='tours'>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
           Популярные <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600">туры</span>

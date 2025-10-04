@@ -34,10 +34,11 @@ function Navigation() {
         setIsMobileMenuOpen(false);
     };
 
-    const headerClass = `fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled && isClient
-            ? "bg-white/95 backdrop-blur-xl shadow-lg border-b border-gray-100"
-            : "bg-white/90 backdrop-blur-md"
+    const headerClass = `fixed top-0 left-0 right-0 z-[50] transition-all duration-500 ${isScrolled && isClient
+        ? "bg-white backdrop-blur-xl shadow-lg border-b border-gray-100"
+        : "bg-white backdrop-blur-md"
         }`;
+
 
     return (
         <>
@@ -68,8 +69,8 @@ function Navigation() {
                             {navItems.map((item) => {
                                 const isActive = pathname === item.path;
                                 const linkClass = `relative px-6 py-3 rounded-xl font-semibold transition-colors duration-200 group ${isActive
-                                        ? "text-cyan-600"
-                                        : "text-gray-600 hover:text-cyan-600"
+                                    ? "text-cyan-600"
+                                    : "text-gray-600 hover:text-cyan-600"
                                     }`;
 
                                 return (
@@ -79,7 +80,7 @@ function Navigation() {
                                         className={linkClass}
                                     >
                                         <span className="relative z-10">{item.label}</span>
-                                        
+
                                         {/* Active Indicator - без layoutId */}
                                         {isActive && isClient && (
                                             <motion.div
@@ -144,8 +145,8 @@ function Navigation() {
                                                     href={item.path}
                                                     onClick={handleLinkClick}
                                                     className={`flex items-center justify-between px-4 py-3 rounded-xl font-semibold transition-all duration-200 ${isActive
-                                                            ? "bg-cyan-50 text-cyan-600"
-                                                            : "text-gray-600 hover:bg-gray-50"
+                                                        ? "bg-cyan-50 text-cyan-600"
+                                                        : "text-gray-600 hover:bg-gray-50"
                                                         }`}
                                                 >
                                                     <span>{item.label}</span>
