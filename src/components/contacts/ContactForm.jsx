@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, CheckCircle } from 'lucide-react';
 
@@ -92,7 +91,7 @@ export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubm
             onChange={handleChange}
             required
             className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
-            placeholder="Иван Иванов"
+            placeholder=""
           />
         </div>
 
@@ -122,7 +121,7 @@ export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubm
               value={formData.phone}
               onChange={handleChange}
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
-              placeholder="+998 xx xxx-xxx-xxx"
+              placeholder="+998 (xx) xxx-xx-xx"
             />
           </div>
         </div>
@@ -131,58 +130,104 @@ export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubm
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Удобный способ связи *
           </label>
-          <select
-            name="contactMethod"
-            value={formData.contactMethod}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
-          >
-            {contactMethods.map((method) => (
-              <option key={method.value} value={method.value}>
-                {method.label}
-              </option>
-            ))}
-          </select>
+
+          <div className="relative">
+            <select
+              name="contactMethod"
+              value={formData.contactMethod}
+              onChange={handleChange}
+              required
+              className="w-full appearance-none px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl 
+                 text-gray-900 text-base leading-relaxed 
+                 focus:ring-2 focus:ring-cyan-500 focus:border-transparent 
+                 transition-all duration-300 pr-10"
+            >
+              {contactMethods.map((method) => (
+                <option key={method.value} value={method.value}>
+                  {method.label}
+                </option>
+              ))}
+            </select>
+            <svg
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
+            </svg>
+          </div>
         </div>
+
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Тип путешествия *
           </label>
-          <select
-            name="travelType"
-            value={formData.travelType}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
-          >
-            {travelTypes.map((type) => (
-              <option key={type.value} value={type.value}>
-                {type.label}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              name="travelType"
+              value={formData.travelType}
+              onChange={handleChange}
+              required
+              className="w-full appearance-none px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl 
+                 text-gray-900 text-base leading-relaxed 
+                 focus:ring-2 focus:ring-cyan-500 focus:border-transparent 
+                 transition-all duration-300 pr-10"
+            >
+              {travelTypes.map((type) => (
+                <option key={type.value} value={type.value}>
+                  {type.label}
+                </option>
+              ))}
+            </select>
+            <svg
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
+            </svg>
+          </div>
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Бюджет поездки *
           </label>
-          <select
-            name="budget"
-            value={formData.budget}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
-          >
-            {budgets.map((budget) => (
-              <option key={budget.value} value={budget.value}>
-                {budget.label}
-              </option>
-            ))}
-          </select>
+
+          <div className="relative">
+            <select
+              name="budget"
+              value={formData.budget}
+              onChange={handleChange}
+              required
+              className="w-full appearance-none px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl 
+                 text-gray-900 text-base leading-relaxed 
+                 focus:ring-2 focus:ring-cyan-500 focus:border-transparent 
+                 transition-all duration-300 pr-10"
+            >
+              {budgets.map((budget) => (
+                <option key={budget.value} value={budget.value}>
+                  {budget.label}
+                </option>
+              ))}
+            </select>
+            <svg
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
+            </svg>
+          </div>
         </div>
+
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">

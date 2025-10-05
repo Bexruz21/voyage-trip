@@ -36,7 +36,7 @@ function Navigation() {
 
     return (
         <>
-            <header className="bg-white shadow-lg sticky top-0 z-50 transition-all duration-500">
+            <header className="relative bg-white shadow-lg sticky top-0 z-50 transition-all duration-500 ">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center py-3">
                         {/* Logo */}
@@ -122,40 +122,54 @@ function Navigation() {
                 {isClient && (
                     <AnimatePresence>
                         {isMobileMenuOpen && (
-                            <motion.div
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: "auto" }}
-                                exit={{ opacity: 0, height: 0 }}
-                                transition={{ duration: 0.2 }}
-                                className="lg:hidden border-t border-gray-200 bg-white/95 backdrop-blur-xl"
-                            >
-                                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-                                    <div className="space-y-2">
-                                        {navItems.map((item) => {
-                                            const isActive = pathname === item.path;
-                                            return (
-                                                <Link
-                                                    key={item.path}
-                                                    href={item.path}
-                                                    onClick={handleLinkClick}
-                                                    className={`flex items-center justify-between px-4 py-3 rounded-xl font-semibold transition-all duration-200 ${isActive
-                                                        ? "bg-cyan-50 text-cyan-600"
-                                                        : "text-gray-600 hover:bg-gray-50"
-                                                        }`}
-                                                >
-                                                    <span>{item.label}</span>
-                                                    {isActive && (
-                                                        <div className="w-2 h-2 bg-cyan-500 rounded-full" />
-                                                    )}
-                                                </Link>
-                                            );
-                                        })}
+                            <>
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 0.4 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                    className="fixed"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                />
+
+                                {/* Само меню — внутри header, но под шапкой */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    transition={{ duration: 0.25 }}
+                                    className="absolute inset-x-0 top-full z-40 bg-white/95 backdrop-blur-xl border-t border-gray-200 overflow-y-auto shadow-xl"
+                                >
+                                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                                        <div className="space-y-2">
+                                            {navItems.map((item) => {
+                                                const isActive = pathname === item.path;
+                                                return (
+                                                    <Link
+                                                        key={item.path}
+                                                        href={item.path}
+                                                        onClick={handleLinkClick}
+                                                        className={`flex items-center justify-between px-4 py-3 rounded-xl font-semibold transition-all duration-200 ${isActive
+                                                                ? "bg-cyan-50 text-cyan-600"
+                                                                : "text-gray-600 hover:bg-gray-50"
+                                                            }`}
+                                                    >
+                                                        <span>{item.label}</span>
+                                                        {isActive && (
+                                                            <div className="w-2 h-2 bg-cyan-500 rounded-full" />
+                                                        )}
+                                                    </Link>
+                                                );
+                                            })}
+                                        </div>
                                     </div>
-                                </div>
-                            </motion.div>
+                                </motion.div>
+                            </>
                         )}
                     </AnimatePresence>
                 )}
+
+
             </header>
         </>
     );

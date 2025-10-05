@@ -135,9 +135,14 @@ export function ContactInfo() {
       </div>
 
       {/* ===== Карта (отдельный блок) ===== */}
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-100 p-6 sm:p-8">
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">Мы на карте</h3>
-        <div className="rounded-xl overflow-hidden border border-gray-200 shadow-md">
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+        {/* Header (с отступами) */}
+        <div className="py-4 px-6 border-b border-gray-100">
+          <h3 className="text-xl font-semibold text-gray-900">Мы на карте</h3>
+        </div>
+
+        {/* Content (без паддингов) */}
+        <div className="border-t border-gray-200">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d749.2919366029774!2d69.28302441245825!3d41.30521424995097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8ad5cad60c4f%3A0x2569478729648ff8!2z0YPQu9C40YbQsCDQqNCw0YXRgNC40YHQsNCx0LcgNdCQLCAxMDAwMDAsINCi0LDRiNC60LXQvdGCLCBUYXNoa2VudCwg0KPQt9Cx0LXQutC40YHRgtCw0L0!5e0!3m2!1sru!2s!4v1759674609171!5m2!1sru!2s"
             width="100%"
@@ -149,6 +154,7 @@ export function ContactInfo() {
           ></iframe>
         </div>
       </div>
+
     </div>
   );
 }

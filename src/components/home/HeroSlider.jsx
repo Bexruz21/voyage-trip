@@ -13,11 +13,12 @@ const slides = [
         subtitle: "От тропических пляжей до заснеженных вершин"
     },
     {
-        image: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&auto=format&fit=crop&w=2068&q=80",
+        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
         title: "Премиум сервис",
         subtitle: "Все заботы о путешествии мы берем на себя"
     }
 ];
+
 
 export function HeroSlider({ isClient }) {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -48,7 +49,8 @@ export function HeroSlider({ isClient }) {
                         alt={slides[0].title}
                         className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-opacity-60 flex items-center justify-center">
+
                         <div className="text-center text-white max-w-4xl px-4">
                             <h1 className="text-5xl md:text-7xl font-bold mb-6">
                                 {slides[0].title}
@@ -82,14 +84,15 @@ export function HeroSlider({ isClient }) {
                         alt={slides[currentSlide].title}
                         className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-opacity-40 flex items-center justify-center">
+                    <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center text-white max-w-4xl px-4">
                             <motion.h1
                                 key={`title-${currentSlide}`}
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-                                className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6"
+                                className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] 
+             [text-shadow:_0_0_20px_rgba(255,255,255,0.2)]"
                             >
                                 {slides[currentSlide].title}
                             </motion.h1>
@@ -99,7 +102,9 @@ export function HeroSlider({ isClient }) {
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-                                className="text-xl md:text-2xl mb-8"
+                                className="text-xl md:text-2xl mb-8 text-gray-100 
+             drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] 
+             [text-shadow:_0_0_10px_rgba(255,255,255,0.15)]"
                             >
                                 {slides[currentSlide].subtitle}
                             </motion.p>

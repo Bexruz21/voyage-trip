@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Plane } from 'lucide-react';
 
 export function CTASection() {
@@ -12,9 +13,11 @@ export function CTASection() {
           Наши эксперты подберут для вас идеальный тур с учетом всех пожеланий
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl transition-all duration-300">
-            Получить консультацию
-          </button>
+          <Link href="/contacts">
+            <button className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl transition-all duration-300">
+              Получить консультацию
+            </button>
+          </Link>
           <button className="border-2 border-cyan-500 text-cyan-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-cyan-50 transition-all duration-300">
             Смотреть все туры
           </button>
