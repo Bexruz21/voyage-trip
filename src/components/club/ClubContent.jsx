@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { HeroSection } from './HeroSection';
+import { HeroSection } from '../HeroSection';
 import { IntroSection } from './IntroSection';
 import { StatsSection } from './StatsSection';
 import { TargetAudienceSection } from './TargetAudienceSection';
@@ -36,7 +36,7 @@ function ClubContent() {
     <div className="min-h-screen bg-gradient-to-br from-white via-amber-50 to-orange-50 relative overflow-hidden">
       
       <div className="relative z-10">
-        <HeroSection isClient={isClient} />
+        <HeroSection isClient={isClient} page="club" />
         <IntroSection />
         <StatsSection isClient={isClient} />
         <TargetAudienceSection isClient={isClient} />

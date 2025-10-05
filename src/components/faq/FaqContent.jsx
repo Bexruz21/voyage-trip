@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { HeroSection } from './HeroSection';
+import { HeroSection } from '../HeroSection';
 import { SearchSection } from './SearchSection';
 import { CategoriesSection } from './CategoriesSection';
 import { FaqItems } from './FaqItems';
@@ -109,7 +109,7 @@ function FaqContent() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-cyan-50 relative overflow-hidden">
             <div className="relative z-10">
-                <HeroSection isClient={isClient} />
+                <HeroSection isClient={isClient} page="faq" />
                 <SearchSection
                     searchQuery={searchQuery}
                     onSearchChange={setSearchQuery}

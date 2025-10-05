@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { HeroSection } from './HeroSection';
+import { HeroSection } from '../HeroSection';
 import { StatsSection } from './StatsSection';
 import { ContactForm } from './ContactForm';
-import { ContactInfo } from './ContactInfo';
 import { CTASection } from './CTASection';
+import { ContactInfo } from './ContactInfo';
 
 function ContactsContent() {
     const [formData, setFormData] = useState({
@@ -52,7 +52,7 @@ function ContactsContent() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-cyan-50 relative overflow-hidden">            
             <div className="relative z-10">
-                <HeroSection isClient={isClient} />
+                <HeroSection isClient={isClient} page="contacts" />
                 <StatsSection />
                 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
