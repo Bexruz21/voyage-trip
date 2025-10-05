@@ -32,9 +32,10 @@ const office = {
       username: "@voyagetrip",
       url: "https://t.me/voyagetrip",
       icon: Send,
-      color: "text-blue-600",
-      bgColor: "bg-blue-100",
+      color: "text-[#07b9fa]",
+      bgColor: "bg-[#e0f7ff]",
     },
+
   ],
   email: "info@voyagetrip.com",
   hours: "Пн–Пт: 9:00–21:00, Сб–Вс: 10:00–20:00",
@@ -138,7 +139,7 @@ export function ContactInfo() {
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Мы на карте</h3>
         <div className="rounded-xl overflow-hidden border border-gray-200 shadow-md">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2994.2219736623997!2d69.27744367594436!3d41.29198517131367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8bfa3a89e7a7%3A0x123456789abcdef!2sSeoul%20Plaza%20Business%20Centre!5e0!3m2!1sru!2suz!4v1691234567890!5m2!1sru!2suz"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d749.2919366029774!2d69.28302441245825!3d41.30521424995097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8ad5cad60c4f%3A0x2569478729648ff8!2z0YPQu9C40YbQsCDQqNCw0YXRgNC40YHQsNCx0LcgNdCQLCAxMDAwMDAsINCi0LDRiNC60LXQvdGCLCBUYXNoa2VudCwg0KPQt9Cx0LXQutC40YHRgtCw0L0!5e0!3m2!1sru!2s!4v1759674609171!5m2!1sru!2s"
             width="100%"
             height="300"
             style={{ border: 0 }}

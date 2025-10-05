@@ -18,14 +18,23 @@ export function AboutSection() {
               создавая уникальные маршруты и обеспечивая высочайший уровень сервиса
               на каждом этапе вашего путешествия.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center">
                   <Phone className="w-6 h-6 text-cyan-600" />
                 </div>
                 <div>
-                  <div className="font-semibold text-gray-900">Телефон</div>
-                  <div className="text-gray-600">+998 (77) 122 88 80</div>
+                  <div className="font-semibold text-gray-900">Горячая линия</div>
+                  <div className="text-gray-600">+998 77 122 88 80, +998 77 430 88 80</div>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center">
+                  <Phone className="w-6 h-6 text-cyan-600" />
+                </div>
+                <div>
+                  <div className="font-semibold text-gray-900">Визовая поддержка</div>
+                  <div className="text-gray-600">+998 90 940 43 33, +998 95 940 43 33</div>
                 </div>
               </div>
               <div className="flex items-center space-x-3">

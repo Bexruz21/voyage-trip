@@ -18,15 +18,21 @@ function Footer() {
     const contactInfo = [
         {
             icon: Phone,
-            text: "+998 77 122 88 80",
+            text: "Горячая линия",
             href: "tel:+998771228880",
-            description: "Ежедневно с 9:00 до 21:00"
+            description: "+998 77 122 88 80, +998 77 430 88 80"
+        },
+        {
+            icon: Phone,
+            text: "Визовая поддержка",
+            href: "tel:+998909404333",
+            description: "+998 90 940 43 33, +998 95 940 43 33"
         },
         {
             icon: Mail,
             text: "info@voyagetrip.com",
             href: "mailto:info@voyagetrip.com",
-            description: "Ответим в течение 2 часов"
+            description: "Электронная почта"
         },
         {
             icon: MapPin,

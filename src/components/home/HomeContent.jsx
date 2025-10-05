@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { BackgroundElements } from './BackgroundElements';
 import { HeroSlider } from './HeroSlider';
 import { FeaturesSection } from './FeaturesSection';
 import { CategoriesSection } from './CategoriesSection';
@@ -32,9 +31,7 @@ function HomeContent() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-cyan-50 relative overflow-hidden">
-            <BackgroundElements isClient={isClient} />
-            
+        <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-cyan-50 relative overflow-hidden">            
             <div className="relative z-10">
                 <HeroSlider isClient={isClient} />
                 <FeaturesSection isClient={isClient} />
