@@ -2,9 +2,9 @@ import { motion } from 'framer-motion';
 import { Users, Star, Gift, Shield } from 'lucide-react';
 
 const stats = [
-  { icon: Users, value: "5,000+", label: "Участников клуба" },
+  { icon: Users, value: "100+", label: "Участников клуба" },
   { icon: Star, value: "98%", label: "Довольных клиентов" },
-  { icon: Gift, value: "2,500+", label: "Выданных бонусов" },
+  { icon: Gift, value: "50+", label: "Выданных бонусов" },
   { icon: Shield, value: "24/7", label: "Поддержка" }
 ];
 
