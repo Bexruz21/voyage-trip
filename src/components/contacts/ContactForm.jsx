@@ -187,10 +187,7 @@ export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubm
     e.preventDefault();
     
     try {
-      // Отправляем данные в Telegram
       await sendToTelegram(formData);
-      
-      // Вызываем onSubmit для обновления состояния
       onSubmit();
     } catch (error) {
       console.error('Ошибка при отправке формы:', error);
@@ -332,7 +329,7 @@ export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubm
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Бюджет поездки *
+              Бюджет поездки * (за 1 человека)
             </label>
             <div className="relative">
               <select
