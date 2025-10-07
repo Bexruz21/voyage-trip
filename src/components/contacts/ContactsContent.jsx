@@ -19,6 +19,7 @@ function ContactsContent() {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
+    const [submittedData, setSubmittedData] = useState(null);
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
@@ -31,11 +32,13 @@ function ContactsContent() {
 
     const handleSubmit = async () => {
         setIsSubmitting(true);
+        setSubmittedData({ ...formData });
 
         await new Promise(resolve => setTimeout(resolve, 2000));
 
         setSubmitStatus('success');
         setIsSubmitting(false);
+
         setFormData({
             name: '',
             email: '',
@@ -46,24 +49,34 @@ function ContactsContent() {
             message: ''
         });
 
-        setTimeout(() => setSubmitStatus(null), 5000);
+        setTimeout(() => {
+            setSubmitStatus(null);
+            setSubmittedData(null);
+        }, 5000);
+    };
+
+    const handleCloseSuccess = () => {
+        setSubmitStatus(null);
+        setSubmittedData(null);
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-cyan-50 relative overflow-hidden">            
+        <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-cyan-50 relative overflow-hidden">
             <div className="relative z-10">
                 <HeroSection isClient={isClient} page="contacts" />
                 <StatsSection />
-                
+
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                        <ContactForm 
+                        <ContactForm
                             isClient={isClient}
                             formData={formData}
                             onFormChange={handleFormChange}
                             onSubmit={handleSubmit}
                             isSubmitting={isSubmitting}
                             submitStatus={submitStatus}
+                            submittedData={submittedData}
+                            onCloseSuccess={handleCloseSuccess}
                         />
                         <ContactInfo />
                     </div>

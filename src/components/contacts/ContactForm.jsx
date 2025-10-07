@@ -82,6 +82,8 @@ ${formData.message}
 };
 
 function SuccessModal({ isOpen, onClose, formData }) {
+  if (!formData) return null;
+  
   const contactMethodLabel = contactMethods.find(m => m.value === formData.contactMethod)?.label || formData.contactMethod;
   const travelTypeLabel = travelTypes.find(t => t.value === formData.travelType)?.label || formData.travelType;
   const budgetLabel = budgets.find(b => b.value === formData.budget)?.label || formData.budget;
@@ -174,7 +176,7 @@ function SuccessModal({ isOpen, onClose, formData }) {
   );
 }
 
-export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubmitting, submitStatus, onCloseSuccess }) {
+export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubmitting, submitStatus, submittedData, onCloseSuccess }) {
   const handleChange = (e) => {
     onFormChange({
       ...formData,
@@ -422,11 +424,10 @@ export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubm
         </div>
       </div>
 
-      {/* Модальное окно успеха */}
       <SuccessModal
         isOpen={submitStatus === 'success'}
         onClose={onCloseSuccess}
-        formData={formData}
+        formData={submittedData}
       />
     </>
   );
