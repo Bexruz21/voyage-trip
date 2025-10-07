@@ -81,7 +81,6 @@ ${formData.message}
   }
 };
 
-// Компонент модального окна успеха
 function SuccessModal({ isOpen, onClose, formData }) {
   const contactMethodLabel = contactMethods.find(m => m.value === formData.contactMethod)?.label || formData.contactMethod;
   const travelTypeLabel = travelTypes.find(t => t.value === formData.travelType)?.label || formData.travelType;
@@ -99,7 +98,7 @@ function SuccessModal({ isOpen, onClose, formData }) {
             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
             onClick={onClose}
           />
-          
+
           {/* Модальное окно */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -185,13 +184,12 @@ export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubm
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       await sendToTelegram(formData);
       onSubmit();
     } catch (error) {
       console.error('Ошибка при отправке формы:', error);
-      // Здесь можно добавить обработку ошибок
     }
   };
 
@@ -242,7 +240,6 @@ export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubm
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
-                placeholder="example@gmail.com"
               />
             </div>
 
@@ -254,9 +251,16 @@ export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubm
                 type="tel"
                 name="phone"
                 value={formData.phone}
-                onChange={handleChange}
+                onChange={(e) => {
+                  let value = e.target.value;
+                  value = value.replace(/[^+\d]/g, '');
+                  value = value.replace(/(?!^)\+/g, '');
+                  if (value && !value.startsWith('+')) {
+                    value = '+' + value;
+                  }
+                  handleChange({ target: { name: 'phone', value } });
+                }}
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
-                placeholder="+998 (xx) xxx-xx-xx"
               />
             </div>
           </div>
@@ -419,8 +423,8 @@ export function ContactForm({ isClient, formData, onFormChange, onSubmit, isSubm
       </div>
 
       {/* Модальное окно успеха */}
-      <SuccessModal 
-        isOpen={submitStatus === 'success'} 
+      <SuccessModal
+        isOpen={submitStatus === 'success'}
         onClose={onCloseSuccess}
         formData={formData}
       />
