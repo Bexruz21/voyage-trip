@@ -43,7 +43,7 @@ export function AboutSection() {
                 </div>
                 <div>
                   <div className="font-semibold text-gray-900">Email</div>
-                  <div className="text-gray-600">info@voyagetrip.com</div>
+                  <div className="text-gray-600">info@voyagetrip.uz</div>
                 </div>
               </div>
             </div>

@@ -9,7 +9,7 @@ const team = [
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     bio: "Создает незабываемые экскурсии с глубоким погружением в культуру и историю каждой страны.",
     specialties: ["Экскурсионные программы", "Культурология", "Языки: английский, испанский"],
-    contact: "maxim@voyagetrip.ru"
+    contact: "maxim@gmail.com"
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const team = [
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     bio: "Создает незабываемые экскурсии с глубоким погружением в культуру и историю каждой страны.",
     specialties: ["Экскурсионные программы", "Культурология", "Языки: английский, испанский"],
-    contact: "maxim@voyagetrip.ru"
+    contact: "maxim@gmail.com"
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const team = [
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     bio: "Создает незабываемые экскурсии с глубоким погружением в культуру и историю каждой страны.",
     specialties: ["Экскурсионные программы", "Культурология", "Языки: английский, испанский"],
-    contact: "maxim@voyagetrip.ru"
+    contact: "maxim@gmail.com"
   },
 ];
 

@@ -37,7 +37,7 @@ const office = {
     },
 
   ],
-  email: "info@voyagetrip.com",
+  email: "info@voyagetrip.uz",
   hours: "Пн–Пт: 9:00–21:00, Сб–Вс: 10:00–20:00",
   features: ["Бесплатная парковка", "Wi-Fi", "Кофе-бар"],
 };

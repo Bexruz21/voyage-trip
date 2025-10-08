@@ -13,7 +13,7 @@ const contactMethods = [
     {
         icon: Mail,
         title: "Email",
-        details: "info@voyagetrip.ru",
+        details: "info@voyagetrip.uz",
         description: "Ответим в течение 2 часов",
         color: "from-pink-400 to-rose-400"
     },
