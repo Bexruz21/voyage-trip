@@ -30,7 +30,7 @@ function Footer() {
         },
         {
             icon: Mail,
-            text: "info@voyagetrip.com",
+            text: "info@voyagetrip.uz",
             href: "mailto:info@voyagetrip.uz",
             description: "Электронная почта"
         },
