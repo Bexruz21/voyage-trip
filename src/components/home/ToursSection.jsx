@@ -162,7 +162,6 @@ export function ToursSection({ onExploreAll }) {
               <div className="flex-1 space-y-6">
                 {/* Заголовок и флаг */}
                 <div className="flex items-center gap-4 mb-4">
-                  <span className="text-4xl">{destination.flag}</span>
                   <h3 className="text-4xl font-bold text-gray-900">{destination.name}</h3>
                 </div>
 
@@ -210,11 +209,11 @@ export function ToursSection({ onExploreAll }) {
                     <div className="text-sm text-gray-500">Отелей</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">{destination.stats.rating}</div>
+                    <div className="text-2xl font-bold text-yellow-500">{destination.stats.rating}</div>
                     <div className="text-sm text-gray-500">Рейтинг</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-600">{destination.price}</div>
+                    <div className="text-2xl font-bold  text-green-600">{destination.price}</div>
                     <div className="text-sm text-gray-500">Стоимость</div>
                   </div>
                 </div>
@@ -243,7 +242,7 @@ export function ToursSection({ onExploreAll }) {
                   <img
                     src={destination.image}
                     alt={destination.name}
-                    className="w-full h-[500px] object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-[550px] object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
