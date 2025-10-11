@@ -15,13 +15,13 @@ const office = {
   address:
     "г. Ташкент, Seoul Plaza Business Centre, Мирабадский р-н, ул. Шазрисабз, 5А",
   phones: [
-    { type: "Горячая линия", numbers: ["+998 77 122 88 80", "+998 77 430 88 80"] },
-    { type: "Визовая поддержка", numbers: ["+998 90 940 43 33", "+998 95 940 43 33"] },
+    { type: "Горячая линия", numbers: ["+998 (90) 881-03-33"] },
+    { type: "Визовая поддержка", numbers: ["+998 (90) 940-43-33", "+998 (95) 940-43-33"] },
   ],
   messengers: [
     {
       type: "WhatsApp",
-      number: "+998 90 881 03 33",
+      number: "+998 (90) 881-03-33",
       url: "https://wa.me/998908810333",
       icon: MessageCircle,
       color: "text-green-600",

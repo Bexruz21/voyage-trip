@@ -29,7 +29,7 @@ export function AboutSection() {
                 <div className="min-w-0">
                   <div className="font-semibold text-gray-900 text-sm sm:text-base">Горячая линия</div>
                   <div className="text-gray-600 text-sm sm:text-base truncate">
-                    +998 77 122 88 80, +998 77 430 88 80
+                    +998 (90) 881-03-33
                   </div>
                 </div>
               </div>
@@ -41,7 +41,7 @@ export function AboutSection() {
                 <div className="min-w-0">
                   <div className="font-semibold text-gray-900 text-sm sm:text-base">Визовая поддержка</div>
                   <div className="text-gray-600 text-sm sm:text-base truncate">
-                    +998 90 940 43 33, +998 95 940 43 33
+                    +998 (90) 940-43-33, +998 (95) 940-43-33
                   </div>
                 </div>
               </div>

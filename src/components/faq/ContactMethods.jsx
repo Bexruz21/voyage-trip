@@ -6,7 +6,7 @@ const contactMethods = [
     {
         icon: Phone,
         title: "Телефон",
-        details: "+998 (77) 122 88 80",
+        details: "+998 (90) 881-03-33",
         description: "Ежедневно с 9:00 до 21:00",
         color: "from-indigo-400 to-blue-400"
     },
@@ -27,7 +27,7 @@ const contactMethods = [
     {
         icon: MessageCircle,
         title: "WhatsApp",
-        details: "+998 (77) 122 88 80",
+        details: "+998 (90) 881-03-33",
         description: "Круглосуточно",
         color: "from-green-400 to-teal-400"
     }

@@ -19,14 +19,14 @@ function Footer() {
         {
             icon: Phone,
             text: "Горячая линия",
-            href: "tel:+998771228880",
-            description: "+998 77 122 88 80, +998 77 430 88 80"
+            href: "tel:+998908810333",
+            description: "+998 (90) 881-03-33"
         },
         {
             icon: Phone,
             text: "Визовая поддержка",
             href: "tel:+998909404333",
-            description: "+998 90 940 43 33, +998 95 940 43 33"
+            description: "+998 (90) 940-43-33, +998 (95) 940-43-33"
         },
         {
             icon: Mail,
@@ -51,7 +51,7 @@ function Footer() {
         },
         {
             icon: MessageCircle,
-            href: "#",
+            href: "https://wa.me/998908810333",
             name: "Whatsapp",
             color: "bg-[#25D366] text-white"
         }
