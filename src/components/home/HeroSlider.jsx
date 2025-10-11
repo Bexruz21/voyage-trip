@@ -105,7 +105,7 @@ export function HeroSlider({ isClient }) {
                                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                                 exit={{ opacity: 0, y: -40, filter: "blur(1px)" }}
                                 transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-                                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight text-white drop-shadow-2xl"
+                                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight text-white drop-shadow-2xl"
                             >
                                 {slides[currentSlide].title}
                             </motion.h1>

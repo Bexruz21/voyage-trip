@@ -18,9 +18,11 @@ export function CTASection() {
               Получить консультацию
             </button>
           </Link>
-          <button className="border-2 border-cyan-500 text-cyan-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-cyan-50 transition-all duration-300">
-            Смотреть все туры
-          </button>
+          <Link href="/destinations">
+            <button className="border-2 border-cyan-500 text-cyan-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-cyan-50 transition-all duration-300">
+              Смотреть все туры
+            </button>
+          </Link>
         </div>
       </div>
     </section>

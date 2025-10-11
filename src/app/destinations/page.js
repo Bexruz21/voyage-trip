@@ -1,34 +1,157 @@
 'use client'
 
-// pages/directions.js
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { countriesData } from './mock';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+// Иконки
+const MapPin = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>;
+const Star = () => <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>;
+const Calendar = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>;
+const Users = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" /></svg>;
+
+// Данные
+const regions = [
+  {
+    id: 1,
+    region: "Европа",
+    name: "Европейская классика",
+    description: 'От романтических улочек Парижа до величественных альпийских пейзажей. Европа - это многовековая история, искусство и культура, воплощенные в самых красивых городах мира.',
+    image: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    stats: { countries: 25, tours: 450, rating: 4.9 },
+    bestTime: 'Апрель - Июнь, Сентябрь - Октябрь',
+    highlights: ['Романтические столицы', 'Альпийские курорты', 'Исторические замки', 'Мишленовские рестораны'],
+    countries: [
+      {
+        id: 1,
+        name: 'Франция',
+        description: 'Страна любви, моды и изысканной кухни. От сияющих огней Парижа до лавандовых полей Прованса.',
+        image: 'https://images.unsplash.com/photo-1502602898536-47ad22581b52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2067&q=80',
+        capital: 'Париж',
+        population: '67.4 млн',
+        language: 'Французский',
+        currency: 'Евро (€)',
+        bestTime: 'Май - Июнь, Сентябрь',
+        highlights: ['Эйфелева башня', 'Лувр', 'Лазурный берег', 'Замки Луары'],
+        cities: [
+          {
+            name: 'Париж',
+            description: 'Город любви и огней, столица моды и искусства. Романтическая атмосфера на каждом шагу.',
+            image: 'https://images.unsplash.com/photo-1502602898536-47ad22581b52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2067&q=80',
+            highlights: ['Эйфелева башня', 'Лувр', 'Монмартр', 'Нотр-Дам'],
+            bestTime: 'Апрель - Июнь',
+            attractions: ['Собор Парижской Богоматери', 'Триумфальная арка', 'Елисейские поля'],
+            hotels: 1250,
+            rating: 4.8
+          },
+          {
+            name: 'Ницца',
+            description: 'Жемчужина Лазурного берега с итальянским шармом и средиземноморским солнцем.',
+            image: 'https://images.unsplash.com/photo-1522083165193-3424ed129620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
+            highlights: ['Английская набережная', 'Старый город', 'Пляжи', 'Курсаль'],
+            bestTime: 'Май - Сентябрь',
+            attractions: ['Музей Матисса', 'Холм Замка', 'Опера Ниццы'],
+            hotels: 890,
+            rating: 4.7
+          }
+        ]
+      },
+      {
+        id: 2,
+        name: 'Италия',
+        description: 'Колыбель Ренессанса с богатейшим культурным наследием и самой вкусной кухней в мире.',
+        image: 'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+        capital: 'Рим',
+        population: '59.1 млн',
+        language: 'Итальянский',
+        currency: 'Евро (€)',
+        bestTime: 'Апрель - Июнь, Сентябрь - Октябрь',
+        highlights: ['Колизей', 'Венецианские каналы', 'Флорентийское искусство', 'Сицилийская кухня'],
+        cities: [
+          {
+            name: 'Рим',
+            description: 'Вечный город с 3000-летней историей, где каждая улица дышит древностью.',
+            image: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+            highlights: ['Колизей', 'Ватикан', 'Фонтан Треви', 'Пантеон'],
+            bestTime: 'Апрель - Май, Октябрь',
+            attractions: ['Римский форум', 'Испанская лестница', 'Площадь Навона'],
+            hotels: 1560,
+            rating: 4.8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 2,
+    region: "Азия", 
+    name: "Тайны Востока",
+    description: 'Загадочные храмы, древние традиции и современные мегаполисы. От сакур Японии до тропических пляжей Таиланда.',
+    image: 'https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?fm=jpg&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YXNpYW4lMjBsYW5kc2NhcGV8ZW58MHx8MHx8fDA%3D&ixlib=rb-4.1.0&q=60&w=3000',
+    stats: { countries: 18, tours: 320, rating: 4.8 },
+    bestTime: 'Октябрь - Апрель',
+    highlights: ['Древние храмы', 'Тропические пляжи', 'Современные мегаполисы', 'Экзотическая кухня'],
+    countries: [
+      {
+        id: 3,
+        name: 'Япония',
+        description: 'Страна контрастов, где древние традиции гармонично соседствуют с ультрасовременными технологиями.',
+        image: 'https://images.unsplash.com/photo-1540959733332-9abcb6c7c113?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+        capital: 'Токио',
+        population: '125.7 млн',
+        language: 'Японский',
+        currency: 'Иена (¥)',
+        bestTime: 'Март - Май, Сентябрь - Ноябрь',
+        highlights: ['Цветение сакуры', 'Гора Фудзи', 'Токио - город будущего', 'Киото - древняя столица'],
+        cities: [
+          {
+            name: 'Токио',
+            description: 'Футуристический мегаполис, где небоскребы соседствуют с древними храмами.',
+            image: 'https://images.unsplash.com/photo-1540959733332-9abcb6c7c113?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+            highlights: ['Сибуя', 'Императорский дворец', 'Токио Скай Три', 'Акихабара'],
+            bestTime: 'Март - Май, Сентябрь - Ноябрь',
+            attractions: ['Рынок Цукидзи', 'Храм Мэйдзи', 'Роппонги'],
+            hotels: 2340,
+            rating: 4.9
+          }
+        ]
+      }
+    ]
+  }
+  // ... можно добавить остальные регионы
+];
 
 const DirectionsPage = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (selectedCountry || selectedCity) {
+    const regionId = searchParams?.get('region');
+    if (regionId) {
+      const region = regions.find(r => r.id === parseInt(regionId));
+      if (region) {
+        setSelectedRegion(region);
+      }
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (selectedRegion || selectedCountry || selectedCity) {
       setIsLoading(true);
-      const timer = setTimeout(() => setIsLoading(false), 800);
+      const timer = setTimeout(() => setIsLoading(false), 600);
       return () => clearTimeout(timer);
     }
-  }, [selectedCountry, selectedCity]);
-
-  const filteredCountries = countriesData.filter(country =>
-    country.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    country.cities.some(city =>
-      city.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  );
+  }, [selectedRegion, selectedCountry, selectedCity]);
 
   const resetSelection = () => {
+    setSelectedRegion(null);
     setSelectedCountry(null);
     setSelectedCity(null);
+    router.push('/directions');
   };
 
   const containerVariants = {
@@ -47,100 +170,145 @@ const DirectionsPage = () => {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.5
+        duration: 0.6,
+        ease: "easeOut"
       }
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-50 via-blue-50 to-cyan-100 overflow-hidden">
-        {/* Морской фон с волнами */}
+    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-cyan-100">
+      {/* Hero Section с динамическим контентом */}
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          {/* Верхние волны */}
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-blue-200/30 to-transparent"></div>
-
-          {/* Морские акценты */}
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyan-200/20 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-blue-300/15 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 w-56 h-56 bg-sky-200/25 rounded-full blur-3xl"></div>
-
-          {/* Нижние волны */}
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-blue-100/40 to-transparent"></div>
+          {/* Динамический фон в зависимости от выбора */}
+          {!selectedRegion && (
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-blue-400/15 to-sky-300/20">
+              <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-300/20 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-400/15 rounded-full blur-3xl"></div>
+            </div>
+          )}
+          {selectedRegion && !selectedCountry && (
+            <img
+              src={selectedRegion.image}
+              alt={selectedRegion.name}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
+          {selectedCountry && !selectedCity && (
+            <img
+              src={selectedCountry.image}
+              alt={selectedCountry.name}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
+          {selectedCity && (
+            <img
+              src={selectedCity.image}
+              alt={selectedCity.name}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"></div>
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="text-center max-w-4xl mx-auto"
+            transition={{ duration: 1 }}
+            className="text-center max-w-4xl mx-auto text-white"
           >
-            {/* Главный заголовок */}
-            <motion.h1
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-6xl md:text-7xl font-bold mb-8 leading-tight"
-            >
-              <span className="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900 bg-clip-text text-transparent">
-                Путешествия
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-slate-700 via-gray-600 to-slate-800 bg-clip-text text-transparent">
-                Премиум Класса
-              </span>
-            </motion.h1>
-
-            {/* Описание */}
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-xl md:text-2xl text-gray-600 mb-4 leading-relaxed max-w-3xl mx-auto font-light"
-            >
-              Бронируйте эксклюзивные туры по всему миру
-            </motion.p>
-
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              className="text-lg md:text-xl text-gray-500 mb-12 leading-relaxed max-w-3xl mx-auto font-medium"
-            >
-              От индивидуальных маршрутов до готовых путешествий — ваш идеальный отдых начинается с бронирования
-            </motion.p>
+            {!selectedRegion ? (
+              <>
+                <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                  Все направления
+                </h1>
+                <p className="text-xl md:text-2xl mb-8 leading-relaxed opacity-90">
+                  Откройте для себя уникальные уголки планеты. Каждое направление - это новая история, 
+                  наполненная культурой, природными красотами и незабываемыми впечатлениями.
+                </p>
+              </>
+            ) : !selectedCountry ? (
+              <>
+                <h1 className="text-4xl md:text-6xl font-bold mb-4">{selectedRegion.name}</h1>
+                <p className="text-lg md:text-xl mb-6 opacity-90">{selectedRegion.description}</p>
+                <div className="flex flex-wrap justify-center gap-4 mb-6">
+                  {selectedRegion.highlights.map((highlight, idx) => (
+                    <span key={idx} className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm border border-white/30">
+                      {highlight}
+                    </span>
+                  ))}
+                </div>
+              </>
+            ) : !selectedCity ? (
+              <>
+                <h1 className="text-4xl md:text-6xl font-bold mb-4">{selectedCountry.name}</h1>
+                <p className="text-lg md:text-xl mb-6 opacity-90">{selectedCountry.description}</p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
+                    Столица: {selectedCountry.capital}
+                  </span>
+                  <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
+                    Население: {selectedCountry.population}
+                  </span>
+                </div>
+              </>
+            ) : (
+              <>
+                <h1 className="text-4xl md:text-6xl font-bold mb-4">{selectedCity.name}</h1>
+                <p className="text-lg md:text-xl mb-6 opacity-90">{selectedCity.description}</p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
+                    🏨 {selectedCity.hotels} отелей
+                  </span>
+                  <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
+                    ⭐ {selectedCity.rating} рейтинг
+                  </span>
+                </div>
+              </>
+            )}
           </motion.div>
         </div>
-
-        {/* Декоративные элементы */}
-        <div className="absolute bottom-10 left-10 w-8 h-8 bg-cyan-300/30 rounded-full"></div>
-        <div className="absolute top-20 right-16 w-12 h-12 bg-blue-200/40 rounded-full"></div>
-        <div className="absolute top-1/3 left-10 w-6 h-6 bg-sky-300/50 rounded-full"></div>
       </section>
-
 
       {/* Breadcrumbs */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
-        className="container mx-auto px-4 sm:px-16 mt-16"
+        className="container mx-auto px-4 mt-8"
       >
         <div className="flex items-center space-x-3 text-sm text-gray-600">
-          <motion.button
+          <motion.button 
             whileHover={{ scale: 1.05 }}
-            onClick={resetSelection}
-            className="hover:text-blue-600 transition-colors font-medium"
+            onClick={resetSelection} 
+            className="hover:text-blue-600 transition-colors font-medium flex items-center gap-2"
           >
-            Все страны
+            <MapPin />
+            Все направления
           </motion.button>
+          {selectedRegion && (
+            <>
+              <span className="text-blue-400">›</span>
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                onClick={() => {
+                  setSelectedCountry(null);
+                  setSelectedCity(null);
+                }} 
+                className="hover:text-blue-600 transition-colors font-medium"
+              >
+                {selectedRegion.name}
+              </motion.button>
+            </>
+          )}
           {selectedCountry && (
             <>
               <span className="text-blue-400">›</span>
-              <motion.button
+              <motion.button 
                 whileHover={{ scale: 1.05 }}
-                onClick={() => setSelectedCity(null)}
+                onClick={() => setSelectedCity(null)} 
                 className="hover:text-blue-600 transition-colors font-medium"
               >
                 {selectedCountry.name}
@@ -167,85 +335,75 @@ const DirectionsPage = () => {
           >
             <div className="text-center">
               <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-              <p className="text-gray-600 font-medium">Загружаем направления...</p>
+              <p className="text-gray-600 font-medium">Загружаем...</p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 sm:px-16 py-16">
+      <div className="container mx-auto px-4 py-16">
         <AnimatePresence mode="wait">
-          {!selectedCountry ? (
-            // Countries Grid
+          {!selectedRegion ? (
+            // Regions Grid
             <motion.div
-              key="countries"
+              key="regions"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {filteredCountries.map((country) => (
+              {regions.map((region) => (
                 <motion.div
-                  key={country.id}
+                  key={region.id}
                   variants={itemVariants}
                   whileHover={{ y: -8, scale: 1.02 }}
                   className="group cursor-pointer"
-                  onClick={() => setSelectedCountry(country)}
+                  onClick={() => setSelectedRegion(region)}
                 >
-                  <div className="bg-white rounded-3xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl border border-gray-100 hover:border-cyan-100">
+                  <div className="bg-white rounded-3xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl border border-gray-100 hover:border-cyan-200">
                     <div className="relative overflow-hidden">
                       <img
-                        src={country.image}
-                        alt={country.name}
+                        src={region.image}
+                        alt={region.name}
                         className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                      <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-white font-semibold border border-white/30">
-                        {country.flag}
-                      </div>
                       <div className="absolute bottom-6 left-6 text-white">
-                        <h3 className="text-2xl font-bold mb-2">{country.name}</h3>
-                        <p className="opacity-90 text-sm mb-3 max-w-md leading-relaxed">{country.description}</p>
+                        <h3 className="text-2xl font-bold mb-2">{region.name}</h3>
+                        <p className="opacity-90 text-sm mb-3 max-w-md leading-relaxed">{region.description}</p>
                         <div className="flex items-center space-x-4 text-sm">
-                          <div className="flex items-center space-x-1 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            <span>{country.cities.length} городов</span>
-                          </div>
-                          <div className="flex items-center space-x-1 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                            </svg>
-                            <span>{country.currency}</span>
-                          </div>
+                          <span className="bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
+                            🌍 {region.stats.countries} стран
+                          </span>
+                          <span className="bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
+                            ⭐ {region.stats.rating}
+                          </span>
                         </div>
                       </div>
                     </div>
-
+                    
                     <div className="p-6 bg-gradient-to-br from-white to-gray-50">
-                      <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
-                        <div className="flex items-center space-x-2">
-                          <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                          </svg>
-                          <span className="text-xs">Лучшее время: {country.bestTime}</span>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                          <Calendar />
+                          <span>Лучшее время: {region.bestTime}</span>
                         </div>
-                        <div className="flex items-center space-x-2">
-                          <svg className="w-5 h-5 text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                          </svg>
-                          <span className="text-xs">{country.visa}</span>
-                        </div>
+                      </div>
+                      
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {region.highlights.slice(0, 2).map((highlight, idx) => (
+                          <span key={idx} className="bg-cyan-50 text-cyan-700 px-3 py-1 rounded-full text-xs border border-cyan-200">
+                            {highlight}
+                          </span>
+                        ))}
                       </div>
 
                       <motion.div
                         whileHover={{ x: 5 }}
-                        className="mt-6 flex items-center justify-between p-3 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-xl border border-cyan-100 cursor-pointer group"
+                        className="flex items-center justify-between p-3 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-xl border border-cyan-100 cursor-pointer group"
                       >
-                        <span className="text-cyan-700 font-semibold text-sm">Исследовать направления</span>
+                        <span className="text-cyan-700 font-semibold text-sm">Исследовать регион</span>
                         <div className="flex items-center space-x-1">
                           <svg className="w-4 h-4 text-cyan-600 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -257,96 +415,101 @@ const DirectionsPage = () => {
                 </motion.div>
               ))}
             </motion.div>
-          ) : !selectedCity ? (
-            // Cities Grid
+          ) : !selectedCountry ? (
+            // Countries Grid
             <motion.div
-              key="cities"
+              key="countries"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
+              {/* Статистика региона */}
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="text-center mb-12"
+                className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
               >
-                <h2 className="text-4xl font-bold text-gray-800 mb-4">
-                  Города {selectedCountry.name}
-                </h2>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                  Откройте для себя уникальные города этой удивительной страны
-                </p>
+                <div className="bg-white rounded-2xl p-6 text-center shadow-lg border border-gray-100">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">{selectedRegion.stats.countries}</div>
+                  <div className="text-gray-600 text-sm">Стран в регионе</div>
+                </div>
+                <div className="bg-white rounded-2xl p-6 text-center shadow-lg border border-gray-100">
+                  <div className="text-3xl font-bold text-green-600 mb-2">{selectedRegion.stats.tours}+</div>
+                  <div className="text-gray-600 text-sm">Доступных туров</div>
+                </div>
+                <div className="bg-white rounded-2xl p-6 text-center shadow-lg border border-gray-100">
+                  <div className="text-3xl font-bold text-amber-500 mb-2 flex items-center justify-center">
+                    {selectedRegion.stats.rating} <Star />
+                  </div>
+                  <div className="text-gray-600 text-sm">Рейтинг региона</div>
+                </div>
+                <div className="bg-white rounded-2xl p-6 text-center shadow-lg border border-gray-100">
+                  <div className="text-3xl font-bold text-cyan-600 mb-2">
+                    <Calendar />
+                  </div>
+                  <div className="text-gray-600 text-sm">{selectedRegion.bestTime}</div>
+                </div>
               </motion.div>
 
               <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
-                className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
               >
-                {selectedCountry.cities.map((city) => (
+                {selectedRegion.countries.map((country) => (
                   <motion.div
-                    key={city.id}
+                    key={country.id}
                     variants={itemVariants}
                     whileHover={{ y: -6 }}
                     className="group cursor-pointer"
-                    onClick={() => setSelectedCity(city)}
+                    onClick={() => setSelectedCountry(country)}
                   >
                     <div className="bg-white rounded-3xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl border border-gray-100 hover:border-cyan-100">
                       <div className="relative overflow-hidden">
                         <img
-                          src={city.image}
-                          alt={city.name}
-                          className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
+                          src={country.image}
+                          alt={country.name}
+                          className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                         <div className="absolute bottom-6 left-6 text-white">
-                          <h3 className="text-2xl font-bold mb-2">{city.name}</h3>
-                          <p className="opacity-90 mb-3 max-w-md leading-relaxed">{city.description}</p>
-                          <div className="flex items-center space-x-4 text-sm">
-                            <div className="flex items-center space-x-1 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 border border-white/30">
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                              </svg>
-                              <span>{city.population}</span>
-                            </div>
-                            <div className="flex items-center space-x-1 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 border border-white/30">
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                              </svg>
-                              <span>{city.hotels.length} отелей</span>
-                            </div>
+                          <h3 className="text-2xl font-bold mb-2">{country.name}</h3>
+                          <p className="opacity-90 mb-3 max-w-md leading-relaxed text-sm">{country.description}</p>
+                          <div className="flex items-center space-x-2 text-sm">
+                            <span className="bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
+                              🏙️ {country.cities.length} городов
+                            </span>
                           </div>
                         </div>
                       </div>
 
                       <div className="p-6">
-                        <div className="mb-4">
-                          <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
-                            <svg className="w-5 h-5 text-amber-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                            Основные достопримечательности:
-                          </h4>
-                          <div className="flex flex-wrap gap-2">
-                            {city.highlights.map((highlight, index) => (
-                              <span
-                                key={index}
-                                className="bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-700 px-3 py-2 rounded-xl text-sm border border-cyan-100 font-medium"
-                              >
-                                {highlight}
-                              </span>
-                            ))}
+                        <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 mb-4">
+                          <div className="flex items-center gap-2">
+                            <Users />
+                            <span>{country.population}</span>
                           </div>
+                          <div className="flex items-center gap-2">
+                            <span>💬 {country.language}</span>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {country.highlights.slice(0, 3).map((highlight, idx) => (
+                            <span key={idx} className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs border border-blue-200">
+                              {highlight}
+                            </span>
+                          ))}
                         </div>
 
                         <motion.div
                           whileHover={{ x: 5 }}
-                          className="flex items-center justify-between p-3 bg-gradient-to-r from-emerald-50 to-green-50 rounded-xl border border-emerald-100 cursor-pointer group"
+                          className="flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl border border-blue-100 cursor-pointer group"
                         >
-                          <span className="text-emerald-700 font-semibold text-sm">Смотреть отели</span>
+                          <span className="text-blue-700 font-semibold text-sm">Смотреть города</span>
                           <div className="flex items-center space-x-1">
-                            <svg className="w-4 h-4 text-emerald-600 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-4 h-4 text-blue-600 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>
                           </div>
@@ -357,165 +520,112 @@ const DirectionsPage = () => {
                 ))}
               </motion.div>
             </motion.div>
-          ) : (
-            // Hotels List
+          ) : !selectedCity ? (
+            // Cities Grid
             <motion.div
-              key="hotels"
+              key="cities"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
+              {/* Информация о стране */}
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="text-center mb-12"
+                className="bg-white rounded-3xl shadow-xl p-8 mb-12 border border-gray-100"
               >
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                  Лучшие отели в {selectedCity.name}
-                </h2>
-                <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-                  Подберите идеальное место для вашего отдыха
-                </p>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <h2 className="text-3xl font-bold text-gray-800 mb-4">{selectedCountry.name}</h2>
+                    <p className="text-gray-600 mb-6 leading-relaxed">{selectedCountry.description}</p>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                          <span className="text-blue-600">🏛️</span>
+                        </div>
+                        <div>
+                          <div className="font-semibold text-gray-900">Столица</div>
+                          <div className="text-blue-600">{selectedCountry.capital}</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                          <Users />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-gray-900">Население</div>
+                          <div className="text-green-600">{selectedCountry.population}</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
+                          <span className="text-amber-600">💬</span>
+                        </div>
+                        <div>
+                          <div className="font-semibold text-gray-900">Язык</div>
+                          <div className="text-amber-600">{selectedCountry.language}</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-cyan-100 rounded-xl flex items-center justify-center">
+                          <span className="text-cyan-600">💰</span>
+                        </div>
+                        <div>
+                          <div className="font-semibold text-gray-900">Валюта</div>
+                          <div className="text-cyan-600">{selectedCountry.currency}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex justify-center">
+                    <img
+                      src={selectedCountry.image}
+                      alt={selectedCountry.name}
+                      className="rounded-2xl shadow-lg max-w-md w-full"
+                    />
+                  </div>
+                </div>
               </motion.div>
 
               <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
-                className="grid grid-cols-1 gap-8"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
               >
-                {selectedCity.hotels.map((hotel) => (
+                {selectedCountry.cities.map((city, index) => (
                   <motion.div
-                    key={hotel.id}
+                    key={index}
                     variants={itemVariants}
-                    className="bg-white rounded-3xl shadow-2xl overflow-hidden hover:shadow-3xl transition-all duration-500 border border-gray-100 group"
+                    whileHover={{ scale: 1.05 }}
+                    className="group cursor-pointer"
+                    onClick={() => setSelectedCity(city)}
                   >
-                    <div className="flex flex-col xl:flex-row h-full">
-                      {/* Изображение отеля - контейнер с фиксированной высотой */}
-                      <div className="xl:w-2/5 relative flex-shrink-0">
-                        <div className="relative h-80 xl:h-full xl:min-h-96 overflow-hidden">
-                          <img
-                            src={hotel.image}
-                            alt={hotel.name}
-                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                    <div className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100">
+                      <div className="relative h-48 overflow-hidden">
+                        <img
+                          src={city.image}
+                          alt={city.name}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                        <div className="absolute bottom-4 left-4 text-white">
+                          <h3 className="text-xl font-bold">{city.name}</h3>
                         </div>
                       </div>
-
-                      {/* Информация об отеле */}
-                      <div className="xl:w-3/5 p-6 md:p-8 flex flex-col">
-                        {/* Заголовок и рейтинг */}
-                        <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-6">
-                          <div className="mb-4 md:mb-0 flex-1">
-                            <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
-                              {hotel.name}
-                            </h3>
-                            <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-4">
-                              {hotel.description}
-                            </p>
-
-                            {/* Рейтинг для мобильных */}
-                            <div className="flex items-center md:hidden bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl px-4 py-3">
-                              <div className="flex items-center space-x-2">
-                                <div className="text-amber-600 font-bold text-xl flex items-center">
-                                  {hotel.rating}
-                                  <svg className="w-5 h-5 ml-1 fill-current text-amber-500" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                  </svg>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Рейтинг для десктопа */}
-                          <div className="hidden md:flex flex-col items-end bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl px-6 py-4">
-                            <div className="text-amber-600 font-bold text-2xl flex items-center">
-                              {hotel.rating}
-                              <svg className="w-6 h-6 ml-1 fill-current text-amber-500" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                              </svg>
-                            </div>
-                          </div>
+                      <div className="p-6">
+                        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{city.description}</p>
+                        <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                          <span>🏨 {city.hotels} отелей</span>
+                          <span className="flex items-center gap-1">
+                            ⭐ {city.rating}
+                          </span>
                         </div>
-
-                        {/* Расположение и удобства */}
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                          <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-5">
-                            <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
-                              <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                              </svg>
-                              Расположение
-                            </h4>
-                            <p className="text-gray-700 text-sm md:text-base mb-2 font-medium">{hotel.location}</p>
-                            <p className="text-blue-600 text-sm font-semibold">{hotel.distance}</p>
-                          </div>
-
-                          <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-5">
-                            <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
-                              <svg className="w-5 h-5 text-emerald-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                              </svg>
-                              Удобства
-                            </h4>
-                            <div className="flex flex-wrap gap-2">
-                              {hotel.amenities.slice(0, 4).map((amenity, index) => (
-                                <span
-                                  key={index}
-                                  className="bg-white/80 text-emerald-700 px-3 py-2 rounded-xl text-sm border border-emerald-200 font-medium backdrop-blur-sm"
-                                >
-                                  {amenity}
-                                </span>
-                              ))}
-                              {hotel.amenities.length > 4 && (
-                                <span className="bg-white/80 text-gray-600 px-3 py-2 rounded-xl text-sm border border-gray-200 font-medium backdrop-blur-sm">
-                                  +{hotel.amenities.length - 4}
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Цена и кнопка бронирования - прижимаем к низу */}
-                        <div className="mt-auto pt-6 border-t border-gray-200">
-                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
-                            <div className="text-center sm:text-left">
-                              <div className="flex items-baseline justify-center sm:justify-start space-x-2">
-                                <span className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                                  ${hotel.price}
-                                </span>
-                                <span className="text-gray-500 text-lg">/ ночь</span>
-                              </div>
-                              <div className="text-green-600 text-sm font-semibold flex items-center justify-center sm:justify-start mt-2">
-                                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                </svg>
-                                Бесплатная отмена • Бесплатный WiFi
-                              </div>
-                            </div>
-                            <motion.button
-                              whileHover={{ scale: 1.05, y: -2 }}
-                              whileTap={{ scale: 0.95 }}
-                              transition={{ duration: 0.3 }}
-                              className="w-full sm:w-auto px-8 py-4 text-lg font-bold text-white rounded-2xl shadow-xl transition-all
-             bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 hover:shadow-2xl group"
-                            >
-                              <span className="flex items-center justify-center gap-2">
-                                Забронировать
-                                <svg
-                                  className="w-5 h-5 transition-transform group-hover:translate-x-1"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5-5 5m5-5H6" />
-                                </svg>
-                              </span>
-                            </motion.button>
-
-                          </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-blue-600 font-semibold text-sm">Подробнее</span>
+                          <svg className="w-4 h-4 text-blue-600 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
                         </div>
                       </div>
                     </div>
@@ -523,30 +633,71 @@ const DirectionsPage = () => {
                 ))}
               </motion.div>
             </motion.div>
+          ) : (
+            // City Detail
+            <motion.div
+              key="city-detail"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <div className="bg-white rounded-3xl shadow-xl overflow-hidden mb-8 border border-gray-100">
+                <div className="relative h-96">
+                  <img
+                    src={selectedCity.image}
+                    alt={selectedCity.name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute bottom-8 left-8 text-white">
+                    <h2 className="text-4xl font-bold mb-2">{selectedCity.name}</h2>
+                    <p className="text-xl opacity-90 max-w-2xl">{selectedCity.description}</p>
+                  </div>
+                </div>
+
+                <div className="p-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div className="lg:col-span-2">
+                      <h3 className="text-2xl font-bold text-gray-800 mb-6">Основные достопримечательности</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {selectedCity.attractions.map((attraction, idx) => (
+                          <div key={idx} className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-4 border border-blue-100">
+                            <div className="flex items-center gap-3">
+                              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <span className="text-blue-600 text-sm">⭐</span>
+                              </div>
+                              <span className="font-semibold text-gray-800">{attraction}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-2xl p-6">
+                      <h4 className="text-xl font-bold text-gray-800 mb-4">Информация</h4>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <span className="text-gray-600">Количество отелей</span>
+                          <span className="font-semibold text-blue-600">{selectedCity.hotels}</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-gray-600">Рейтинг</span>
+                          <span className="font-semibold text-amber-500 flex items-center gap-1">
+                            {selectedCity.rating} <Star />
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-gray-600">Лучшее время</span>
+                          <span className="font-semibold text-green-600">{selectedCity.bestTime}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Empty State */}
-        {filteredCountries.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center py-20"
-          >
-            <div className="text-gray-400 text-8xl mb-6">🌍</div>
-            <h3 className="text-3xl font-bold text-gray-600 mb-4">Ничего не найдено</h3>
-            <p className="text-gray-500 text-lg mb-8">
-              Попробуйте изменить поисковый запрос или выберите другое направление
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              onClick={() => setSearchTerm('')}
-              className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-semibold"
-            >
-              Сбросить поиск
-            </motion.button>
-          </motion.div>
-        )}
       </div>
     </div>
   );

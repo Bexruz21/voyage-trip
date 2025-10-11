@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 // Иконки
 const MapPin = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>;
@@ -166,7 +167,20 @@ const itemVariants = {
   }
 };
 
-export function ToursSection({ onExploreAll }) {
+
+
+export function ToursSection() {
+
+  const router = useRouter();
+
+  const handleSelectRegion = (region) => {
+    router.push(`/destinations?region=${region.id}`);
+  };
+
+  const handleExploreAll = () => {
+    router.push('/destinations');
+  };
+
   return (
     <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-50 via-blue-50/10 to-indigo-50/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -201,6 +215,7 @@ export function ToursSection({ onExploreAll }) {
               variants={itemVariants}
               className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
                 } gap-8 lg:gap-12 items-center`}
+              onClick={() => handleSelectRegion(region)}
             >
               {/* Текстовая информация */}
               <div className="flex-1 space-y-6 order-2 lg:order-1">
@@ -259,10 +274,12 @@ export function ToursSection({ onExploreAll }) {
                     <div className="text-base lg:text-lg font-bold text-blue-600">{region.stats.tours}</div>
                     <div className="text-xs text-blue-500">туров</div>
                   </div>
+
                   <div className="inline-flex items-center gap-1 bg-green-50 px-3 py-1 rounded-lg border border-green-200">
                     <div className="text-base lg:text-lg font-bold text-green-600">{region.stats.hotels}+</div>
                     <div className="text-xs text-green-500">отелей</div>
                   </div>
+
                   <div className="inline-flex items-center gap-1 bg-yellow-50 px-3 py-1 rounded-lg border border-yellow-200">
                     <div className="text-base lg:text-lg font-bold text-yellow-600 flex items-center gap-1">
                       {region.stats.rating}
@@ -270,8 +287,10 @@ export function ToursSection({ onExploreAll }) {
                     </div>
                     <div className="text-xs text-yellow-500">рейтинг</div>
                   </div>
-                  <div className="inline-flex items-center gap-1 bg-gradient-to-br from-blue-500 to-cyan-500 px-3 py-1 rounded-lg shadow-lg">
-                    <div className="text-base lg:text-lg font-bold text-white">{region.price}</div>
+
+                  <div className="inline-flex items-center gap-1 bg-cyan-50 px-3 py-1 rounded-lg border border-cyan-200">
+                    <div className="text-base lg:text-lg font-bold text-cyan-600">{region.price}</div>
+                    <div className="text-xs text-cyan-500">цена</div>
                   </div>
                 </div>
 
@@ -367,7 +386,7 @@ export function ToursSection({ onExploreAll }) {
               Откройте мир с комфортом и уверенностью.
             </p>
             <motion.button
-              onClick={onExploreAll}
+              onClick={() => handleExploreAll()}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 lg:px-12 py-3 lg:py-4 rounded-xl lg:rounded-2xl font-bold text-base lg:text-lg hover:shadow-2xl transition-all duration-300 relative z-10 shadow-lg"
