@@ -111,8 +111,8 @@ function Navigation() {
                             })}
                         </nav>
 
-                        {/* Right Side - Language & Profile */}
-                        <div className="flex items-center space-x-2">
+                        {/* Right Side - Language & Profile */}    
+                        <div className="flex items-center space-x-2"> 
                             {/* Language Selector */}
                             <div className="relative hidden lg:flex">
                                 <motion.button

@@ -15,18 +15,14 @@ const regions = [
     region: "Европа",
     name: "Европейская классика",
     description: 'От романтических улочек Парижа до величественных альпийских пейзажей. Европа - это многовековая история, искусство и культура, воплощенные в самых красивых городах мира. Исследуйте старинные замки, наслаждайтесь изысканной кухней и погрузитесь в атмосферу настоящей европейской сказки.',
-    video: '/videos/europe.mp4',
     image: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
     countries: ['Франция', 'Италия', 'Испания', 'Германия', 'Австрия', 'Швейцария', 'Греция'],
     highlights: ['Париж - город любви и моды', 'Венеция - романтика на воде', 'Барселона - архитектура Гауди', 'Альпы - горнолыжные курорты'],
     stats: {
-      tours: 156,
-      hotels: 4500,
       rating: 4.9
     },
     price: 'от €550',
     bestTime: 'Апрель - Июнь, Сентябрь - Октябрь',
-    duration: '7-14 дней',
     color: 'from-blue-500 to-cyan-500'
   },
   {
@@ -34,18 +30,14 @@ const regions = [
     region: "Азия",
     name: "Тайны Востока",
     description: 'Загадочные храмы, древние традиции и современные мегаполисы Азии. От сакур Японии до тропических пляжей Таиланда. Погрузитесь в мир контрастов, где ультрасовременные технологии соседствуют с тысячелетними традициями.',
-    video: '/videos/asia.mp4',
     image: 'https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?fm=jpg&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YXNpYW4lMjBsYW5kc2NhcGV8ZW58MHx8MHx8fDA%3D&ixlib=rb-4.1.0&q=60&w=3000',
     countries: ['Япония', 'Таиланд', 'Вьетнам', 'Китай', 'Южная Корея', 'Сингапур', 'Малайзия'],
     highlights: ['Токио - город будущего', 'Бали - тропический рай', 'Великая Китайская стена', 'Храмы Ангкор-Ват'],
     stats: {
-      tours: 128,
-      hotels: 3200,
       rating: 4.8
     },
     price: 'от $780',
     bestTime: 'Октябрь - Апрель',
-    duration: '10-18 дней',
     color: 'from-emerald-500 to-teal-500'
   },
   {
@@ -53,18 +45,14 @@ const regions = [
     region: "Африка",
     name: "Дикая и роскошная Африка",
     description: 'Сафари по бескрайним саваннам, закаты над пустыней Сахара и роскошные лоджи с видом на дикую природу. Африка - это адреналин сафари, пляжи Занзибара и уникальная культура племен. Незабываемые приключения ждут вас!',
-    video: '/videos/africa.mp4',
     image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80',
     countries: ['Кения', 'Танзания', 'ЮАР', 'Марокко', 'Египет', 'Намибия', 'Сейшелы'],
     highlights: ['Сафари в Серенгети', 'Пирамиды Гизы', 'Мыс Доброй Надежды', 'Роскошные лоджи'],
     stats: {
-      tours: 89,
-      hotels: 1800,
       rating: 4.7
     },
     price: 'от $1200',
     bestTime: 'Июнь - Октябрь',
-    duration: '8-15 дней',
     color: 'from-amber-500 to-orange-500'
   },
   {
@@ -72,18 +60,14 @@ const regions = [
     region: "Ближний Восток",
     name: "Современные чудеса Востока",
     description: 'Футуристические небоскребы, золотые пустыни и восточная роскошь. Ближний Восток - это уникальное сочетание древних традиций и ультрасовременных технологий. От роскошных моллов Дубая до исторических памятников Иордании.',
-    video: '/videos/middle-east.mp4',
     image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
     countries: ['ОАЭ', 'Катар', 'Оман', 'Иордания', 'Саудовская Аравия', 'Бахрейн'],
     highlights: ['Бурдж-Халифа в Дубае', 'Петра - розовый город', 'Пустынные сафари', 'Роскошные спа-курорты'],
     stats: {
-      tours: 67,
-      hotels: 1500,
       rating: 4.8
     },
     price: 'от $950',
     bestTime: 'Октябрь - Апрель',
-    duration: '5-10 дней',
     color: 'from-purple-500 to-pink-500'
   },
   {
@@ -91,18 +75,14 @@ const regions = [
     region: "Океания",
     name: "Рай на земле",
     description: 'Кристально чистые лагуны, белоснежные пляжи и пышные тропические джунгли. Острова Океании - это воплощение мечты о рае на земле. Идеальные места для романтического отдыха, дайвинга и полного релакса.',
-    video: '/videos/oceania.mp4',
     image: 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
     countries: ['Мальдивы', 'Бора-Бора', 'Фиджи', 'Бали', 'Пхукет', 'Маврикий', 'Сейшелы'],
     highlights: ['Оверуатер виллы на Мальдивах', 'Лагуны Бора-Бора', 'Дайвинг с мантами', 'Романтические ужины на пляже'],
     stats: {
-      tours: 94,
-      hotels: 2200,
       rating: 4.9
     },
     price: 'от $1500',
     bestTime: 'Круглый год',
-    duration: '7-12 дней',
     color: 'from-cyan-500 to-blue-500'
   },
   {
@@ -110,18 +90,14 @@ const regions = [
     region: "Австралия и Океания",
     name: "Австралия и Новая Зеландия",
     description: 'От Большого Барьерного рифа до фьордов Южного острова. Уникальная природа, экзотические животные и приключения для настоящих искателей. Идеальное направление для любителей активного отдыха и природных чудес.',
-    video: '/videos/australia.mp4',
     image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
     countries: ['Австралия', 'Новая Зеландия', 'Тасмания', 'Фиджи'],
     highlights: ['Сиднейский оперный театр', 'Большой Барьерный риф', 'Фьорды Милфорд-Саунд', 'Винодельни долины Баросса'],
     stats: {
-      tours: 72,
-      hotels: 1600,
       rating: 4.8
     },
     price: 'от $1800',
     bestTime: 'Сентябрь - Ноябрь, Март - Май',
-    duration: '12-21 день',
     color: 'from-green-500 to-emerald-500'
   },
   {
@@ -129,18 +105,14 @@ const regions = [
     region: "Турция",
     name: "Турция",
     description: 'Уникальная страна на стыке Европы и Азии, где восточная экзотика встречается с европейским комфортом. От исторических памятников Стамбула до роскошных пляжей Анталии и волшебных пейзажей Каппадокии.',
-    video: '/videos/turkey.mp4',
     image: 'https://images.unsplash.com/photo-1589561454226-796a8aa89b05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
     countries: ['Стамбул', 'Анталия', 'Бодрум', 'Каппадокия', 'Измир', 'Мармарис', 'Кемер'],
     highlights: ['Стамбул - город на двух континентах', 'Полеты на воздушных шарах в Каппадокии', 'Роскошные курорты Средиземноморья', 'Древний город Эфес'],
     stats: {
-      tours: 203,
-      hotels: 3800,
       rating: 4.7
     },
     price: 'от $450',
     bestTime: 'Апрель - Октябрь',
-    duration: '7-14 дней',
     color: 'from-red-500 to-orange-500'
   }
 ];
@@ -270,16 +242,6 @@ export function ToursSection() {
 
                 {/* Статистика и цена */}
                 <div className="flex flex-wrap items-center gap-3 lg:gap-4 pt-4">
-                  <div className="inline-flex items-center gap-1 bg-blue-50 px-3 py-1 rounded-lg border border-blue-200">
-                    <div className="text-base lg:text-lg font-bold text-blue-600">{region.stats.tours}</div>
-                    <div className="text-xs text-blue-500">туров</div>
-                  </div>
-
-                  <div className="inline-flex items-center gap-1 bg-green-50 px-3 py-1 rounded-lg border border-green-200">
-                    <div className="text-base lg:text-lg font-bold text-green-600">{region.stats.hotels}+</div>
-                    <div className="text-xs text-green-500">отелей</div>
-                  </div>
-
                   <div className="inline-flex items-center gap-1 bg-yellow-50 px-3 py-1 rounded-lg border border-yellow-200">
                     <div className="text-base lg:text-lg font-bold text-yellow-600 flex items-center gap-1">
                       {region.stats.rating}
@@ -295,28 +257,15 @@ export function ToursSection() {
                 </div>
 
                 {/* Информация о туре */}
-                <div className={`bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl lg:rounded-2xl p-4 lg:p-6 border border-blue-200`}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-                    <div className="flex items-center gap-3 lg:gap-4">
-                      <div className="flex-shrink-0 w-10 h-10 lg:w-12 lg:h-12 bg-blue-100 rounded-xl lg:rounded-2xl flex items-center justify-center">
-                        <Calendar />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-semibold text-gray-900 text-sm lg:text-base leading-tight">Лучшее время</div>
-                        <div className="text-blue-700 font-medium text-sm lg:text-base mt-1 break-words leading-tight">
-                          {region.bestTime}
-                        </div>
-                      </div>
+                <div className={`bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl lg:rounded-2xl p-4 lg:p-4 border border-blue-200`}>
+                  <div className="flex items-center gap-3 lg:gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 lg:w-12 lg:h-12 bg-blue-100 rounded-xl lg:rounded-2xl flex items-center justify-center">
+                      <Calendar />
                     </div>
-                    <div className="flex items-center gap-3 lg:gap-4">
-                      <div className="flex-shrink-0 w-10 h-10 lg:w-12 lg:h-12 bg-purple-100 rounded-xl lg:rounded-2xl flex items-center justify-center">
-                        <Clock />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-semibold text-gray-900 text-sm lg:text-base leading-tight">Длительность</div>
-                        <div className="text-purple-700 font-medium text-sm lg:text-base mt-1 break-words leading-tight">
-                          {region.duration}
-                        </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold text-gray-900 text-sm lg:text-base leading-tight">Лучшее время</div>
+                      <div className="text-blue-700 font-medium text-sm lg:text-base mt-1 break-words leading-tight">
+                        {region.bestTime}
                       </div>
                     </div>
                   </div>
@@ -336,18 +285,6 @@ export function ToursSection() {
                     alt={region.name}
                     className="w-full h-64 lg:h-[700px] object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-
-                  {/* Видео (будет поверх изображения если загрузится) */}
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="absolute inset-0 w-full h-64 lg:h-[700px] object-cover group-hover:scale-110 transition-transform duration-700 opacity-0 group-hover:opacity-100"
-                    preload="metadata"
-                  >
-                    <source src={region.video} type="video/mp4" />
-                  </video>
 
                   {/* Градиентный оверлей */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
