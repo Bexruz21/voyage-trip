@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const slides = [
@@ -24,20 +24,16 @@ const slides = [
     }
 ];
 
-export function HeroSlider({ isClient }) {
+export function HeroSlider() {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-    const nextSlide = useCallback(() => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, []);
 
     useEffect(() => {
-        if (!isClient || !isAutoPlaying) return;
-
-        const interval = setInterval(nextSlide, 7000);
+        const interval = setInterval(() => {
+            setCurrentSlide((i) => (i + 1) % slides.length);
+        }, 7000);
         return () => clearInterval(interval);
-    }, [isClient, isAutoPlaying, nextSlide]);
+    }, []);
+
 
     const scrollToTours = () => {
         const element = document.getElementById('tours');
@@ -46,41 +42,8 @@ export function HeroSlider({ isClient }) {
         }
     };
 
-    // Вариант для серверного рендеринга
-    if (!isClient) {
-        return (
-            <div className="relative h-screen overflow-hidden">
-                <div className="absolute inset-0">
-                    <img
-                        src={slides[0].image}
-                        alt={slides[0].title}
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-black/50 flex items-center justify-center">
-                        <div className="text-center text-white max-w-4xl px-4">
-                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight">
-                                {slides[0].title}
-                            </h1>
-                            <p className="text-lg sm:text-xl md:text-2xl mb-6 md:mb-8 text-gray-200 max-w-2xl mx-auto">
-                                {slides[0].subtitle}
-                            </p>
-                            <button
-                                onClick={scrollToTours}
-                                className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 transform hover:scale-105"
-                            >
-                                Найти свое путешествие
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div
-            className="relative h-screen overflow-hidden"
-        >
+        <div className="relative h-screen overflow-hidden">
             <AnimatePresence mode="popLayout">
                 <motion.div
                     key={currentSlide}

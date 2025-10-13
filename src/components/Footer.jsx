@@ -1,60 +1,21 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import {
-    Phone,
-    Mail,
-    MapPin,
-    MessageCircle,
-    Send
-
-} from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { Phone, Mail, MapPin, MessageCircle, Send } from 'lucide-react';
 
 function Footer() {
     const currentYear = new Date().getFullYear();
-    const [isClient, setIsClient] = useState(false);
 
     const contactInfo = [
-        {
-            icon: Phone,
-            text: "Горячая линия",
-            href: "tel:+998908810333",
-            description: "+998 (90) 881-03-33"
-        },
-        {
-            icon: Phone,
-            text: "Визовая поддержка",
-            href: "tel:+998909404333",
-            description: "+998 (90) 940-43-33, +998 (95) 940-43-33"
-        },
-        {
-            icon: Mail,
-            text: "info@voyagetrip.uz",
-            href: "mailto:info@voyagetrip.uz",
-            description: "Электронная почта"
-        },
-        {
-            icon: MapPin,
-            text: "г. Ташкент, Seoul Plaza Business Centre",
-            href: "#",
-            description: "Мирабадский р‑н, ул. Шазрисабз, 5А"
-        }
+        { icon: Phone, text: "Горячая линия", href: "tel:+998908810333", description: "+998 (90) 881-03-33" },
+        { icon: Phone, text: "Визовая поддержка", href: "tel:+998909404333", description: "+998 (90) 940-43-33, +998 (95) 940-43-33" },
+        { icon: Mail, text: "info@voyagetrip.uz", href: "mailto:info@voyagetrip.uz", description: "Электронная почта" },
+        { icon: MapPin, text: "г. Ташкент, Seoul Plaza Business Centre", href: "#", description: "Мирабадский р-н, ул. Шазрисабз, 5А" }
     ];
 
     const socialLinks = [
-        {
-            icon: Send,
-            href: "https://t.me/voyagetrip",
-            name: "Telegram",
-            color: "bg-[#07b9fa] text-white"
-        },
-        {
-            icon: MessageCircle,
-            href: "https://wa.me/998908810333",
-            name: "Whatsapp",
-            color: "bg-[#25D366] text-white"
-        }
+        { icon: Send, href: "https://t.me/voyagetrip", color: "bg-[#07b9fa]" },
+        { icon: MessageCircle, href: "https://wa.me/998908810333", color: "bg-[#25D366]" }
     ];
 
     const quickLinks = [
@@ -65,212 +26,79 @@ function Footer() {
         { name: "Контакты", href: "/contacts" }
     ];
 
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
-
     return (
         <footer className="bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 border-t border-gray-200">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Main Footer Content */}
-                <div className="py-8 sm:py-12">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
-                        {/* Brand Section */}
-                        {isClient ? (
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6 }}
-                                className="space-y-4"
-                            >
-                                <div className="flex items-center space-x-3">
-                                    <img
-                                        src="/logo.png"
-                                        alt="VOYAGE TRIP"
-                                        className="w-16 h-16 object-contain"
-                                    />
-                                    <div>
-                                        <h2 className="text-xl font-bold text-gray-900">VOYAGE TRIP</h2>
-                                        <p className="text-gray-600">Премиум путешествия</p>
-                                    </div>
-                                </div>
-                                <p className="text-gray-600 text-sm leading-relaxed">
-                                    Создаём современные путешествия по всему миру.<br/>
-                                    Доверьте свою мечту профессионалам.
-                                </p>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-                                {/* Social Links */}
-                                <div className="flex space-x-3 pt-2">
-                                    {socialLinks.map((social, index) => (
-                                        <motion.a
-                                            key={index}
-                                            href={social.href}
-                                            initial={{ opacity: 0, scale: 0 }}
-                                            whileInView={{ opacity: 1, scale: 1 }}
-                                            transition={{ delay: index * 0.1 }}
-                                            whileHover={{ scale: 1.1, y: -2 }}
-                                            className={`w-10 h-10 rounded-lg flex items-center justify-center shadow-sm  ${social.color}`}
-                                        >
-                                            <social.icon className="w-5 h-5" />
-                                        </motion.a>
-                                    ))}
-                                </div>
-                            </motion.div>
-                        ) : (
-                            // Статическая версия для SEO
-                            <div className="space-y-4">
-                                <div className="flex items-center space-x-3">
-                                    <img
-                                        src="/logo.png"
-                                        alt="VOYAGE TRIP"
-                                        className="w-16 h-16 object-contain"
-                                    />
-                                    <div>
-                                        <h2 className="text-xl font-bold text-gray-900">VOYAGE TRIP</h2>
-                                        <p className="text-gray-600">Премиум путешествия</p>
-                                    </div>
-                                </div>
-                                <p className="text-gray-600 text-sm leading-relaxed">
-                                    Мы создаём современные туристические решения и уникальные путешествия по всему миру..
-                                    Доверьте свою мечту профессионалам.
-                                </p>
-                                <div className="flex space-x-3 pt-2">
-                                    {socialLinks.map((social, index) => (
-                                        <a
-                                            key={index}
-                                            href={social.href}
-                                            className={`w-10 h-10 bg-white rounded-lg flex items-center justify-center text-gray-600 border border-gray-200 shadow-sm ${social.color}`}
-                                        >
-                                            <social.icon className="w-5 h-5" />
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Quick Links */}
-                        {isClient ? (
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6, delay: 0.1 }}
-                                className="space-y-4 hidden sm:block"
-                            >
-                                <h3 className="font-semibold text-gray-900">Быстрые ссылки</h3>
-                                <div className="grid grid-cols-2 gap-2">
-                                    {quickLinks.map((link, index) => (
-                                        <motion.a
-                                            key={link.name}
-                                            href={link.href}
-                                            initial={{ opacity: 0, x: -10 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: index * 0.05 }}
-                                            className="text-gray-600 hover:text-cyan-600 transition-colors duration-300 text-sm py-1 flex items-center group"
-                                        >
-                                            <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                                            {link.name}
-                                        </motion.a>
-                                    ))}
-                                </div>
-                            </motion.div>
-                        ) : (
-                            // Статическая версия для SEO
-                            <div className="space-y-4">
-                                <h3 className="font-semibold text-gray-900">Быстрые ссылки</h3>
-                                <div className="grid grid-cols-2 gap-2">
-                                    {quickLinks.map((link, index) => (
-                                        <a
-                                            key={link.name}
-                                            href={link.href}
-                                            className="text-gray-600 hover:text-cyan-600 transition-colors duration-300 text-sm py-1"
-                                        >
-                                            {link.name}
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Contact Info */}
-                        {isClient ? (
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6, delay: 0.2 }}
-                                className="space-y-4"
-                            >
-                                <h3 className="font-semibold text-gray-900">Контакты</h3>
-                                <div className="space-y-3">
-                                    {contactInfo.map((contact, index) => (
-                                        <motion.a
-                                            key={index}
-                                            href={contact.href}
-                                            initial={{ opacity: 0, x: 10 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: index * 0.1 }}
-                                            whileHover={{ x: 5 }}
-                                            className="flex items-start space-x-3 group cursor-pointer"
-                                        >
-                                            <div className="w-8 h-8 bg-cyan-100 rounded-lg flex items-center justify-center text-cyan-600 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300 mt-0.5">
-                                                <contact.icon className="w-4 h-4" />
-                                            </div>
-                                            <div>
-                                                <div className="font-medium text-gray-900 group-hover:text-cyan-600 transition-colors duration-300">
-                                                    {contact.text}
-                                                </div>
-                                                <div className="text-gray-500 text-sm">{contact.description}</div>
-                                            </div>
-                                        </motion.a>
-                                    ))}
-                                </div>
-                            </motion.div>
-                        ) : (
-                            // Статическая версия для SEO
-                            <div className="space-y-4">
-                                <h3 className="font-semibold text-gray-900">Контакты</h3>
-                                <div className="space-y-3">
-                                    {contactInfo.map((contact, index) => (
-                                        <a
-                                            key={index}
-                                            href={contact.href}
-                                            className="flex items-start space-x-3"
-                                        >
-                                            <div className="w-8 h-8 bg-cyan-100 rounded-lg flex items-center justify-center text-cyan-600 mt-0.5">
-                                                <contact.icon className="w-4 h-4" />
-                                            </div>
-                                            <div>
-                                                <div className="font-medium text-gray-900">
-                                                    {contact.text}
-                                                </div>
-                                                <div className="text-gray-500 text-sm">{contact.description}</div>
-                                            </div>
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
+                {/* Brand Section */}
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+                    <div className="flex items-center space-x-3">
+                        <img src="/logo.png" alt="VOYAGE TRIP" className="w-16 h-16 object-contain" />
+                        <div>
+                            <h2 className="text-xl font-bold text-gray-900">VOYAGE TRIP</h2>
+                            <p className="text-gray-600">Премиум путешествия</p>
+                        </div>
                     </div>
-                </div>
-
-                {/* Bottom Bar */}
-                <div className="border-t border-gray-300 py-6">
-                    <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-                        {isClient ? (
-                            <motion.p
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                className="text-gray-600 text-sm"
+                    <p className="text-gray-600 text-sm mt-3 leading-relaxed">
+                        Создаём современные путешествия по всему миру.<br />Доверьте свою мечту профессионалам.
+                    </p>
+                    <div className="flex space-x-3 mt-4">
+                        {socialLinks.map((s, i) => (
+                            <motion.a
+                                key={i}
+                                href={s.href}
+                                className={`w-10 h-10 rounded-lg flex items-center justify-center text-white shadow-sm ${s.color}`}
+                                whileHover={{ scale: 1.1, y: -2 }}
                             >
-                                © {currentYear} VOYAGE TRIP. Все права защищены.
-                            </motion.p>
-                        ) : (
-                            <p className="text-gray-600 text-sm">
-                                © {currentYear} VOYAGE TRIP. Все права защищены.
-                            </p>
-                        )}
-
+                                <s.icon className="w-5 h-5" />
+                            </motion.a>
+                        ))}
                     </div>
-                </div>
+                </motion.div>
+
+                {/* Quick Links */}
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
+                    <h3 className="font-semibold text-gray-900 mb-3">Быстрые ссылки</h3>
+                    <div className="grid grid-cols-2 gap-2">
+                        {quickLinks.map((link, i) => (
+                            <motion.a
+                                key={i}
+                                href={link.href}
+                                whileHover={{ x: 4 }}
+                                className="text-gray-600 hover:text-cyan-600 text-sm transition-all"
+                            >
+                                {link.name}
+                            </motion.a>
+                        ))}
+                    </div>
+                </motion.div>
+
+                {/* Contacts */}
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+                    <h3 className="font-semibold text-gray-900 mb-3">Контакты</h3>
+                    <div className="space-y-3">
+                        {contactInfo.map((c, i) => (
+                            <motion.a
+                                key={i}
+                                href={c.href}
+                                whileHover={{ x: 4 }}
+                                className="flex items-start space-x-3 group"
+                            >
+                                <div className="w-8 h-8 bg-cyan-100 rounded-lg flex items-center justify-center text-cyan-600 group-hover:bg-cyan-500 group-hover:text-white transition-all">
+                                    <c.icon className="w-4 h-4" />
+                                </div>
+                                <div>
+                                    <div className="font-medium text-gray-900 group-hover:text-cyan-600">{c.text}</div>
+                                    <div className="text-gray-500 text-sm">{c.description}</div>
+                                </div>
+                            </motion.a>
+                        ))}
+                    </div>
+                </motion.div>
+            </div>
+
+            <div className="border-t border-gray-200 py-6 text-center text-gray-600 text-sm">
+                © {currentYear} VOYAGE TRIP. Все права защищены.
             </div>
         </footer>
     );

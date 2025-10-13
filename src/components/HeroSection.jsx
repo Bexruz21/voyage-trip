@@ -44,35 +44,9 @@ const heroConfig = {
   }
 };
 
-export function HeroSection({ isClient, page = 'contacts' }) {
+export function HeroSection({ page = 'contacts' }) {
   const config = heroConfig[page] || heroConfig.contacts;
   const IconComponent = config.icon;
-
-  const content = (
-    <div className="pt-20 pb-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Icon */}
-        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r rounded-2xl mb-6 shadow-lg">
-          <IconComponent className="w-10 h-10 text-white" />
-        </div>
-        
-        {/* Title */}
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-gray-900 mb-6">
-          {config.title}{' '}
-          <span className={`text-transparent bg-clip-text bg-gradient-to-r ${config.gradient}`}>
-            {config.highlighted}
-          </span>
-        </h1>
-        
-        {/* Description */}
-        <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
-          {config.description}
-        </p>
-      </div>
-    </div>
-  );
-
-  if (!isClient) return content;
 
   return (
     <motion.div
