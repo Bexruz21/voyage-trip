@@ -3,48 +3,43 @@ import { TeamMemberCard } from './TeamMemberCard';
 const team = [
   {
     id: 1,
-    name: "Максим Иванов",
-    position: "Гид-эксперт",
-    experience: "Профессиональный гид",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    bio: "Создает незабываемые экскурсии с глубоким погружением в культуру и историю каждой страны.",
-    specialties: ["Экскурсионные программы", "Культурология", "Языки: английский, испанский"],
-    contact: "maxim@gmail.com"
+    name: "Замонгир Мирвохидов",
+    position: "Директор",
+    experience: "Основатель и руководитель Voyage Trip",
+    bio: "Основатель Voyage Trip. Отвечает за развитие и качество сервиса. Верит, что каждое путешествие должно вдохновлять и открывать новые горизонты.",
+
+    specialties: ["Руководство и стратегия", "Партнёрские отношения", "Маршруты и направления", "Контроль качества"],
+    contact: "zamon880@gmail.com",
+    quote: "Каждое путешествие — это история, которую мы создаём вместе"
   },
   {
     id: 2,
-    name: "Максим Иванов",
-    position: "Гид-эксперт",
-    experience: "Профессиональный гид",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    bio: "Создает незабываемые экскурсии с глубоким погружением в культуру и историю каждой страны.",
-    specialties: ["Экскурсионные программы", "Культурология", "Языки: английский, испанский"],
-    contact: "maxim@gmail.com"
-  },
-  {
-    id: 3,
-    name: "Максим Иванов",
-    position: "Гид-эксперт",
-    experience: "Профессиональный гид",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    bio: "Создает незабываемые экскурсии с глубоким погружением в культуру и историю каждой страны.",
-    specialties: ["Экскурсионные программы", "Культурология", "Языки: английский, испанский"],
-    contact: "maxim@gmail.com"
-  },
+    name: "Акбарали Мамаданов",
+    position: "Администратор",
+    experience: "Ответственный за организацию и сопровождение туров",
+    bio: "Занимается организацией поездок, координацией клиентов и партнёров. Гарантирует чёткую работу команды и индивидуальный подход к каждому путешественнику.",
+    specialties: ["Организация туров", "Работа с клиентами", "Координация гидов", "Сервис и логистика"],
+    contact: "akbaralimamadanov@gmail.com",
+    quote: "Главная цель — сделать каждую поездку максимально комфортной и запоминающейся"
+  }
 ];
+
 
 export function TeamSection({ isClient, onMemberSelect }) {
   return (
-    <section className="py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">
-          Наша <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">команда</span>
-        </h2>
-        <p className="text-xl text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-          Профессионалы с огромным опытом, которые сделают ваше путешествие идеальным
-        </p>
+    <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+      <div className="max-w-1xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">
+            Наша <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">команда</span>
+          </h2>
+          <p className="text-xl text-gray-600 text-center mb-8 max-w-2xl mx-auto">
+            Профессионалы с огромным опытом, которые сделают ваше путешествие идеальным
+          </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto rounded-full"></div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
+        <div className="flex flex-col md:flex-row justify-center items-stretch gap-8 max-w-6xl mx-auto">
           {team.map((member, index) => (
             <TeamMemberCard
               key={member.id}
