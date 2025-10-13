@@ -5,15 +5,17 @@ import { MembershipCard } from './MembershipCard';
 const membershipCards = [
     {
         id: 'silver',
-        name: "Silver",
-        duration: "3 месяца",
-        tours: "2 тура",
-        price: "$300",
-        description: "Идеальна для частых путешественников",
+        name: "Silver Membership",
+        duration: "5 месяцев",
+        tours: "До 3 туров",
+        price: "$500",
+        description: "Оптимальный старт для тех, кто хочет путешествовать честно и со статусом клуба.",
         features: [
-            "Оригинальные цены туроператоров",
-            "Доступ в закрытую Telegram-группу",
-            "Базовые привилегии клуба"
+            "Доступ к оригинальным ценам туроператоров",
+            "Приоритет в обработке заявок",
+            "Доступ в личный кабинет Voyage Trip (история, статусы, баланс)",
+            "Возможность участия в сезонных акциях Voyage Trip",
+            "Разовый бонус $25 Voyage Balance при активации карты"
         ],
         buttonText: "Выбрать Silver",
         popular: false,
@@ -21,17 +23,18 @@ const membershipCards = [
     },
     {
         id: 'gold',
-        name: "Gold",
-        duration: "6 месяцев",
-        tours: "4 тура",
-        price: "$500",
-        description: "Для тех, кто хочет максимум удобства",
+        name: "Gold Membership",
+        duration: "12 месяцев",
+        tours: "До 5 туров",
+        price: "$1000",
+        description: "Комфорт и статус для уверенных путешественников, где престиж становится стандартом.",
         features: [
-            "Трансфер в аэропорт",
-            "Telegram-группа Gold уровня",
-            "Все привилегии Silver",
-            "Приоритетное бронирование",
-            "Персональный менеджер"
+            "Всё, что в Silver",
+            "Один трансфер до аэропорта (для 2 человек)",
+            "Ваучер $100 (на Fast Track, VIP-зал, апгрейд номера или экскурсию)",
+            "Доступ в закрытую Telegram-группу Voyage Club",
+            "Приоритетное обслуживание",
+            "Участие в бонусных розыгрышах 2 раза в год"
         ],
         buttonText: "Выбрать Gold",
         popular: true,
@@ -39,24 +42,27 @@ const membershipCards = [
     },
     {
         id: 'platinum',
-        name: "Platinum",
+        name: "Platinum Membership",
         duration: "12 месяцев",
-        tours: "6 туров",
-        price: "$700",
-        description: "Максимум привилегий для взыскательных",
+        tours: "До 8 туров",
+        price: "$2000",
+        limit: "30 карт в год",
+        description: "Уровень доверия и привилегий. Программа для тех, кто ценит личный сервис, комфорт и престиж.",
         features: [
-            "Трансфер туда-обратно",
-            "1 бесплатная экскурсия",
-            "Участие в розыгрышах",
-            "Все привилегии Gold",
-            "Эксклюзивные предложения",
-            "VIP поддержка 24/7"
+            "Всё, что в Gold",
+            "Личный консьерж Voyage Manager",
+            "Ваучер $200 (Fast Track, Lounge, апгрейд отеля, частный трансфер и т.д.)",
+            "Приоритетное бронирование и гарантированная поддержка 24/7",
+            "Эксклюзивная Platinum-группа с персональным куратором",
+            "Участие в ежегодных розыгрышах (часы, техника, путешествия)",
+            "Приглашения на закрытые встречи Voyage Trip Club"
         ],
         buttonText: "Выбрать Platinum",
         popular: false,
         color: "from-cyan-400 to-blue-400"
     }
 ];
+
 
 export function MembershipCardsSection({ isClient, isJoining, selectedPlan, joinStatus, onJoinClick }) {
     return (
