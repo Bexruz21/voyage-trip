@@ -562,7 +562,7 @@ ${formData.message ? `📝 *Пожелания:* ${formData.message}` : ''}
 
             {/* Правая колонка - форма бронирования */}
             <div className="lg:col-span-1">
-              <div className="sticky top-4 sm:top-8">
+              <div className="">
                 <div className="bg-white rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-2xl overflow-hidden">
                   <div className="bg-gradient-to-r from-sky-500 to-cyan-500 p-6 sm:p-8 lg:p-10 text-white text-center">
                     <div className="relative z-10">
