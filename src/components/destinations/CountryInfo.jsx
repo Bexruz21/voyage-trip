@@ -93,13 +93,13 @@ export function CountryInfo({ country }) {
                             transition={{ delay: 0.5 }}
                             className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
                         >
-                            <div className="inline-flex items-center gap-2 sm:gap-3 bg-blue-50 px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-blue-200 group hover:bg-blue-100 transition-all duration-300">
-                                <div className="text-blue-600 flex items-center gap-1">
+                            <div className="inline-flex items-center gap-2 sm:gap-3 bg-blue-50 px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-blue-200 group hover:bg-sky-100 transition-all duration-300">
+                                <div className="text-sky-600 flex items-center gap-1">
                                     <Building className="w-4 h-4 sm:w-5 sm:h-5" />
                                 </div>
                                 <div>
-                                    <div className="text-xs font-semibold text-blue-500 uppercase tracking-wide">Столица</div>
-                                    <div className="text-sm sm:text-base font-bold text-blue-700">{country.capital}</div>
+                                    <div className="text-xs font-semibold text-sky-500 uppercase tracking-wide">Столица</div>
+                                    <div className="text-sm sm:text-base font-bold text-sky-700">{country.capital}</div>
                                 </div>
                             </div>
 

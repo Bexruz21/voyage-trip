@@ -25,9 +25,9 @@ export function CountryCard({ country, onSelect }) {
             <div className="bg-white rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl border border-gray-100 hover:border-blue-200/50 relative">
                 {/* Бейдж с рейтингом */}
                 <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10">
-                    <div className="bg-white/90 backdrop-blur-sm rounded-full px-2 sm:px-3 py-1 text-amber-500 flex items-center gap-1 shadow-lg">
+                    <div className="bg-white/20 backdrop-blur-sm  border border-white/30 rounded-full px-2 sm:px-3 py-1 text-amber-500 flex items-center gap-1 shadow-lg">
                         <Star className="w-3 h-3 sm:w-4 sm:h-4  fill-current" />
-                        <span className="text-xs sm:text-sm font-semibold text-gray-700">{country.rating || '4.8'}</span>
+                        <span className="text-xs sm:text-sm font-semibold text-white">{country.rating || '4.8'}</span>
                     </div>
                 </div>
 
