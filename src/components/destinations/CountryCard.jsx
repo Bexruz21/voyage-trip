@@ -25,8 +25,8 @@ export function CountryCard({ country, onSelect }) {
             <div className="bg-white rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl border border-gray-100 hover:border-blue-200/50 relative">
                 {/* Бейдж с рейтингом */}
                 <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10">
-                    <div className="bg-white/90 backdrop-blur-sm rounded-full px-2 sm:px-3 py-1 flex items-center gap-1 shadow-lg">
-                        <Star className="w-3 h-3 sm:w-4 sm:h-4 text-amber-500 fill-current" />
+                    <div className="bg-white/90 backdrop-blur-sm rounded-full px-2 sm:px-3 py-1 text-amber-500 flex items-center gap-1 shadow-lg">
+                        <Star className="w-3 h-3 sm:w-4 sm:h-4  fill-current" />
                         <span className="text-xs sm:text-sm font-semibold text-gray-700">{country.rating || '4.8'}</span>
                     </div>
                 </div>
@@ -66,8 +66,8 @@ export function CountryCard({ country, onSelect }) {
                     {/* Статистика в стиле иконок */}
                     <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-3 sm:mb-4">
                         <div className="flex items-center gap-2 sm:gap-3 p-1 sm:p-2 rounded-lg sm:rounded-xl bg-blue-50/50 hover:bg-blue-50 transition-colors duration-300 group/item">
-                            <div className="p-1 sm:p-2 bg-blue-100 rounded-md sm:rounded-lg group-hover/item:bg-blue-200 transition-colors duration-300">
-                                <Building className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
+                            <div className="p-1 sm:p-2 bg-blue-100 rounded-md text-sky-600 sm:rounded-lg group-hover/item:bg-blue-200 transition-colors duration-300">
+                                <Building className="w-3 h-3 sm:w-4 sm:h-4 " />
                             </div>
                             <div>
                                 <div className="text-[10px] sm:text-xs text-gray-500">Столица</div>
@@ -75,8 +75,8 @@ export function CountryCard({ country, onSelect }) {
                             </div>
                         </div>
                         <div className="flex items-center gap-2 sm:gap-3 p-1 sm:p-2 rounded-lg sm:rounded-xl bg-emerald-50/50 hover:bg-emerald-50 transition-colors duration-300 group/item">
-                            <div className="p-1 sm:p-2 bg-emerald-100 rounded-md sm:rounded-lg group-hover/item:bg-emerald-200 transition-colors duration-300">
-                                <Users className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-600" />
+                            <div className="p-1 sm:p-2 bg-emerald-100 rounded-md sm:rounded-lg text-emerald-600 group-hover/item:bg-emerald-200 transition-colors duration-300">
+                                <Users className="w-3 h-3 sm:w-4 sm:h-4 " />
                             </div>
                             <div>
                                 <div className="text-[10px] sm:text-xs text-gray-500">Население</div>
@@ -84,8 +84,8 @@ export function CountryCard({ country, onSelect }) {
                             </div>
                         </div>
                         <div className="flex items-center gap-2 sm:gap-3 p-1 sm:p-2 rounded-lg sm:rounded-xl bg-amber-50/50 hover:bg-amber-50 transition-colors duration-300 group/item">
-                            <div className="p-1 sm:p-2 bg-amber-100 rounded-md sm:rounded-lg group-hover/item:bg-amber-200 transition-colors duration-300">
-                                <Language className="w-3 h-3 sm:w-4 sm:h-4 text-amber-600" />
+                            <div className="p-1 sm:p-2 bg-amber-100 rounded-md sm:rounded-lg text-amber-600 group-hover/item:bg-amber-200 transition-colors duration-300">
+                                <Language className="w-3 h-3 sm:w-4 sm:h-4 " />
                             </div>
                             <div>
                                 <div className="text-[10px] sm:text-xs text-gray-500">Язык</div>
@@ -93,8 +93,8 @@ export function CountryCard({ country, onSelect }) {
                             </div>
                         </div>
                         <div className="flex items-center gap-2 sm:gap-3 p-1 sm:p-2 rounded-lg sm:rounded-xl bg-rose-50/50 hover:bg-rose-50 transition-colors duration-300 group/item">
-                            <div className="p-1 sm:p-2 bg-rose-100 rounded-md sm:rounded-lg group-hover/item:bg-rose-200 transition-colors duration-300">
-                                <Currency className="w-3 h-3 sm:w-4 sm:h-4 text-rose-600" />
+                            <div className="p-1 sm:p-2 bg-rose-100 rounded-md sm:rounded-lg text-rose-600 group-hover/item:bg-rose-200 transition-colors duration-300">
+                                <Currency className="w-3 h-3 sm:w-4 sm:h-4 " />
                             </div>
                             <div>
                                 <div className="text-[10px] sm:text-xs text-gray-500">Валюта</div>

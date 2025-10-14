@@ -30,6 +30,7 @@ export const regions = [
         highlights: ['Эйфелева башня', 'Лувр', 'Лазурный берег', 'Замки Луары'],
         cities: [
           {
+            id: 1,
             name: 'Париж',
             description: 'Город любви и огней, столица моды и искусства. Романтическая атмосфера на каждом шагу.',
             image: 'https://images.unsplash.com/photo-1502602898536-47ad22581b52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2067&q=80',
@@ -54,6 +55,7 @@ export const regions = [
         highlights: ['Колизей', 'Венецианские каналы', 'Флорентийское искусство', 'Сицилийская кухня'],
         cities: [
           {
+            id: 1,
             name: 'Рим',
             description: 'Вечный город с 3000-летней историей, где каждая улица дышит древностью.',
             image: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
@@ -98,12 +100,14 @@ export const regions = [
         highlights: ['Цветение сакуры', 'Гора Фудзи', 'Токио - город будущего', 'Киото - древняя столица'],
         cities: [
           {
+            id: 1,
             name: 'Токио',
             description: 'Футуристический мегаполис, где небоскребы соседствуют с древними храмами.',
             image: 'https://plus.unsplash.com/premium_photo-1661914240950-b0124f20a5c1?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170',
             highlights: ['Сибуя', 'Императорский дворец', 'Токио Скай Три', 'Акихабара'],
             bestTime: 'Март - Май, Сентябрь - Ноябрь',
             attractions: ['Рынок Цукидзи', 'Храм Мэйдзи', 'Роппонги'],
+            population: '20.4 млн',
             hotels: 2340,
             rating: 4.9
           }

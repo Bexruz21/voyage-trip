@@ -26,7 +26,7 @@ export function Breadcrumbs({ selectedRegion, selectedCountry, selectedCity, onR
               onClick={onRegionClick}
               className="hover:text-blue-600 transition-colors font-medium truncate max-w-[120px] sm:max-w-none"
             >
-              {selectedRegion.name}
+              {selectedRegion.region}
             </motion.button>
           </>
         )}
