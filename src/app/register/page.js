@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Mail, Phone } from "lucide-react";
 
 export default function RegisterPage() {
     const router = useRouter();
@@ -110,10 +110,6 @@ export default function RegisterPage() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-100 via-blue-50 to-cyan-100 px-3 sm:px-4 py-8 sm:py-16">
-            {/* Мягкие фоновые круги - адаптированы для мобилок */}
-            <div className="absolute top-0 left-0 w-48 h-48 sm:w-72 sm:h-72 bg-sky-200/30 rounded-full blur-2xl sm:blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-            <div className="absolute bottom-0 right-0 w-56 h-56 sm:w-96 sm:h-96 bg-cyan-300/20 rounded-full blur-2xl sm:blur-3xl translate-x-1/3 translate-y-1/3"></div>
-
             <div className="w-full max-w-[95vw] sm:max-w-lg bg-white rounded-2xl sm:rounded-3xl shadow-[0_8px_40px_rgba(0,0,0,0.06)] p-4 sm:p-8 border border-sky-100 backdrop-blur-sm relative z-10 mx-auto">
                 {/* Верхний заголовок - адаптирован для мобилок */}
                 <div className="text-center mb-6 sm:mb-8">
@@ -182,19 +178,7 @@ export default function RegisterPage() {
                             required
                             className="w-full pr-9 sm:pr-10 pl-3 sm:pl-4 py-2.5 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl bg-gray-50 focus:bg-white focus:border-sky-400 focus:ring-1 sm:focus:ring-2 focus:ring-sky-100 text-gray-700 text-sm shadow-sm outline-none"
                         />
-                        <svg
-                            className="w-4 h-4 sm:w-5 sm:h-5 text-sky-400 absolute right-3 top-1/2 -translate-y-1/2"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M16 12H8m8-4H8m0 8h8m4-10H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2z"
-                            />
-                        </svg>
+                        <Mail size={20} className="text-sky-500 absolute right-4 top-1/2 -translate-y-1/2"/>
                     </div>
 
                     <div className="relative">
@@ -207,19 +191,7 @@ export default function RegisterPage() {
                             required
                             className="w-full pr-9 sm:pr-10 pl-3 sm:pl-4 py-2.5 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl bg-gray-50 focus:bg-white focus:border-sky-400 focus:ring-1 sm:focus:ring-2 focus:ring-sky-100 text-gray-700 text-sm shadow-sm outline-none"
                         />
-                        <svg
-                            className="w-4 h-4 sm:w-5 sm:h-5 text-sky-400 absolute right-3 top-1/2 -translate-y-1/2"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                            />
-                        </svg>
+                        <Phone size={20} className="text-sky-500 absolute right-4 top-1/2 -translate-y-1/2"/>
                     </div>
 
                     {/* Пароль */}
@@ -236,7 +208,7 @@ export default function RegisterPage() {
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 text-sky-400 hover:text-sky-600 p-0.5"
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-sky-500 hover:text-sky-600 p-0.5"
                         >
                             {showPassword ? (
                                 <EyeOff size={20} />
@@ -262,7 +234,7 @@ export default function RegisterPage() {
                             onClick={() =>
                                 setShowConfirmPassword(!showConfirmPassword)
                             }
-                            className="absolute right-3 top-1/2 -translate-y-1/2 text-sky-400 hover:text-sky-600 p-0.5"
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-sky-500 hover:text-sky-600 p-0.5"
                         >
                             {showConfirmPassword ? (
                                 <EyeOff size={20} />

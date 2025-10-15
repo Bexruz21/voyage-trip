@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Mail } from "lucide-react";
 
 export default function Login() {
     const router = useRouter();
@@ -74,7 +74,7 @@ export default function Login() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-100 via-blue-50 to-cyan-100 px-3 sm:px-4 py-8 sm:py-16">
-            <div className="bg-white rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-4 sm:p-8 md:p-10 w-full max-w-[95vw] sm:max-w-md border border-sky-50 transition-all mx-auto">
+            <div className="bg-white rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-6 py-8 sm:p-8 w-full max-w-[95vw] sm:max-w-md border border-sky-50 transition-all mx-auto">
                 {/* Header */}
                 <div className="text-center mb-6 sm:mb-8">
                     <div className="flex justify-center mb-3 sm:mb-4">
@@ -122,17 +122,14 @@ export default function Login() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="Email"
-                            className="w-full pl-3 sm:pl-4 pr-8 sm:pr-10 py-2.5 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl text-gray-700 bg-gray-50 focus:bg-white focus:border-sky-400 focus:ring-1 sm:focus:ring-2 focus:ring-sky-200 transition-all duration-300 outline-none shadow-sm text-sm sm:text-base"
+                            className="w-full pl-3 sm:pl-4 pr-8 py-2.5 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl text-gray-700 bg-gray-50 focus:bg-white focus:border-sky-400 focus:ring-1 sm:focus:ring-2 focus:ring-sky-200 transition-all duration-300 outline-none shadow-sm text-sm sm:text-base"
                             required
                             aria-label="Email"
                             autoComplete="username"
                             disabled={isLoading}
                         />
-                        <span className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-sky-400" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                        </span>
+                        <Mail size={20} className="absolute right-3 top-1/2 -translate-y-1/2 text-sky-400"/>
+                        
                     </div>
 
                     {/* Password */}
@@ -142,7 +139,7 @@ export default function Login() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Пароль"
-                            className="w-full pl-3 sm:pl-4 pr-8 sm:pr-10 py-2.5 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl text-gray-700 bg-gray-50 focus:bg-white focus:border-sky-400 focus:ring-1 sm:focus:ring-2 focus:ring-sky-200 transition-all duration-300 outline-none shadow-sm text-sm sm:text-base"
+                            className="w-full pl-3 sm:pl-4 pr-8 py-2.5 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl text-gray-700 bg-gray-50 focus:bg-white focus:border-sky-400 focus:ring-1 sm:focus:ring-2 focus:ring-sky-200 transition-all duration-300 outline-none shadow-sm text-sm sm:text-base"
                             required
                             aria-label="Пароль"
                             autoComplete="current-password"
@@ -151,7 +148,7 @@ export default function Login() {
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-sky-400 hover:text-sky-600 transition p-0.5 sm:p-1"
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-sky-400 hover:text-sky-600 transition p-0.5 sm:p-1"
                             aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
                         > 
                             {showPassword ? (
