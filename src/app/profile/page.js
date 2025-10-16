@@ -265,7 +265,7 @@ export default function ProfilePage() {
                 </div>
                 <h3 className="text-2xl font-bold mb-3">Voyage Balance Guest</h3>
                 <p className="text-blue-100 mb-6 max-w-md mx-auto text-lg">
-                    "Даже если вы не член клуба, Voyage Trip благодарит вас за выбор — получайте 2% кешбэк на следующее путешествие!"
+                    Даже если вы не член клуба, Voyage Trip благодарит вас за выбор — получайте 2% кешбэк на следующее путешествие!
                 </p>
                 <button className="bg-white text-blue-600 px-8 py-3 rounded-xl font-bold hover:bg-blue-50 transition-colors">
                     Стать членом клуба
@@ -503,7 +503,7 @@ export default function ProfilePage() {
                                     </div>
                                     <div className="flex items-start space-x-2">
                                         <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
-                                        <p>Друг должен указать ваш код <span className="font-mono font-bold">{user.referrals.link}</span> в поле "Реферальный код" при регистрации</p>
+                                        <p>Друг должен указать ваш код <span className="font-mono font-bold">{user.referrals.link}</span> в поле &quot;Реферальный код&quot; при регистрации</p>
                                     </div>
                                     <div className="flex items-start space-x-2">
                                         <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
@@ -586,7 +586,7 @@ export default function ProfilePage() {
                                     </div>
                                     <h3 className="text-2xl font-bold text-gray-800">Моя клубная карта</h3>
                                 </div>
-                                
+
                                 <div className={`bg-gradient-to-r ${user.membershipCard.color} rounded-2xl p-6 text-white mb-6 relative overflow-hidden`}>
                                     <div className="absolute top-4 right-4 opacity-20">
                                         <CardIcon />
