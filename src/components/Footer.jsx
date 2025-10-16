@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, MessageCircle, Send } from 'lucide-react';
+import Link from 'next/link';
 
 function Footer() {
     const currentYear = new Date().getFullYear();
@@ -23,7 +24,8 @@ function Footer() {
         { name: "Клуб", href: "/club" },
         { name: "О нас", href: "/about" },
         { name: "FAQ", href: "/faq" },
-        { name: "Контакты", href: "/contacts" }
+        { name: "Контакты", href: "/contacts" },
+        { name: 'Лицензия', href: '/license' },
     ];
 
     return (
@@ -98,8 +100,18 @@ function Footer() {
             </div>
 
             <div className="border-t border-gray-200 py-6 text-center text-gray-600 text-sm">
-                © {currentYear} VOYAGE TRIP. Все права защищены.
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-2">
+                    <span>© {currentYear} VOYAGE TRIP. Все права защищены.</span>
+                    <span className="hidden sm:inline">•</span>
+                    <Link
+                        href="/license"
+                        className="hover:text-cyan-600 transition-colors underline"
+                    >
+                        Лицензия на туристическую деятельность
+                    </Link>
+                </div>
             </div>
+
         </footer>
     );
 }

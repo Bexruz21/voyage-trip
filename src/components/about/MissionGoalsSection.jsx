@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Target, CheckCircle, MapPin, Zap, Star, Globe, Shield, Clock, TrendingUp, Lightbulb } from 'lucide-react';
-
+import { Target, CheckCircle, MapPin, Zap, Star, Globe, Shield, Clock, TrendingUp, Lightbulb, FileCheck } from 'lucide-react';
 const tabs = [
   { id: 'mission', label: 'Миссия' },
   { id: 'goals', label: 'Цели' },
@@ -55,6 +54,11 @@ const features = [
     icon: Lightbulb,
     title: "Индивидуальный подход",
     description: "Создаем маршруты с учетом ваших интересов и предпочтений"
+  },
+   {
+    icon: FileCheck,
+    title: "Официальная лицензия",
+    description: "VOYAGE TRIP имеет государственную лицензию на туроператорскую деятельность"
   }
 ];
 
@@ -212,7 +216,7 @@ export function MissionGoalsSection({ isClient }) {
   return (
     <section className="py-8 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-xl lg:shadow-2xl border border-gray-100 overflow-hidden">
+        <div className="bg-white/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-xl lg:shadow-xl border border-gray-100 overflow-hidden">
           {/* Tabs */}
           <div className="border-b border-gray-200">
             <div className="flex overflow-x-auto no-scrollbar">

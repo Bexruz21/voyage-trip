@@ -7,6 +7,7 @@ import { MissionGoalsSection } from './MissionGoalsSection';
 import { ValuesSection } from './ValuesSection';
 import { TeamSection } from './TeamSection';
 import { CTASection } from './CTASection';
+import { LicenseCompact } from './LicenseCompact';
 
 function AboutContent() {
   const [isClient, setIsClient] = useState(false);
@@ -21,6 +22,9 @@ function AboutContent() {
         <HeroSection isClient={isClient} page="about" />
         <StatsSection isClient={isClient} />
         <MissionGoalsSection isClient={isClient} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+          <LicenseCompact isClient={isClient} />
+        </div>
         <ValuesSection isClient={isClient} />
         <TeamSection
           isClient={isClient}
