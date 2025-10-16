@@ -1,5 +1,6 @@
 // app/licenses/page.tsx
 'use client';
+import Image from 'next/image';
 
 export default function LicensesPage() {
     const pdfUrl = "/documents/license.pdf"; // Путь к вашему PDF файлу
@@ -71,12 +72,14 @@ export default function LicensesPage() {
                             {/* PDF просмотр */}
                             <div className="lg:col-span-3">
                                 <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-                                    <img
+
+                                    <Image
                                         src="/documents/license.jpg"
-                                        className="w-full object-contain bg-white"
                                         alt="Лицензия туроператора"
                                         title="Лицензия туроператора"
-                                        loading="lazy"
+                                        width={1200}
+                                        height={800}
+                                        className="w-full object-contain bg-white"
                                     />
                                 </div>
                             </div>
