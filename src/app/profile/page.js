@@ -9,8 +9,8 @@ import {
 
 export default function ProfilePage() {
   const [user, setUser] = useState({
-    name: 'Александр Иванов',
-    email: 'alex.ivanov@example.com',
+    name: 'Имя Фамилия',
+    email: 'alex.ivanov@gmail.com',
     membershipCard: {
       id: 'gold',
       name: "Gold Membership",
