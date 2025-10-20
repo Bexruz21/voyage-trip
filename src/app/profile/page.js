@@ -358,7 +358,7 @@ export default function ProfilePage() {
                     <span className="text-sm font-semibold text-slate-500">Voyage Balance</span>
                   </div>
                   <p className="text-4xl font-bold bg-gradient-to-r from-sky-600 to-cyan-600 bg-clip-text text-transparent">
-                    {user.voyageBalance.toLocaleString('ru-RU')} ₽
+                    {user.voyageBalance.toLocaleString('ru-RU')} $
                   </p>
                   <p className="text-sm text-slate-500 mt-2">
                     {hasCard ? "Бонусный счет" : "Кешбэк на следующий тур"}
@@ -415,7 +415,7 @@ export default function ProfilePage() {
                     </div>
                   </div>
                   <p className="text-3xl font-bold text-slate-800">
-                    {user.referrals.earned.toLocaleString('ru-RU')} ₽
+                    {user.referrals.earned.toLocaleString('ru-RU')} $
                   </p>
                   <p className="text-sm text-slate-600 mt-2">
                     {hasCard ? "на Voyage Balance" : "на следующий тур"}
@@ -510,7 +510,7 @@ export default function ProfilePage() {
                       <div className="text-right">
                         {getStatusBadge(booking.status)}
                         <p className="text-xl font-bold text-slate-800 mt-3">
-                          {booking.price.toLocaleString('ru-RU')} ₽
+                          {booking.price.toLocaleString('ru-RU')} $
                         </p>
                       </div>
                     </div>
@@ -523,7 +523,7 @@ export default function ProfilePage() {
                             {booking.type === 'referral' ? 'Бонус на Voyage Balance' : 'Кешбэк на следующий тур'}
                           </span>
                           <span className="text-lg font-bold text-emerald-600">
-                            +{(booking.referralBonus || booking.cashback).toLocaleString('ru-RU')} ₽
+                            +{(booking.referralBonus || booking.cashback).toLocaleString('ru-RU')} $
                           </span>
                         </div>
                         <p className="text-sm text-emerald-600 mt-1">

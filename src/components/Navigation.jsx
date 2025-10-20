@@ -145,13 +145,6 @@ function Navigation() {
                                                 transition={{ duration: 0.3 }}
                                             />
                                         )}
-
-                                        {!isActive && (
-                                            <motion.div
-                                                className="absolute inset-0 bg-gray-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                                whileHover={{ opacity: 1 }}
-                                            />
-                                        )}
                                     </Link>
                                 );
                             })}
@@ -248,7 +241,7 @@ function Navigation() {
                                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
                                                 transition={{ duration: 0.2 }}
-                                                className="absolute right-0 top-full mt-2 w-auto bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50"
+                                                className="absolute min-w-64 right-0 top-full mt-2 w-auto bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50"
                                             >
                                                 {isLoggedIn && userData ? (
                                                     <>
@@ -260,7 +253,7 @@ function Navigation() {
                                                                 }
                                                             </p>
                                                             <p className="text-sm text-gray-500">ID: {userData.ref_id}</p>
-                                                            <p className="text-sm text-green-600 font-medium">Баланс: {userData.balance} ₽</p>
+                                                            <p className="text-sm text-green-600 font-medium">Баланс: {userData.balance} $</p>
                                                         </div>
 
                                                         <Link
@@ -320,30 +313,40 @@ function Navigation() {
                                 </AnimatePresence>
                             </div>
 
-                            <motion.button
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                className={`lg:hidden p-3 rounded-lg transition-all duration-300 ${isMobileMenuOpen
-                                    ? "bg-cyan-50 text-cyan-600"
-                                    : "bg-gray-50 text-gray-600 hover:bg-gray-100"
-                                    }`}
-                            >
-                                <div className="w-5 h-5 flex flex-col justify-center space-y-1">
-                                    <motion.span
-                                        className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
-                                            }`}
-                                    />
-                                    <motion.span
-                                        className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "opacity-0 -translate-x-2" : "opacity-100"
-                                            }`}
-                                    />
-                                    <motion.span
-                                        className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
-                                            }`}
-                                    />
-                                </div>
-                            </motion.button>
-
+                            {/* Mobile Menu Button */}
+                            {isClient ? (
+                                <motion.button
+                                    whileTap={{ scale: 0.95 }}
+                                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                    className={`lg:hidden p-3 rounded-lg transition-all duration-300 ${isMobileMenuOpen
+                                        ? "bg-cyan-50 text-cyan-600"
+                                        : "bg-gray-50 text-gray-600 hover:bg-gray-100"
+                                        }`}
+                                >
+                                    <div className="w-5 h-5 flex flex-col justify-center space-y-1">
+                                        <motion.span
+                                            className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
+                                                }`}
+                                        />
+                                        <motion.span
+                                            className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "opacity-0 -translate-x-2" : "opacity-100"
+                                                }`}
+                                        />
+                                        <motion.span
+                                            className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
+                                                }`}
+                                        />
+                                    </div>
+                                </motion.button>
+                            ) : (
+                                <button className="lg:hidden p-3 bg-gray-100 text-gray-600 rounded-lg">
+                                    <div className="w-5 h-5 flex flex-col justify-center space-y-1">
+                                        <span className="block w-5 h-0.5 bg-gray-600" />
+                                        <span className="block w-5 h-0.5 bg-gray-600" />
+                                        <span className="block w-5 h-0.5 bg-gray-600" />
+                                    </div>
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
