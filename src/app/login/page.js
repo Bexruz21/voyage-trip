@@ -27,7 +27,7 @@ export default function Login() {
         setIsLoading(true);
 
         try {
-            const res = await fetch("http://127.0.0.1:8000/api/auth/token/", {
+            const res = await fetch("http://127.0.0.1:8000/api/user/login/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email: email.trim(), password }),
@@ -39,17 +39,13 @@ export default function Login() {
                 let errMsg = "Ошибка входа.";
 
                 if (data.detail) {
-                    if (data.detail === "No active account found with the given credentials") {
+                    if (data.detail.includes("No active account")) {
                         errMsg = "Неверный email или пароль.";
                     } else {
                         errMsg = data.detail;
                     }
                 } else if (data.non_field_errors) {
                     errMsg = data.non_field_errors.join(" ");
-                } else if (data.email) {
-                    errMsg = Array.isArray(data.email) ? data.email.join(" ") : data.email;
-                } else if (data.password) {
-                    errMsg = Array.isArray(data.password) ? data.password.join(" ") : data.password;
                 }
 
                 setError(errMsg);
@@ -59,10 +55,12 @@ export default function Login() {
             if (data.access && data.refresh) {
                 localStorage.setItem("access", data.access);
                 localStorage.setItem("refresh", data.refresh);
-                router.push("/");
             } else {
                 setError("Сервер вернул неожиданный ответ при входе.");
+                return;
             }
+            window.dispatchEvent(new Event('storage'));
+            router.push("/");
         } catch (err) {
             console.error("Network/login error:", err);
             setError("Не удалось подключиться к серверу. Проверьте подключение.");
@@ -128,8 +126,8 @@ export default function Login() {
                             autoComplete="username"
                             disabled={isLoading}
                         />
-                        <Mail size={20} className="absolute right-3 top-1/2 -translate-y-1/2 text-sky-400"/>
-                        
+                        <Mail size={20} className="absolute right-3 top-1/2 -translate-y-1/2 text-sky-400" />
+
                     </div>
 
                     {/* Password */}
@@ -150,7 +148,7 @@ export default function Login() {
                             onClick={() => setShowPassword(!showPassword)}
                             className="absolute right-3 top-1/2 -translate-y-1/2 text-sky-400 hover:text-sky-600 transition p-0.5 sm:p-1"
                             aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
-                        > 
+                        >
                             {showPassword ? (
                                 <EyeOff size={20} />
                             ) : (

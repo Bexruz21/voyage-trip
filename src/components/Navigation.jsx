@@ -1,17 +1,21 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import axios from "axios";
 
 function Navigation() {
     const pathname = usePathname();
+    const router = useRouter();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isClient, setIsClient] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [isLanguageOpen, setIsLanguageOpen] = useState(false);
     const [currentLanguage, setCurrentLanguage] = useState("ru");
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userData, setUserData] = useState(null);
 
     const navItems = [
         { path: "/", label: "Главная" },
@@ -30,7 +34,38 @@ function Navigation() {
 
     useEffect(() => {
         setIsClient(true);
+
+        const checkAuthStatus = () => {
+            const accessToken = localStorage.getItem('access');
+
+            if (accessToken) {
+                axios.get("http://127.0.0.1:8000/api/user/me/", {
+                    headers: { Authorization: `Bearer ${accessToken}` }
+                })
+                    .then(res => {
+                        setUserData(res.data);
+                        setIsLoggedIn(true);
+                    })
+                    .catch(() => {
+                        setIsLoggedIn(false);
+                        setUserData(null);
+                    });
+            } else {
+                setIsLoggedIn(false);
+                setUserData(null);
+            }
+        };
+
+        checkAuthStatus();
+
+        const handleStorageChange = () => checkAuthStatus();
+        window.addEventListener("storage", handleStorageChange);
+
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+        };
     }, []);
+
 
     const handleLinkClick = () => {
         setIsMobileMenuOpen(false);
@@ -39,14 +74,25 @@ function Navigation() {
     const handleLanguageChange = (langCode) => {
         setCurrentLanguage(langCode);
         setIsLanguageOpen(false);
-        // Здесь можно добавить логику смены языка
+    };
+
+    const handleLogout = () => {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem('access');
+            localStorage.removeItem('refresh');
+            localStorage.removeItem('user');
+            setIsLoggedIn(false);
+            setUserData(null);
+            setIsProfileOpen(false);
+            router.push('/login')
+        }
     };
 
     const currentLang = languages.find(lang => lang.code === currentLanguage);
 
     return (
         <>
-            <header className="relative bg-white shadow-xl py-1 sticky top-0 z-50 transition-all duration-500">
+            <header className="bg-white shadow-xl py-1 sticky top-0 z-50 transition-all duration-500">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center py-2">
                         {/* Logo - Compact */}
@@ -76,8 +122,8 @@ function Navigation() {
                             {navItems.map((item) => {
                                 const isActive = pathname === item.path;
                                 const linkClass = `relative px-6 py-3 rounded-lg font-semibold transition-all duration-300 group overflow-hidden ${isActive
-                                        ? "text-cyan-600"
-                                        : "text-gray-600 hover:text-cyan-700"
+                                    ? "text-cyan-600"
+                                    : "text-gray-600 hover:text-cyan-700"
                                     }`;
 
                                 return (
@@ -111,8 +157,8 @@ function Navigation() {
                             })}
                         </nav>
 
-                        {/* Right Side - Language & Profile */}    
-                        <div className="flex items-center space-x-2"> 
+                        {/* Right Side - Language & Profile */}
+                        <div className="flex items-center space-x-2">
                             {/* Language Selector */}
                             <div className="relative hidden lg:flex">
                                 <motion.button
@@ -158,8 +204,8 @@ function Navigation() {
                                                         key={language.code}
                                                         onClick={() => handleLanguageChange(language.code)}
                                                         className={`flex items-center space-x-3 w-full px-4 py-2 text-sm transition-all duration-200 ${currentLanguage === language.code
-                                                                ? "bg-cyan-50 text-cyan-600"
-                                                                : "text-gray-700 hover:bg-gray-50"
+                                                            ? "bg-cyan-50 text-cyan-600"
+                                                            : "text-gray-700 hover:bg-gray-50"
                                                             }`}
                                                     >
                                                         <span>{language.label}</span>
@@ -202,74 +248,102 @@ function Navigation() {
                                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
                                                 transition={{ duration: 0.2 }}
-                                                className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50"
+                                                className="absolute right-0 top-full mt-2 w-auto bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50"
                                             >
-                                                <div className="px-4 py-2 border-b border-gray-100">
-                                                    <p className="text-sm font-medium text-gray-900">Гость</p>
-                                                    <p className="text-xs text-gray-500">Войдите в аккаунт</p>
-                                                </div>
+                                                {isLoggedIn && userData ? (
+                                                    <>
+                                                        <div className="px-4 py-2 border-b border-gray-100">
+                                                            <p className="text-sm font-medium text-gray-900">
+                                                                {userData.first_name && userData.last_name
+                                                                    ? `${userData.first_name} ${userData.last_name}`
+                                                                    : userData.email
+                                                                }
+                                                            </p>
+                                                            <p className="text-sm text-gray-500">ID: {userData.ref_id}</p>
+                                                            <p className="text-sm text-green-600 font-medium">Баланс: {userData.balance} ₽</p>
+                                                        </div>
 
-                                                <Link
-                                                    href="/login"
-                                                    onClick={() => setIsProfileOpen(false)}
-                                                    className="flex items-center space-x-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all duration-200"
-                                                >
-                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                                                    </svg>
-                                                    <span>Войти</span>
-                                                </Link>
+                                                        <Link
+                                                            href="/profile"
+                                                            onClick={() => setIsProfileOpen(false)}
+                                                            className="flex items-center space-x-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all duration-200"
+                                                        >
+                                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                                            </svg>
+                                                            <span>Профиль</span>
+                                                        </Link>
 
-                                                <Link
-                                                    href="/register"
-                                                    onClick={() => setIsProfileOpen(false)}
-                                                    className="flex items-center space-x-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all duration-200"
-                                                >
-                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                                                    </svg>
-                                                    <span>Регистрация</span>
-                                                </Link>
+                                                        <button
+                                                            onClick={handleLogout}
+                                                            className="flex items-center space-x-3 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-all duration-200"
+                                                        >
+                                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                                            </svg>
+                                                            <span>Выйти</span>
+                                                        </button>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <div className="px-4 py-2 border-b border-gray-100">
+                                                            <p className="text-sm font-medium text-gray-900">Гость</p>
+                                                            <p className="text-xs text-gray-500">Войдите в аккаунт</p>
+                                                        </div>
+
+                                                        <Link
+                                                            href="/login"
+                                                            onClick={() => setIsProfileOpen(false)}
+                                                            className="flex items-center space-x-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all duration-200"
+                                                        >
+                                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                                                            </svg>
+                                                            <span>Войти</span>
+                                                        </Link>
+
+                                                        <Link
+                                                            href="/register"
+                                                            onClick={() => setIsProfileOpen(false)}
+                                                            className="flex items-center space-x-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all duration-200"
+                                                        >
+                                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                                            </svg>
+                                                            <span>Регистрация</span>
+                                                        </Link>
+                                                    </>
+                                                )}
                                             </motion.div>
                                         </>
                                     )}
                                 </AnimatePresence>
                             </div>
 
-                            {/* Mobile Menu Button */}
-                            {isClient ? (
-                                <motion.button
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                    className={`lg:hidden p-3 rounded-lg transition-all duration-300 ${isMobileMenuOpen
-                                            ? "bg-cyan-50 text-cyan-600"
-                                            : "bg-gray-50 text-gray-600 hover:bg-gray-100"
-                                        }`}
-                                >
-                                    <div className="w-5 h-5 flex flex-col justify-center space-y-1">
-                                        <motion.span
-                                            className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
-                                                }`}
-                                        />
-                                        <motion.span
-                                            className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "opacity-0 -translate-x-2" : "opacity-100"
-                                                }`}
-                                        />
-                                        <motion.span
-                                            className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
-                                                }`}
-                                        />
-                                    </div>
-                                </motion.button>
-                            ) : (
-                                <button className="lg:hidden p-3 bg-gray-100 text-gray-600 rounded-lg">
-                                    <div className="w-5 h-5 flex flex-col justify-center space-y-1">
-                                        <span className="block w-5 h-0.5 bg-gray-600" />
-                                        <span className="block w-5 h-0.5 bg-gray-600" />
-                                        <span className="block w-5 h-0.5 bg-gray-600" />
-                                    </div>
-                                </button>
-                            )}
+                            <motion.button
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                className={`lg:hidden p-3 rounded-lg transition-all duration-300 ${isMobileMenuOpen
+                                    ? "bg-cyan-50 text-cyan-600"
+                                    : "bg-gray-50 text-gray-600 hover:bg-gray-100"
+                                    }`}
+                            >
+                                <div className="w-5 h-5 flex flex-col justify-center space-y-1">
+                                    <motion.span
+                                        className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
+                                            }`}
+                                    />
+                                    <motion.span
+                                        className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "opacity-0 -translate-x-2" : "opacity-100"
+                                            }`}
+                                    />
+                                    <motion.span
+                                        className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
+                                            }`}
+                                    />
+                                </div>
+                            </motion.button>
+
                         </div>
                     </div>
                 </div>
@@ -317,6 +391,20 @@ function Navigation() {
                                                 </div>
                                             </div>
 
+                                            {/* User Info Mobile */}
+                                            {isLoggedIn && userData && (
+                                                <div className="mb-4 p-3 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg border border-cyan-200">
+                                                    <p className="text-sm font-medium text-gray-900">
+                                                        {userData.first_name && userData.last_name
+                                                            ? `${userData.first_name} ${userData.last_name}`
+                                                            : userData.email
+                                                        }
+                                                    </p>
+                                                    <p className="text-sm text-gray-600">ID: {userData.ref_id}</p>
+                                                    <p className="text-sm text-green-600 font-medium">Баланс: {userData.balance} $</p>
+                                                </div>
+                                            )}
+
                                             {/* Language Selector Mobile */}
                                             <div className="mb-6 pb-4 border-b border-gray-200/60">
                                                 <div className="flex space-x-2">
@@ -325,8 +413,8 @@ function Navigation() {
                                                             key={language.code}
                                                             onClick={() => handleLanguageChange(language.code)}
                                                             className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm border ${currentLanguage === language.code
-                                                                    ? "bg-cyan-50 text-cyan-600 border-cyan-200"
-                                                                    : "bg-gray-50 text-gray-600 hover:bg-gray-100 border-transparent"
+                                                                ? "bg-cyan-50 text-cyan-600 border-cyan-200"
+                                                                : "bg-gray-50 text-gray-600 hover:bg-gray-100 border-transparent"
                                                                 }`}
                                                         >
                                                             <span className="uppercase">{language.code}</span>
@@ -353,8 +441,8 @@ function Navigation() {
                                                                 href={item.path}
                                                                 onClick={handleLinkClick}
                                                                 className={`flex items-center justify-between px-4 py-3 rounded-lg font-semibold transition-all duration-300 group ${isActive
-                                                                        ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 border border-cyan-200"
-                                                                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                                                                    ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 border border-cyan-200"
+                                                                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                                                                     }`}
                                                             >
                                                                 <span className="flex items-center text-sm">
@@ -372,31 +460,81 @@ function Navigation() {
                                                         </motion.div>
                                                     );
                                                 })}
+
+                                                {/* Profile Link for Mobile */}
+                                                {isLoggedIn && (
+                                                    <motion.div
+                                                        initial={{ opacity: 0, x: 20 }}
+                                                        animate={{
+                                                            opacity: 1,
+                                                            x: 0,
+                                                            transition: { delay: navItems.length * 0.1 }
+                                                        }}
+                                                    >
+                                                        <Link
+                                                            href="/profile"
+                                                            onClick={handleLinkClick}
+                                                            className={`flex items-center justify-between px-4 py-3 rounded-lg font-semibold transition-all duration-300 group ${pathname === '/profile'
+                                                                ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 border border-cyan-200"
+                                                                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                                                                }`}
+                                                        >
+                                                            <span className="flex items-center text-sm">
+                                                                Профиль
+                                                            </span>
+                                                            {pathname === '/profile' && (
+                                                                <motion.div
+                                                                    className="w-1.5 h-1.5 bg-cyan-500 rounded-full"
+                                                                    initial={{ scale: 0 }}
+                                                                    animate={{ scale: 1 }}
+                                                                    transition={{ delay: 0.2 }}
+                                                                />
+                                                            )}
+                                                        </Link>
+                                                    </motion.div>
+                                                )}
                                             </nav>
 
                                             {/* Auth Buttons Mobile */}
-                                            <div className="space-y-2 mb-6">
-                                                <Link
-                                                    href="/login"
-                                                    onClick={handleLinkClick}
-                                                    className="flex items-center justify-center space-x-2 w-full px-4 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200"
-                                                >
-                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                                                    </svg>
-                                                    <span>Войти</span>
-                                                </Link>
-                                                <Link
-                                                    href="/register"
-                                                    onClick={handleLinkClick}
-                                                    className="flex items-center justify-center space-x-2 w-full px-4 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                                                >
-                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                                                    </svg>
-                                                    <span>Регистрация</span>
-                                                </Link>
-                                            </div>
+                                            {!isLoggedIn ? (
+                                                <div className="space-y-2 mb-6">
+                                                    <Link
+                                                        href="/login"
+                                                        onClick={handleLinkClick}
+                                                        className="flex items-center justify-center space-x-2 w-full px-4 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200"
+                                                    >
+                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                                                        </svg>
+                                                        <span>Войти</span>
+                                                    </Link>
+                                                    <Link
+                                                        href="/register"
+                                                        onClick={handleLinkClick}
+                                                        className="flex items-center justify-center space-x-2 w-full px-4 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                                                    >
+                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                                        </svg>
+                                                        <span>Регистрация</span>
+                                                    </Link>
+                                                </div>
+                                            ) : (
+                                                <div className="space-y-2 mb-6">
+                                                    <button
+                                                        onClick={() => {
+                                                            handleLogout();
+                                                            handleLinkClick();
+                                                        }}
+                                                        className="flex items-center justify-center space-x-2 w-full px-4 py-3 border border-red-300 text-red-600 font-semibold rounded-lg hover:bg-red-50 transition-all duration-200"
+                                                    >
+                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                                        </svg>
+                                                        <span>Выйти</span>
+                                                    </button>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </motion.div>

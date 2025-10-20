@@ -8,8 +8,8 @@ import { Eye, EyeOff, Mail, Phone } from "lucide-react";
 export default function RegisterPage() {
     const router = useRouter();
     const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
+        first_name: "",
+        last_name: "",
         email: "",
         phone: "",
         password: "",
@@ -49,14 +49,15 @@ export default function RegisterPage() {
         }
 
         const payload = {
-            full_name: formData.firstName + " " + formData.lastName,
+            first_name: formData.first_name,
+            last_name: formData.last_name,
             email: formData.email,
             phone: formData.phone,
             password: formData.password,
         };
 
         try {
-            const registerRes = await fetch("http://127.0.0.1:8000/api/user/", {
+            const registerRes = await fetch("http://127.0.0.1:8000/api/user/register/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
@@ -76,7 +77,7 @@ export default function RegisterPage() {
                 return;
             }
 
-            const loginRes = await fetch("http://127.0.0.1:8000/api/auth/token/", {
+            const loginRes = await fetch("http://127.0.0.1:8000/api/user/login/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -150,18 +151,18 @@ export default function RegisterPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                         <input
                             type="text"
-                            name="firstName"
+                            name="first_name"
                             placeholder="Имя"
-                            value={formData.firstName}
+                            value={formData.first_name}
                             onChange={handleChange}
                             required
                             className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl bg-gray-50 focus:bg-white focus:border-sky-400 focus:ring-1 sm:focus:ring-2 focus:ring-sky-100 text-gray-700 text-sm shadow-sm outline-none"
                         />
                         <input
                             type="text"
-                            name="lastName"
+                            name="last_name"
                             placeholder="Фамилия"
-                            value={formData.lastName}
+                            value={formData.last_name}
                             onChange={handleChange}
                             required
                             className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl bg-gray-50 focus:bg-white focus:border-sky-400 focus:ring-1 sm:focus:ring-2 focus:ring-sky-100 text-gray-700 text-sm shadow-sm outline-none"
