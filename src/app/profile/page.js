@@ -440,7 +440,7 @@ export default function ProfilePage() {
                     <Users className="w-4 h-4 text-sky-600" />
                     <span className="text-slate-700 text-sm font-medium">Приглашено</span>
                   </div>
-                  <p className="text-lg font-bold text-slate-900">{user.invited_friends}</p>
+                  <p className="text-lg font-bold text-slate-900">{data.total_referrals}</p>
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-lg border-l-4 border-l-emerald-500 bg-emerald-50">
                   <div className="flex items-center gap-3">
@@ -448,8 +448,8 @@ export default function ProfilePage() {
                     <span className="text-slate-700 text-sm font-medium">Активные</span>
                   </div>
                   <div className="text-right">
-                    <p className="text-lg font-bold text-slate-900">{user.active_referrals}</p>
-                    <p className="text-xs text-slate-500">{Math.round((user.active_referrals / user.invited_friends) * 100)}% активности</p>
+                    <p className="text-lg font-bold text-slate-900">{data.referral_users}</p>
+                    <p className="text-xs text-slate-500">{Math.round((data.referral_users / data.total_referrals) * 100)}% активности</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-lg border-l-4 border-l-cyan-500 bg-cyan-50">

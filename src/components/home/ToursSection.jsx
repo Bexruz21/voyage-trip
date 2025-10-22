@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { MapPin, Star, Calendar, Globe, Sparkles } from 'lucide-react';
+import { API } from '@/config/api';
 
 const regionConfig = {
   "Европа": {
@@ -62,7 +63,7 @@ export function ToursSection() {
   const [regions, setRegions] = useState([]);
 
   useEffect(() => {
-    axios.get('https://voyage-trip-api.onrender.com/api/user/regions/')
+    axios.get(API.REGIONS.LIST)
       .then(res => {
         const regionsWithConfig = res.data.map(region => ({
           ...region,
