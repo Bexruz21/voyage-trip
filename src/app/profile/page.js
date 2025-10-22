@@ -39,7 +39,7 @@ export default function ProfilePage() {
   const membershipCards = [
     {
       id: 1,
-      name: 'Silver Card',
+      name: 'Silver Membership',
       price: '$0',
       duration_months: 12,
       max_tours: 5,
@@ -48,7 +48,7 @@ export default function ProfilePage() {
     },
     {
       id: 2,
-      name: 'Gold Card',
+      name: 'Gold Membership',
       price: '$99',
       duration_months: 12,
       max_tours: 10,
@@ -57,7 +57,7 @@ export default function ProfilePage() {
     },
     {
       id: 3,
-      name: 'Platinum Card',
+      name: 'Platinum Membership',
       price: '$199',
       duration_months: 12,
       max_tours: 20,
@@ -287,20 +287,20 @@ export default function ProfilePage() {
                     <div>
                       <p className="text-[11px] text-white/70 mb-1">Бонус</p>
                       <p className="text-lg font-semibold">
-                        {data.active_membership.card.bonus_rate}%
+                        {data.active_membership.card.discount_percent}%
                       </p>
                     </div>
                     <div>
                       <p className="text-[11px] text-white/70 mb-1">Туры</p>
                       <p className="text-lg font-semibold">
-                        {data.active_membership.card.max_tours}
+                        {data.active_membership.card.discount_tours}
                       </p>
                     </div>
                     <div>
                       <p className="text-[11px] text-white/70 mb-1">Исп.</p>
                       <p className="text-lg font-semibold">
                         {data.active_membership.used_tours}/
-                        {data.active_membership.card.max_tours}
+                        {data.active_membership.card.discount_tours}
                       </p>
                     </div>
                   </div>
