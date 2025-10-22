@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import { AnimatePresence } from 'framer-motion';
 import { HeroSection } from './HeroSection';
 import { Breadcrumbs } from './Breadcrumbs';
 import { LoadingOverlay } from './LoadingOverlay';
@@ -11,6 +11,7 @@ import { CountriesGrid } from './CountriesGrid';
 import { CitiesGrid } from './CitiesGrid';
 import { CityDetail } from './CityDetail';
 import axios from 'axios';
+import { API } from '@/config/api';
 
 // Конфигурация цветов для регионов
 const regionConfig = {
@@ -63,7 +64,7 @@ function DestinationsContent({ searchParams }) {
   const fetchRegions = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get('https://voyage-trip-api.onrender.com/api/user/regions/');
+      const response = await axios.get(API.REGIONS.LIST);
       const regionsWithConfig = response.data.map(region => ({
         ...region,
         color: regionConfig[region.name]?.color || "from-blue-500 to-cyan-500",
@@ -82,15 +83,12 @@ function DestinationsContent({ searchParams }) {
     }
   };
 
-  // Загрузка стран для региона
   const fetchCountries = async (regionId) => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`https://voyage-trip-api.onrender.com/api/user/regions/${regionId}/countries/`);
-      // Добавляем поля для совместимости с компонентами
+      const response = await axios.get(API.REGIONS.COUNTRIES(regionId));
       const countriesWithCompat = response.data.map(country => ({
         ...country,
-        // Добавляем пустой массив городов для совместимости
         cities: []
       }));
       console.log(countriesWithCompat)
@@ -102,17 +100,14 @@ function DestinationsContent({ searchParams }) {
     }
   };
 
-  // Загрузка городов для страны
   const fetchCities = async (countryId) => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`https://voyage-trip-api.onrender.com/api/user/countries/${countryId}/cities/`);
-      // Добавляем поля для совместимости с компонентами
+      const response = await axios.get(API.COUNTRIES.CITIES(countryId));
       const citiesWithCompat = response.data.map(city => ({
         ...city,
         bestTime: city.best_time,
         country: selectedCountry?.name || '',
-        // Добавляем population для CityDetail
         population: 'Не указано'
       }));
       setCities(citiesWithCompat);
@@ -123,12 +118,10 @@ function DestinationsContent({ searchParams }) {
     }
   };
 
-  // Загрузка деталей страны
   const fetchCountryDetails = async (countryId) => {
     try {
-      const response = await axios.get(`https://voyage-trip-api.onrender.com/api/user/countries/${countryId}/`);
+      const response = await axios.get(API.COUNTRIES.DETAIL(countryId));
       const country = response.data;
-      // Добавляем поля для совместимости
       return {
         ...country,
         bestTime: country.best_time,
@@ -140,12 +133,10 @@ function DestinationsContent({ searchParams }) {
     }
   };
 
-  // Загрузка деталей города
   const fetchCityDetails = async (cityId) => {
     try {
-      const response = await axios.get(`https://voyage-trip-api.onrender.com/api/user/cities/${cityId}/`);
+      const response = await axios.get(API.CITIES.DETAIL(cityId));
       const city = response.data;
-      // Добавляем поля для совместимости
       return {
         ...city,
         bestTime: city.best_time,
@@ -159,7 +150,6 @@ function DestinationsContent({ searchParams }) {
     }
   };
 
-  // --- 🧭 Читаем параметры из URL и восстанавливаем выбор ---
   useEffect(() => {
     const regionId = searchParams?.region;
     const countryId = searchParams?.country;
