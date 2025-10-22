@@ -448,8 +448,8 @@ export default function ProfilePage() {
                     <span className="text-slate-700 text-sm font-medium">Активные</span>
                   </div>
                   <div className="text-right">
-                    <p className="text-lg font-bold text-slate-900">{data.referral_users}</p>
-                    <p className="text-xs text-slate-500">{Math.round((data.referral_users / data.total_referrals) * 100)}% активности</p>
+                    <p className="text-lg font-bold text-slate-900">{data.referral_users.length}</p>
+                    <p className="text-xs text-slate-500">{Math.round((data.referral_users.length / data.total_referrals) * 100)}% активности</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-lg border-l-4 border-l-cyan-500 bg-cyan-50">
