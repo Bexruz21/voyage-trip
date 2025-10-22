@@ -241,19 +241,22 @@ export default function ProfilePage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {bonusHistory.map((item, idx) => (
-                      <tr key={item.id} className={`border-b border-slate-100 hover:bg-white transition-colors duration-200 ${idx === bonusHistory.length - 1 ? 'border-b-0' : ''}`}>
-                        <td className="py-4 px-4 text-slate-900 text-sm font-medium">{item.description}</td>
-                        <td className="py-4 px-4 text-slate-600 text-sm">{item.date}</td>
+                    {data.bonus_history.map((item, idx) => (
+                      <tr key={item.id} className={`border-b border-slate-100 hover:bg-white transition-colors duration-200 ${idx === data.bonus_history.length - 1 ? 'border-b-0' : ''}`}>
+                        <td className="py-4 px-4 text-slate-900 text-sm font-medium">Бонус за приглашенного друга</td>
+                        <td className="py-4 px-4 text-slate-600 text-sm">
+                          {new Date(item.created_at).toLocaleDateString('ru-RU')}
+                        </td>
+
                         <td className="py-4 px-4">
-                          <span className={`inline-block px-3 py-1 rounded-lg text-xs font-semibold ${item.type === 'referral'
-                            ? 'bg-amber-100 text-amber-800'
-                            : 'bg-violet-100 text-violet-800'
-                            }`}>
-                            {item.type === 'referral' ? 'Реферальный' : 'Кешбэк'}
+                          <span className={`inline-block px-3 py-1 rounded-lg text-xs font-semibold bg-amber-100 text-amber-800`}>
+                            Реферальный
                           </span>
                         </td>
-                        <td className="py-4 px-4 text-emerald-600 text-sm font-bold text-right">+{item.amount.toLocaleString('ru-RU')} $</td>
+                        <td className="py-4 px-4 text-emerald-600 text-sm font-bold text-right">
+                          +{(+item.amount).toLocaleString('ru-RU')} $
+                        </td>
+
                       </tr>
                     ))}
                   </tbody>
