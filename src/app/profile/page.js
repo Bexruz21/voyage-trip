@@ -75,7 +75,6 @@ export default function ProfilePage() {
       try {
         const token = localStorage.getItem("access");
         if (!token) {
-          console.warn("⚠️ Токен не найден в localStorage");
           router.push('/login')
           return;
         }
@@ -89,7 +88,6 @@ export default function ProfilePage() {
         console.log("✅ Ответ от API:", response.data);
         setData(response.data)
       } catch (error) {
-        console.error("❌ Ошибка при запросе профиля:", error.response?.data || error.message);
         localStorage.removeItem('access')
         router.push('/login')
       }

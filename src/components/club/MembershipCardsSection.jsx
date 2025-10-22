@@ -9,7 +9,7 @@ export function MembershipCardsSection() {
     const [cards, setCards] = useState(null)
 
     useEffect(() => {
-        axios.get("http://localhost:8000/api/user/cards/").then(res => {
+        axios.get("https://voyage-trip-api.onrender.com/api/user/cards/").then(res => {
             setCards(res.data)
             console.log(res.data)
         })
