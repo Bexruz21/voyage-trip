@@ -116,11 +116,11 @@ export default function ProfilePage() {
       {/* Header */}
       <div className="border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          <div className="flex items-center gap-4 sm:gap-6">
+          <div className="flex flex-col items-center gap-4 sm:gap-6">
             <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-sky-500 to-cyan-500 rounded-2xl flex items-center justify-center shadow-lg">
               <User className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
             </div>
-            <div className="flex-1">
+            <div className="flex-1 text-center">
               <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900">Профиль</h1>
               <p className="text-slate-500 text-sm sm:text-base mt-1">Отслеживайте ваш кешбэк Voyage Balance, приглашайте друзей и откройте все преимущества клуба</p>
             </div>
@@ -135,7 +135,7 @@ export default function ProfilePage() {
           <div className="lg:col-span-2 space-y-6">
             {/* Voyage Balance Card - with user info */}
             <div className="bg-slate-50 border border-gray-200 rounded-2xl p-6 sm:p-8">
-              <div className="flex items-start justify-between gap-4 mb-8">
+              <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-8">
                 <div className="flex-1">
                   <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">{data.first_name} {data.last_name}</h2>
                   <div className="flex items-center gap-2 text-slate-600 text-sm mt-2">
@@ -168,7 +168,7 @@ export default function ProfilePage() {
                       <Wallet className="w-4 h-4 text-sky-600" />
                       Voyage Balance
                     </p>
-                    <p className="text-5xl sm:text-6xl font-bold bg-gradient-to-r from-sky-600 to-cyan-600 bg-clip-text text-transparent">
+                    <p className="text-3xl sm:text-6xl font-bold bg-gradient-to-r from-sky-600 to-cyan-600 bg-clip-text text-transparent">
                       {data.balance.toLocaleString('ru-RU')} $
                     </p>
                   </div>
