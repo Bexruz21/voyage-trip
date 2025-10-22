@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import {
-  User, Mail, Wallet, Users, Copy, Gift, Check, Crown, Star, CreditCard, Zap, TrendingUp, MapPin, Plane
-} from 'lucide-react';
 import axios from 'axios';
+import {
+  User, Mail, Wallet, Users, Copy, Gift, Check, Crown, Star, CreditCard, Zap, TrendingUp, Plane
+} from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function ProfilePage() {
   const [user, setUser] = useState({
@@ -28,6 +29,8 @@ export default function ProfilePage() {
       used_tours: 3
     }
   });
+
+  const router = useRouter()
   const [data, setData] = useState(null)
 
   const [copied, setCopied] = useState(false);
@@ -73,6 +76,7 @@ export default function ProfilePage() {
         const token = localStorage.getItem("access");
         if (!token) {
           console.warn("⚠️ Токен не найден в localStorage");
+          router.push('/login')
           return;
         }
 
@@ -86,6 +90,8 @@ export default function ProfilePage() {
         setData(response.data)
       } catch (error) {
         console.error("❌ Ошибка при запросе профиля:", error.response?.data || error.message);
+        localStorage.removeItem('access')
+        router.push('/login')
       }
     };
 
