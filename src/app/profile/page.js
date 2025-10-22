@@ -21,7 +21,7 @@ export default function ProfilePage() {
 
       try {
         // Загружаем карты (без токена)
-        const cardsResponse = await axios.get("http://127.0.0.1:8000/api/user/cards/");
+        const cardsResponse = await axios.get("https://voyage-trip-api.onrender.com/api/user/cards/");
         const cardsData = cardsResponse.data.map(card => ({
           ...card,
           buttonText: "Выбрать",
@@ -33,7 +33,7 @@ export default function ProfilePage() {
 
         // Загружаем профиль пользователя (с токеном)
         if (accessToken) {
-          const profileResponse = await axios.get("http://127.0.0.1:8000/api/user/profile/", {
+          const profileResponse = await axios.get("https://voyage-trip-api.onrender.com/api/user/profile/", {
             headers: { Authorization: `Bearer ${accessToken}` }
           });
           setUser(profileResponse.data);
@@ -491,7 +491,7 @@ export default function ProfilePage() {
                 <div className="mt-4 sm:mt-6 bg-gradient-to-r from-sky-50 to-cyan-50 rounded-2xl p-4 sm:p-5 border border-sky-200">
                   <h5 className="font-semibold text-sky-800 mb-3 text-base sm:text-lg">Привилегии вашей карты:</h5>
                   <ul className="space-y-2 sm:space-y-3">
-                    {userCard.card.features.slice(0, 3).map((feature, index) => (
+                    {userCard.card.features.map((feature, index) => (
                       <li key={index} className="flex items-start space-x-2 sm:space-x-3 text-sky-700 text-sm sm:text-base">
                         <Check className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                         <span className="leading-relaxed">{feature}</span>

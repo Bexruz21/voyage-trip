@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { HeroSection } from './HeroSection';
@@ -10,7 +10,39 @@ import { RegionsGrid } from './RegionsGrid';
 import { CountriesGrid } from './CountriesGrid';
 import { CitiesGrid } from './CitiesGrid';
 import { CityDetail } from './CityDetail';
-import { regions } from './data/regionsData';
+import axios from 'axios';
+
+// Конфигурация цветов для регионов
+const regionConfig = {
+  "Европа": {
+    color: "from-blue-500 to-cyan-500",
+    icon: "Globe"
+  },
+  "Азия": {
+    color: "from-emerald-500 to-teal-500",
+    icon: "Sparkles"
+  },
+  "Африка": {
+    color: "from-amber-500 to-orange-500",
+    icon: "MapPin"
+  },
+  "Ближний Восток": {
+    color: "from-purple-500 to-pink-500",
+    icon: "Star"
+  },
+  "Океания": {
+    color: "from-cyan-500 to-blue-500",
+    icon: "Sparkles"
+  },
+  "Австралия и Океания": {
+    color: "from-green-500 to-emerald-500",
+    icon: "Globe"
+  },
+  "Турция": {
+    color: "from-red-500 to-orange-500",
+    icon: "MapPin"
+  }
+};
 
 function DestinationsContent({ searchParams }) {
   const router = useRouter();
@@ -18,79 +50,217 @@ function DestinationsContent({ searchParams }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [regions, setRegions] = useState([]);
+  const [countries, setCountries] = useState([]);
+  const [cities, setCities] = useState([]);
 
-  const unwrappedSearchParams = use(searchParams);
+  // Загрузка регионов при монтировании
+  useEffect(() => {
+    fetchRegions();
+  }, []);
+
+  // Загрузка регионов из API
+  const fetchRegions = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get('https://voyage-trip-api.onrender.com/api/user/regions/');
+      const regionsWithConfig = response.data.map(region => ({
+        ...region,
+        color: regionConfig[region.name]?.color || "from-blue-500 to-cyan-500",
+        icon: regionConfig[region.name]?.icon || "Globe",
+        stats: { rating: parseFloat(region.rating) || 4.5 },
+        // Добавляем поля для совместимости с компонентами
+        region: region.name,
+        bestTime: region.best_time,
+        countries: region.countries_names || []
+      }));
+      setRegions(regionsWithConfig);
+    } catch (error) {
+      console.error('Error fetching regions:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Загрузка стран для региона
+  const fetchCountries = async (regionId) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`https://voyage-trip-api.onrender.com/api/user/regions/${regionId}/countries/`);
+      // Добавляем поля для совместимости с компонентами
+      const countriesWithCompat = response.data.map(country => ({
+        ...country,
+        // Добавляем пустой массив городов для совместимости
+        cities: []
+      }));
+      console.log(countriesWithCompat)
+      setCountries(countriesWithCompat);
+    } catch (error) {
+      console.error('Error fetching countries:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Загрузка городов для страны
+  const fetchCities = async (countryId) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`https://voyage-trip-api.onrender.com/api/user/countries/${countryId}/cities/`);
+      // Добавляем поля для совместимости с компонентами
+      const citiesWithCompat = response.data.map(city => ({
+        ...city,
+        bestTime: city.best_time,
+        country: selectedCountry?.name || '',
+        // Добавляем population для CityDetail
+        population: 'Не указано'
+      }));
+      setCities(citiesWithCompat);
+    } catch (error) {
+      console.error('Error fetching cities:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Загрузка деталей страны
+  const fetchCountryDetails = async (countryId) => {
+    try {
+      const response = await axios.get(`https://voyage-trip-api.onrender.com/api/user/countries/${countryId}/`);
+      const country = response.data;
+      // Добавляем поля для совместимости
+      return {
+        ...country,
+        bestTime: country.best_time,
+        cities: country.cities || []
+      };
+    } catch (error) {
+      console.error('Error fetching country details:', error);
+      return null;
+    }
+  };
+
+  // Загрузка деталей города
+  const fetchCityDetails = async (cityId) => {
+    try {
+      const response = await axios.get(`https://voyage-trip-api.onrender.com/api/user/cities/${cityId}/`);
+      const city = response.data;
+      // Добавляем поля для совместимости
+      return {
+        ...city,
+        bestTime: city.best_time,
+        country: selectedCountry?.name || '',
+        population: 'Не указано',
+        detailedDescription: city.description
+      };
+    } catch (error) {
+      console.error('Error fetching city details:', error);
+      return null;
+    }
+  };
 
   // --- 🧭 Читаем параметры из URL и восстанавливаем выбор ---
   useEffect(() => {
-    const regionId = unwrappedSearchParams?.region;
-    const countryId = unwrappedSearchParams?.country;
-    const cityId = unwrappedSearchParams?.city;
+    const regionId = searchParams?.region;
+    const countryId = searchParams?.country;
+    const cityId = searchParams?.city;
 
-    if (regionId) {
-      const region = regions.find(r => r.id === parseInt(regionId));
-      if (region) {
-        setSelectedRegion(region);
+    const restoreSelection = async () => {
+      if (regionId && regions.length > 0) {
+        const region = regions.find(r => r.id === parseInt(regionId));
+        if (region) {
+          setSelectedRegion(region);
+          await fetchCountries(regionId);
 
-        if (countryId) {
-          const country = region.countries.find(c => c.id === parseInt(countryId));
-          if (country) {
-            setSelectedCountry(country);
+          if (countryId) {
+            const countryDetails = await fetchCountryDetails(countryId);
+            if (countryDetails) {
+              setSelectedCountry(countryDetails);
+              await fetchCities(countryId);
 
-            if (cityId) {
-              const city = country.cities.find(ct => ct.id === parseInt(cityId));
-              if (city) {
-                setSelectedCity(city);
+              if (cityId) {
+                const cityDetails = await fetchCityDetails(cityId);
+                if (cityDetails) {
+                  setSelectedCity(cityDetails);
+                }
               }
             }
           }
         }
       }
-    }
-  }, [unwrappedSearchParams]);
+    };
 
-  // --- ⚡ Эффект загрузки при смене выбора ---
-  useEffect(() => {
-    if (selectedRegion || selectedCountry || selectedCity) {
-      setIsLoading(true);
-      const timer = setTimeout(() => setIsLoading(false), 600);
-      return () => clearTimeout(timer);
-    }
-  }, [selectedRegion, selectedCountry, selectedCity]);
+    restoreSelection();
+  }, [searchParams, regions]);
 
   // --- 🧹 Сброс выбора ---
   const resetSelection = () => {
     setSelectedRegion(null);
     setSelectedCountry(null);
     setSelectedCity(null);
+    setCountries([]);
+    setCities([]);
     router.push('/destinations');
   };
 
   // --- 🗺️ Обработчики выбора ---
-  const handleSelectRegion = (region) => {
+  const handleSelectRegion = async (region) => {
     setSelectedRegion(region);
     setSelectedCountry(null);
     setSelectedCity(null);
+    setCities([]);
+    await fetchCountries(region.id);
     router.push(`/destinations?region=${region.id}`);
   };
 
-  const handleSelectCountry = (country) => {
-    setSelectedCountry(country);
-    setSelectedCity(null);
-    router.push(`/destinations?region=${selectedRegion.id}&country=${country.id}`);
+  const handleSelectCountry = async (country) => {
+    const countryDetails = await fetchCountryDetails(country.id);
+    if (countryDetails) {
+      setSelectedCountry(countryDetails);
+      setSelectedCity(null);
+      await fetchCities(country.id);
+      router.push(`/destinations?region=${selectedRegion.id}&country=${country.id}`);
+    }
   };
 
-  const handleSelectCity = (city) => {
-    setSelectedCity(city);
-    router.push(
-      `/destinations?region=${selectedRegion.id}&country=${selectedCountry.id}&city=${city.id}`
-    );
+  const handleSelectCity = async (city) => {
+    const cityDetails = await fetchCityDetails(city.id);
+    if (cityDetails) {
+      setSelectedCity(cityDetails);
+      router.push(
+        `/destinations?region=${selectedRegion.id}&country=${selectedCountry.id}&city=${city.id}`
+      );
+    }
   };
 
-  const handleExploreAll = () => {
-    resetSelection();
-    router.push('/destinations');
+  // Подготовка данных для CountriesGrid
+  const getCountriesGridData = () => {
+    if (!selectedRegion) return { region: null, countriesData: [] };
+
+    return {
+      region: {
+        ...selectedRegion,
+        countriesData: countries
+      },
+      countriesData: countries
+    };
   };
+
+  // Подготовка данных для CitiesGrid
+  const getCitiesGridData = () => {
+    if (!selectedCountry) return { country: null, cities: [] };
+
+    return {
+      country: {
+        ...selectedCountry,
+        cities: cities
+      },
+      cities: cities
+    };
+  };
+
+  const countriesGridData = getCountriesGridData();
+  const citiesGridData = getCitiesGridData();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-cyan-100">
@@ -113,6 +283,7 @@ function DestinationsContent({ searchParams }) {
           onRegionClick={() => {
             setSelectedCountry(null);
             setSelectedCity(null);
+            setCities([]);
             router.push(`/destinations?region=${selectedRegion?.id}`);
           }}
           onCountryClick={() => {
@@ -131,16 +302,19 @@ function DestinationsContent({ searchParams }) {
             />
           ) : !selectedCountry ? (
             <CountriesGrid
-              region={selectedRegion}
+              region={countriesGridData.region}
               onCountrySelect={handleSelectCountry}
             />
           ) : !selectedCity ? (
             <CitiesGrid
-              country={selectedCountry}
+              country={citiesGridData.country}
               onCitySelect={handleSelectCity}
             />
           ) : (
-            <CityDetail city={selectedCity} country={selectedCountry} />
+            <CityDetail
+              city={selectedCity}
+              country={selectedCountry}
+            />
           )}
         </AnimatePresence>
       </div>

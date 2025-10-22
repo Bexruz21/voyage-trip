@@ -39,7 +39,7 @@ function Navigation() {
             const accessToken = localStorage.getItem('access');
 
             if (accessToken) {
-                axios.get("http://127.0.0.1:8000/api/user/me/", {
+                axios.get("https://voyage-trip-api.onrender.com/api/user/me/", {
                     headers: { Authorization: `Bearer ${accessToken}` }
                 })
                     .then(res => {

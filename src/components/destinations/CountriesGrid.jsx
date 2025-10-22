@@ -12,13 +12,14 @@ const containerVariants = {
 };
 
 export function CountriesGrid({ region, onCountrySelect }) {
+
   return (
     <motion.div
       key="countries"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-    >      
+    >
       <motion.div
         variants={containerVariants}
         initial="hidden"

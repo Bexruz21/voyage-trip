@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Building, Users, Language, Currency, Star } from './icons/Icons';
+import { useEffect } from 'react';
 
 const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -14,6 +15,10 @@ const itemVariants = {
 };
 
 export function CountryCard({ country, onSelect }) {
+    // Проверяем и нормализуем данные
+    const safeHighlights = Array.isArray(country.highlights) ? country.highlights : [];
+    const safeCities = Array.isArray(country.cities) ? country.cities : [];
+
     return (
         <motion.div
             variants={itemVariants}
@@ -33,7 +38,7 @@ export function CountryCard({ country, onSelect }) {
 
                 <div className="relative overflow-hidden">
                     <img
-                        src={country.image}
+                        src={country.image || '/default-country.jpg'}
                         alt={country.name}
                         className="w-full h-48 sm:h-56 md:h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                     />
@@ -56,7 +61,7 @@ export function CountryCard({ country, onSelect }) {
                         <div className="flex items-center space-x-2 text-xs sm:text-sm">
                             <span className="bg-white/20 backdrop-blur-sm rounded-full px-2 sm:px-3 py-1 flex items-center gap-1 border border-white/30 hover:bg-white/30 transition-all duration-300">
                                 <Building className="w-3 h-3 sm:w-4 sm:h-4" />
-                                {country.cities.length} городов
+                                {safeCities.length} городов
                             </span>
                         </div>
                     </div>
@@ -80,7 +85,7 @@ export function CountryCard({ country, onSelect }) {
                             </div>
                             <div>
                                 <div className="text-[10px] sm:text-xs text-gray-500">Население</div>
-                                <div className="text-xs sm:text-sm font-semibold text-gray-800 truncate">{country.population}</div>
+                                <div className="text-xs sm:text-sm font-semibold text-gray-800 truncate">{country.population} млн.</div>
                             </div>
                         </div>
                         <div className="flex items-center gap-2 sm:gap-3 p-1 sm:p-2 rounded-lg sm:rounded-xl bg-amber-50/50 hover:bg-amber-50 transition-colors duration-300 group/item">
@@ -104,20 +109,21 @@ export function CountryCard({ country, onSelect }) {
                     </div>
 
                     {/* Хайлайты с анимацией */}
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5">
-                        {country.highlights.slice(0, 3).map((highlight, idx) => (
-                            <motion.span
-                                key={idx}
-                                initial={{ scale: 0.8, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ delay: idx * 0.1 }}
-                                className="bg-gradient-to-br from-cyan-50 to-blue-100 border border-cyan-200 text-cyan-700 px-2.5 sm:px-3 py-1 rounded-lg text-xs font-medium hover:from-cyan-100 hover:to-blue-200 transition-all duration-300 hover:scale-105 cursor-default shadow-sm"
-                            >
-                                {highlight}
-                            </motion.span>
-                        ))}
-                    </div>
-
+                    {safeHighlights.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5">
+                            {safeHighlights.slice(0, 3).map((highlight, idx) => (
+                                <motion.span
+                                    key={idx}
+                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    transition={{ delay: idx * 0.1 }}
+                                    className="bg-gradient-to-br from-cyan-50 to-blue-100 border border-cyan-200 text-cyan-700 px-2.5 sm:px-3 py-1 rounded-lg text-xs font-medium hover:from-cyan-100 hover:to-blue-200 transition-all duration-300 hover:scale-105 cursor-default shadow-sm"
+                                >
+                                    {highlight}
+                                </motion.span>
+                            ))}
+                        </div>
+                    )}
 
                     {/* Кнопка действия */}
                     <motion.div

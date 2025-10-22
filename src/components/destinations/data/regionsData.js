@@ -21,22 +21,22 @@ export const regions = [
         id: 1,
         name: 'Франция',
         description: 'Страна любви, моды и изысканной кухни. От сияющих огней Парижа до лавандовых полей Прованса.',
-        image: 'https://images.unsplash.com/photo-1502602898536-47ad22581b52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2067&q=80',
+        image: 'https://images.unsplash.com/photo-1603378995290-8d4ce0495ddd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687',
         capital: 'Париж',
         population: '67.4 млн',
         language: 'Французский',
         currency: 'Евро (€)',
         bestTime: 'Май - Июнь, Сентябрь',
-        highlights: ['Эйфелева башня', 'Лувр', 'Лазурный берег', 'Замки Луары'],
+        highlights: ["Эйфелева башня", "Лувр", "Лазурный берег", "Замки Луары"],
         cities: [
           {
             id: 1,
             name: 'Париж',
             description: 'Город любви и огней, столица моды и искусства. Романтическая атмосфера на каждом шагу.',
-            image: 'https://images.unsplash.com/photo-1502602898536-47ad22581b52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2067&q=80',
-            highlights: ['Эйфелева башня', 'Лувр', 'Монмартр', 'Нотр-Дам'],
+            image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZnJhbmNlfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600',
+            highlights: ["Эйфелева башня", "Лувр", "Монмартр", "Нотр-Дам"],
             bestTime: 'Апрель - Июнь',
-            attractions: ['Собор Парижской Богоматери', 'Триумфальная арка', 'Елисейские поля'],
+            attractions: ["Собор Парижской Богоматери", "Триумфальная арка", "Елисейские поля"],
             hotels: 1250,
             rating: 4.8
           }
@@ -52,16 +52,16 @@ export const regions = [
         language: 'Итальянский',
         currency: 'Евро (€)',
         bestTime: 'Апрель - Июнь, Сентябрь - Октябрь',
-        highlights: ['Колизей', 'Венецианские каналы', 'Флорентийское искусство', 'Сицилийская кухня'],
+        highlights: ["Колизей", "Венецианские каналы", "Флорентийское искусство", "Сицилийская кухня"],
         cities: [
           {
             id: 1,
             name: 'Рим',
             description: 'Вечный город с 3000-летней историей, где каждая улица дышит древностью.',
             image: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-            highlights: ['Колизей', 'Ватикан', 'Фонтан Треви', 'Пантеон'],
-            bestTime: 'Апрель - Май, Октябрь',
-            attractions: ['Римский форум', 'Испанская лестница', 'Площадь Навона'],
+            highlights: ["Колизей", "Ватикан", "Фонтан Треви", "Пантеон"],
+            bestTime: "Апрель - Май, Октябрь",
+            attractions: ["Римский форум", "Испанская лестница", "Площадь Навона"],
             hotels: 1560,
             rating: 4.8
           }

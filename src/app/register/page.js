@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Eye, EyeOff, Mail, Phone } from "lucide-react";
+import { Eye, EyeOff, Mail, Phone, User } from "lucide-react";
 
 export default function RegisterPage() {
     const router = useRouter();
@@ -14,7 +14,7 @@ export default function RegisterPage() {
         phone: "",
         password: "",
         confirmPassword: "",
-        agreeTerms: false,
+        ref_code: "", // Добавлено поле реферального кода
     });
 
     const [showPassword, setShowPassword] = useState(false);
@@ -42,13 +42,7 @@ export default function RegisterPage() {
             return;
         }
 
-        if (!formData.agreeTerms) {
-            setError("Необходимо принять условия использования");
-            setIsLoading(false);
-            return;
-        }
-
-        const payload = {
+          const payload = {
             first_name: formData.first_name,
             last_name: formData.last_name,
             email: formData.email,
@@ -56,8 +50,13 @@ export default function RegisterPage() {
             password: formData.password,
         };
 
+        // Добавляем ref_code только если он не пустой
+        if (formData.ref_code.trim() !== "") {
+            payload.ref_code = formData.ref_code.trim();
+        }
+
         try {
-            const registerRes = await fetch("http://127.0.0.1:8000/api/user/register/", {
+            const registerRes = await fetch("https://voyage-trip-api.onrender.com/api/user/register/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
@@ -77,7 +76,7 @@ export default function RegisterPage() {
                 return;
             }
 
-            const loginRes = await fetch("http://127.0.0.1:8000/api/user/login/", {
+            const loginRes = await fetch("https://voyage-trip-api.onrender.com/api/user/login/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -98,6 +97,7 @@ export default function RegisterPage() {
 
             localStorage.setItem("access", tokenData.access);
             localStorage.setItem("refresh", tokenData.refresh);
+            window.dispatchEvent(new Event('storage'));
             router.push("/");
         } catch (error) {
             console.error("Ошибка сети:", error);
@@ -195,6 +195,19 @@ export default function RegisterPage() {
                         <Phone size={20} className="text-sky-500 absolute right-4 top-1/2 -translate-y-1/2"/>
                     </div>
 
+                    {/* Реферальный код - добавлено новое поле */}
+                    <div className="relative">
+                        <input
+                            type="text"
+                            name="ref_code"
+                            placeholder="Реферальный код (необязательно)"
+                            value={formData.ref_code}
+                            onChange={handleChange}
+                            className="w-full pr-9 sm:pr-10 pl-3 sm:pl-4 py-2.5 sm:py-3 border border-gray-200 rounded-lg sm:rounded-xl bg-gray-50 focus:bg-white focus:border-sky-400 focus:ring-1 sm:focus:ring-2 focus:ring-sky-100 text-gray-700 text-sm shadow-sm outline-none"
+                        />
+                        <User size={20} className="text-sky-500 absolute right-4 top-1/2 -translate-y-1/2"/>
+                    </div>
+
                     {/* Пароль */}
                     <div className="relative">
                         <input
@@ -245,23 +258,7 @@ export default function RegisterPage() {
                         </button>
                     </div>
 
-                    {/* Чекбокс - адаптирован для мобилок */}
-                    <div className="flex items-start space-x-2 text-sky-700">
-                        <input
-                            type="checkbox"
-                            name="agreeTerms"
-                            checked={formData.agreeTerms}
-                            onChange={handleChange}
-                            required
-                            className="w-4 h-4 text-sky-500 border-sky-300 rounded focus:ring-sky-300 mt-0.5 flex-shrink-0"
-                        />
-                        <label className="text-xs sm:text-sm leading-tight">
-                            Я согласен с{" "}
-                            <a href="#" className="text-sky-600 font-semibold underline">
-                                условиями
-                            </a>
-                        </label>
-                    </div>
+                    {/* Удален чекбокс соглашения с условиями */}
 
                     <button
                         type="submit"
