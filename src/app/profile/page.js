@@ -1,12 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import {
-  User, Mail, Wallet, Users, Copy, Gift, Check, Crown, Star, CreditCard, Zap, TrendingUp, Plane
-} from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 import { API } from '@/config/api';
+import { User, Mail, Wallet, Users, Copy, Gift, Check, Crown, Star, CreditCard, Zap, TrendingUp, Plane } from 'lucide-react';
 
 export default function ProfilePage() {
   const [user, setUser] = useState({
@@ -33,7 +31,7 @@ export default function ProfilePage() {
 
   const router = useRouter()
   const [data, setData] = useState(null)
-
+  const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
 
   const membershipCards = [
@@ -66,11 +64,6 @@ export default function ProfilePage() {
     }
   ];
 
-  const bonusHistory = [
-    { id: 1, amount: 2400, date: '10.01.2025', description: 'Бонус за приглашенного друга', type: 'referral' },
-    { id: 2, amount: 1600, date: '25.12.2024', description: 'Бонус за приглашенного друга', type: 'referral' },
-    { id: 3, amount: 800, date: '15.12.2024', description: 'Кешбэк за тур в Египет', type: 'cashback' }
-  ];
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -91,6 +84,8 @@ export default function ProfilePage() {
       } catch (error) {
         localStorage.removeItem('access')
         router.push('/login')
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -108,7 +103,17 @@ export default function ProfilePage() {
     return card?.color || 'from-slate-400 to-gray-500';
   };
 
-  if (!data) return
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-sky-600 text-xl font-semibold animate-pulse">
+          Загрузка...
+        </div>
+      </div>
+    );
+  }
+
+  if (!data) return null;
 
   return (
     <div className="min-h-screen bg-white">
@@ -350,7 +355,6 @@ export default function ProfilePage() {
               </div>
             )}
 
-            {/* Available Cards - Show only when no active card */}
             {/* No Active Card - Guest Section */}
             {!data.active_membership && (
               <div className="space-y-6">
