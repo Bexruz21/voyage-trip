@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import axios from "axios";
+import { API } from "@/config/api";
 
 function Navigation() {
     const pathname = usePathname();
@@ -39,7 +40,7 @@ function Navigation() {
             const accessToken = localStorage.getItem('access');
 
             if (accessToken) {
-                axios.get("https://voyage-trip-api.onrender.com/api/user/me/", {
+                axios.get(API.AUTH.ME, {
                     headers: { Authorization: `Bearer ${accessToken}` }
                 })
                     .then(res => {

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Mail } from "lucide-react";
+import { API } from "@/config/api";
 
 export default function Login() {
     const router = useRouter();
@@ -27,7 +28,7 @@ export default function Login() {
         setIsLoading(true);
 
         try {
-            const res = await fetch("https://voyage-trip-api.onrender.com/api/user/login/", {
+            const res = await fetch(API.AUTH.LOGIN, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email: email.trim(), password }),

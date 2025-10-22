@@ -1,18 +1,29 @@
-export const API_BASE_URL = 'http://localhost:3000/api'
+export const API_BASE_URL = 'https://voyage-trip-api.onrender.com/api';
 
 export const API = {
   AUTH: {
-    LOGIN: `${API_BASE_URL}/auth/login`,
-    REGISTER: `${API_BASE_URL}/auth/register`,
-    ME: `${API_BASE_URL}/auth/me`,
+    REGISTER: `${API_BASE_URL}/user/auth/register/`,
+    LOGIN: `${API_BASE_URL}/user/auth/login/`,
+    ME: `${API_BASE_URL}/user/me/`,
+    PROFILE: `${API_BASE_URL}/user/profile/`,
   },
 
-  USERS: `${API_BASE_URL}/users`,
-  CARDS: `${API_BASE_URL}/cards`,
+  CARDS: `${API_BASE_URL}/cards/`,
 
-  REGIONS: `${API_BASE_URL}/regions`,
-  COUNTRIES: `${API_BASE_URL}/countries`,
-  CITIES: `${API_BASE_URL}/cities`,
+  REGIONS: {
+    LIST: `${API_BASE_URL}/regions/`,
+    DETAIL: (id) => `${API_BASE_URL}/regions/${id}/`,
+    COUNTRIES: (regionId) => `${API_BASE_URL}/regions/${regionId}/countries/`,
+  },
 
-  TOURS: `${API_BASE_URL}/tours`,
-}
+  COUNTRIES: {
+    LIST: `${API_BASE_URL}/countries/`,
+    DETAIL: (id) => `${API_BASE_URL}/countries/${id}/`,
+    CITIES: (countryId) => `${API_BASE_URL}/countries/${countryId}/cities/`,
+  },
+
+  CITIES: {
+    LIST: `${API_BASE_URL}/cities/`,
+    DETAIL: (id) => `${API_BASE_URL}/cities/${id}/`,
+  },
+};

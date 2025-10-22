@@ -6,6 +6,7 @@ import {
   User, Mail, Wallet, Users, Copy, Gift, Check, Crown, Star, CreditCard, Zap, TrendingUp, Plane
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { API } from '@/config/api';
 
 export default function ProfilePage() {
   const [user, setUser] = useState({
@@ -79,7 +80,7 @@ export default function ProfilePage() {
           return;
         }
 
-        const response = await axios.get("https://voyage-trip-api.onrender.com/api/user/profile/", {
+        const response = await axios.get(API.AUTH.PROFILE, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

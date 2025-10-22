@@ -4,12 +4,13 @@ import { useEffect, useState } from 'react';
 import { MembershipCard } from './MembershipCard';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { API } from '@/config/api';
 
 export function MembershipCardsSection() {
     const [cards, setCards] = useState(null)
 
     useEffect(() => {
-        axios.get("https://voyage-trip-api.onrender.com/api/user/cards/").then(res => {
+        axios.get(API.CARDS).then(res => {
             setCards(res.data)
             console.log(res.data)
         })

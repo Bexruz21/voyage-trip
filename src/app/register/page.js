@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff, Mail, Phone, User } from "lucide-react";
+import { API } from "@/config/api";
 
 export default function RegisterPage() {
     const router = useRouter();
@@ -56,7 +57,7 @@ export default function RegisterPage() {
         }
 
         try {
-            const registerRes = await fetch("https://voyage-trip-api.onrender.com/api/user/register/", {
+            const registerRes = await fetch(API.AUTH.REGISTER, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
@@ -76,7 +77,7 @@ export default function RegisterPage() {
                 return;
             }
 
-            const loginRes = await fetch("https://voyage-trip-api.onrender.com/api/user/login/", {
+            const loginRes = await fetch(API.AUTH.LOGIN, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
