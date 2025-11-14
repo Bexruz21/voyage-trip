@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { Building, Users, Language, Currency, Star } from './icons/Icons';
-import { useEffect } from 'react';
+import { Building, Users, Language, Currency, Star } from '../icons/Icons';
 
 const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -15,7 +14,6 @@ const itemVariants = {
 };
 
 export function CountryCard({ country, onSelect }) {
-    // Проверяем и нормализуем данные
     const safeHighlights = Array.isArray(country.highlights) ? country.highlights : [];
     const safeCities = Array.isArray(country.cities) ? country.cities : [];
 
@@ -28,7 +26,6 @@ export function CountryCard({ country, onSelect }) {
             onClick={() => onSelect(country)}
         >
             <div className="bg-white rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl border border-gray-100 hover:border-blue-200/50 relative">
-                {/* Бейдж с рейтингом */}
                 <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10">
                     <div className="bg-white/20 backdrop-blur-sm  border border-white/30 rounded-full px-2 sm:px-3 py-1 text-amber-500 flex items-center gap-1 shadow-lg">
                         <Star className="w-3 h-3 sm:w-4 sm:h-4  fill-current" />
@@ -42,10 +39,7 @@ export function CountryCard({ country, onSelect }) {
                         alt={country.name}
                         className="w-full h-48 sm:h-56 md:h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    {/* Градиент с градиентной анимацией */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent group-hover:from-black/60 group-hover:via-black/40 transition-all duration-500" />
-
-                    {/* Декоративные элементы */}
                     <div className="absolute top-0 left-0 w-16 h-16 sm:w-20 sm:h-20 bg-blue-500/10 rounded-full -translate-x-8 -translate-y-8 sm:-translate-x-10 sm:-translate-y-10 group-hover:scale-150 transition-transform duration-1000" />
                     <div className="absolute bottom-0 right-0 w-12 h-12 sm:w-16 sm:h-16 bg-teal-500/10 rounded-full translate-x-6 translate-y-6 sm:translate-x-8 sm:translate-y-8 group-hover:scale-150 transition-transform duration-1000 delay-200" />
 
@@ -68,7 +62,6 @@ export function CountryCard({ country, onSelect }) {
                 </div>
 
                 <div className="p-4 sm:p-6 bg-gradient-to-br from-white via-blue-50/30 to-white">
-                    {/* Статистика в стиле иконок */}
                     <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-3 sm:mb-4">
                         <div className="flex items-center gap-2 sm:gap-3 p-1 sm:p-2 rounded-lg sm:rounded-xl bg-blue-50/50 hover:bg-blue-50 transition-colors duration-300 group/item">
                             <div className="p-1 sm:p-2 bg-blue-100 rounded-md text-sky-600 sm:rounded-lg group-hover/item:bg-blue-200 transition-colors duration-300">
@@ -108,7 +101,6 @@ export function CountryCard({ country, onSelect }) {
                         </div>
                     </div>
 
-                    {/* Хайлайты с анимацией */}
                     {safeHighlights.length > 0 && (
                         <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5">
                             {safeHighlights.slice(0, 3).map((highlight, idx) => (
@@ -125,7 +117,6 @@ export function CountryCard({ country, onSelect }) {
                         </div>
                     )}
 
-                    {/* Кнопка действия */}
                     <motion.div
                         whileHover={{ x: 3, scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}

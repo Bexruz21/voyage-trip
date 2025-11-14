@@ -71,6 +71,7 @@ export function ToursSection() {
           icon: regionConfig[region.name]?.icon || Globe
         }));
         setRegions(regionsWithConfig);
+        console.log(regionsWithConfig)
       })
   }, []);
 
@@ -177,7 +178,7 @@ export function ToursSection() {
                   <div className="flex flex-wrap items-center gap-3 lg:gap-4 pt-4">
                     <div className="inline-flex items-center gap-1 bg-yellow-50 px-3 py-1 rounded-lg border border-yellow-200">
                       <div className="text-base lg:text-lg font-bold text-yellow-600 flex items-center gap-1">
-                        {region.stats?.rating || region.rating}
+                        {region.rating}
                         <Star size={16} />
                       </div>
                       <div className="text-xs text-yellow-500">рейтинг</div>

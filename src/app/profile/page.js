@@ -4,111 +4,70 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { API } from '@/config/api';
-import { User, Mail, Wallet, Users, Copy, Gift, Check, Crown, Star, CreditCard, Zap, TrendingUp, Plane } from 'lucide-react';
+import { User, Mail, Wallet, Users, Copy, Gift, Check, Crown, Star, CreditCard, Zap, TrendingUp, Plane, Loader2 } from 'lucide-react';
 
 export default function ProfilePage() {
-  const [user, setUser] = useState({
-    first_name: 'Александр',
-    last_name: 'Иванов',
-    email: 'user@example.com',
-    balance: 4000,
-    ref_id: 'REF123XYZ',
-    invited_friends: 12,
-    active_referrals: 8,
-    upcoming_tours: 1,
-    active_membership: {
-      card: {
-        name: 'Platinum Card',
-        max_tours: 10,
-        features: ['5% бонусы на каждый тур', 'Приоритетная поддержка', 'Эксклюзивные предложения', 'VIP статус'],
-        bonus_rate: 5
-      },
-      start_date: '2024-01-15',
-      end_date: '2025-12-15',
-      used_tours: 3
-    }
-  });
-
-  const router = useRouter()
-  const [data, setData] = useState(null)
+  const router = useRouter();
+  const [data, setData] = useState(null);
+  const [membershipCards, setMembershipCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
 
-  const membershipCards = [
-    {
-      id: 1,
-      name: 'Silver Membership',
-      price: '$0',
-      duration_months: 12,
-      max_tours: 5,
-      bonus_rate: 3,
-      color: 'from-slate-400 to-gray-500'
-    },
-    {
-      id: 2,
-      name: 'Gold Membership',
-      price: '$99',
-      duration_months: 12,
-      max_tours: 10,
-      bonus_rate: 5,
-      color: 'from-amber-400 to-yellow-400'
-    },
-    {
-      id: 3,
-      name: 'Platinum Membership',
-      price: '$199',
-      duration_months: 12,
-      max_tours: 20,
-      bonus_rate: 8,
-      color: 'from-sky-400 to-cyan-400'
-    }
-  ];
+  const colorsMap = {
+    silver: 'from-slate-400 to-gray-500',
+    gold: 'from-amber-400 to-yellow-400',
+    platinum: 'from-sky-400 to-cyan-400',
+  };
 
   useEffect(() => {
-    const fetchProfile = async () => {
+    const token = localStorage.getItem("access");
+    if (!token) {
+      router.push('/login');
+      return;
+    }
+
+    const fetchData = async () => {
       try {
-        const token = localStorage.getItem("access");
-        if (!token) {
-          router.push('/login')
-          return;
-        }
+        const [profileRes, cardsRes] = await Promise.all([
+          axios.get(API.USERS.PROFILE, { headers: { Authorization: `Bearer ${token}` } }),
+          axios.get(API.CARDS)
+        ]);
 
-        const response = await axios.get(API.AUTH.PROFILE, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        setData(profileRes.data);
 
-        console.log("✅ Ответ от API:", response.data);
-        setData(response.data)
+        const cardsWithColors = cardsRes.data.map(card => ({
+          ...card,
+          color: colorsMap[card.code] || 'from-gray-300 to-gray-400'
+        }));
+
+        setMembershipCards(cardsWithColors);
+
       } catch (error) {
-        localStorage.removeItem('access')
-        router.push('/login')
+        localStorage.removeItem('access');
+        router.push('/login');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProfile();
+    fetchData();
   }, []);
 
   const copyReferralLink = () => {
+    if (!data?.ref_id) return;
     navigator.clipboard.writeText(data.ref_id);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const getCardColor = (name) => {
-    const card = membershipCards.find(c => c.name === name);
-    return card?.color || 'from-slate-400 to-gray-500';
+    return membershipCards.find(c => c.name === name)?.color || 'from-slate-400 to-gray-500';
   };
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="text-sky-600 text-xl font-semibold animate-pulse">
-          Загрузка...
-        </div>
+        <Loader2 className="w-12 h-12 text-sky-500 animate-spin" />
       </div>
     );
   }
@@ -126,7 +85,7 @@ export default function ProfilePage() {
             </div>
             <div className="flex-1 text-center">
               <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900">Профиль</h1>
-              <p className="text-slate-500 text-sm sm:text-base mt-1">Отслеживайте ваш кешбэк Voyage Balance, приглашайте друзей и откройте все преимущества клуба</p>
+              <p className="text-slate-500 text-sm sm:text-base mt-1">Отслеживайте ваш Voyage Balance, приглашайте друзей и откройте все преимущества клуба</p>
             </div>
           </div>
         </div>
@@ -183,9 +142,7 @@ export default function ProfilePage() {
                 </div>
               </div>
               <p className="text-slate-600 text-sm leading-relaxed mt-6">
-                {data.active_membership
-                  ? 'Бонусы от приглашенных друзей и кешбэк за туры автоматически поступают на ваш счет.'
-                  : 'Кешбэк от приглашенных друзей используется для оплаты следующего путешествия.'}
+                Бонусы от приглашенных друзей автоматически поступают на ваш счет.
               </p>
             </div>
 
@@ -216,9 +173,9 @@ export default function ProfilePage() {
                 <h3 className="font-semibold text-slate-900 text-sm">Как это работает:</h3>
                 {[
                   `Дайте код ${data.ref_id} своему другу`,
-                  'Друг вводит код при регистрации',
-                  'После первой покупки вам зачисляются бонусы',
-                  'Бонусы зачисляются только от активных рефералов'
+                  'Друг вводит ваш код при регистрации',
+                  'После покупки карты и тура вашим другом вам начисляются бонусы',
+                  'Бонусы начисляются только за активных рефералов (тех, кто совершил покупки)'
                 ].map((step, idx) => (
                   <div key={idx} className="flex gap-3 text-slate-600 text-sm">
                     <span className="font-semibold text-sky-600 shrink-0 w-6">{idx + 1}.</span>
@@ -246,25 +203,41 @@ export default function ProfilePage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.bonus_history.map((item, idx) => (
-                      <tr key={item.id} className={`border-b border-slate-100 hover:bg-white transition-colors duration-200 ${idx === data.bonus_history.length - 1 ? 'border-b-0' : ''}`}>
-                        <td className="py-4 px-4 text-slate-900 text-sm font-medium">Бонус за приглашенного друга</td>
-                        <td className="py-4 px-4 text-slate-600 text-sm">
-                          {new Date(item.created_at).toLocaleDateString('ru-RU')}
+                    {data && data.bonus_history && data.bonus_history.length > 0 ? (
+                      data.bonus_history.map((item, idx) => (
+                        <tr
+                          key={item.id}
+                          className={`border-b border-slate-100 hover:bg-white transition-colors duration-200 ${idx === data.bonus_history.length - 1 ? 'border-b-0' : ''
+                            }`}
+                        >
+                          <td className="py-4 px-4 text-slate-900 text-sm font-medium">
+                            Бонус за приглашенного друга
+                          </td>
+                          <td className="py-4 px-4 text-slate-600 text-sm">
+                            {new Date(item.created_at).toLocaleDateString('ru-RU')}
+                          </td>
+                          <td className="py-4 px-4">
+                            <span className="inline-block px-3 py-1 rounded-lg text-xs font-semibold bg-amber-100 text-amber-800">
+                              Реферальный
+                            </span>
+                          </td>
+                          <td className="py-4 px-4 text-emerald-600 text-sm font-bold text-right">
+                            +{(+item.amount).toLocaleString('ru-RU')} $
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td
+                          colSpan="4"
+                          className="py-6 text-center text-slate-500 text-sm italic"
+                        >
+                          История пуста
                         </td>
-
-                        <td className="py-4 px-4">
-                          <span className={`inline-block px-3 py-1 rounded-lg text-xs font-semibold bg-amber-100 text-amber-800`}>
-                            Реферальный
-                          </span>
-                        </td>
-                        <td className="py-4 px-4 text-emerald-600 text-sm font-bold text-right">
-                          +{(+item.amount).toLocaleString('ru-RU')} $
-                        </td>
-
                       </tr>
-                    ))}
+                    )}
                   </tbody>
+
                 </table>
               </div>
             </div>
@@ -373,7 +346,7 @@ export default function ProfilePage() {
                       { icon: <TrendingUp className="w-4 h-4 text-cyan-600" />, text: 'Доступ к базовой статистике' },
                     ].map((item, idx) => (
                       <div key={idx} className="flex items-start gap-3">
-                        <div className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <div className="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5">
                           {item.icon}
                         </div>
                         <span className="text-slate-700 text-sm leading-relaxed">{item.text}</span>
@@ -405,7 +378,7 @@ export default function ProfilePage() {
                           <div className="flex-1 min-w-0">
                             <h4 className="font-semibold text-slate-900 text-sm">{card.name}</h4>
                             <p className="text-slate-500 text-xs mt-0.5">
-                              {card.max_tours} туров • {card.duration_months} мес
+                              {card.discount_tours + card.extra_discount_tours} туров • {card.duration_months} мес
                             </p>
                           </div>
                           <span className="text-sm font-semibold text-sky-600 group-hover:text-sky-700 transition-colors">Купить</span>
@@ -414,11 +387,11 @@ export default function ProfilePage() {
                         <div className="flex items-center justify-between text-sm">
                           <div>
                             <p className="text-slate-600 text-xs mb-0.5">Бонусы</p>
-                            <p className="font-bold text-emerald-600">{card.bonus_rate}%</p>
+                            <p className="font-bold text-emerald-600">{card.discount_percent + card.extra_discount_percent}%</p>
                           </div>
                           <div className="text-right">
                             <p className="text-slate-600 text-xs mb-0.5">Цена</p>
-                            <p className="font-bold text-slate-900">{card.price}</p>
+                            <p className="font-bold text-slate-900">${card.price}</p>
                           </div>
                         </div>
                       </div>
@@ -440,14 +413,14 @@ export default function ProfilePage() {
                     <Plane className="w-4 h-4 text-violet-600" />
                     <span className="text-slate-700 text-sm font-medium">Путешествие</span>
                   </div>
-                  <p className="text-lg font-bold text-slate-900">{user.upcoming_tours}</p>
+                  <p className="text-lg font-bold text-slate-900">{data.tours_count}</p>
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-lg border-l-4 border-l-sky-500 bg-sky-50">
                   <div className="flex items-center gap-3">
                     <Users className="w-4 h-4 text-sky-600" />
                     <span className="text-slate-700 text-sm font-medium">Приглашено</span>
                   </div>
-                  <p className="text-lg font-bold text-slate-900">{data.total_referrals}</p>
+                  <p className="text-lg font-bold text-slate-900">{data.referrals_count}</p>
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-lg border-l-4 border-l-emerald-500 bg-emerald-50">
                   <div className="flex items-center gap-3">
@@ -455,8 +428,8 @@ export default function ProfilePage() {
                     <span className="text-slate-700 text-sm font-medium">Активные</span>
                   </div>
                   <div className="text-right">
-                    <p className="text-lg font-bold text-slate-900">{data.referral_users.length}</p>
-                    <p className="text-xs text-slate-500">{Math.round((data.referral_users.length / data.total_referrals) * 100)}% активности</p>
+                    <p className="text-lg font-bold text-slate-900">{data.active_referrals_count}</p>
+                    <p className="text-xs text-slate-500">{Math.round((data.active_referrals_count / data.referrals_count) * 100)}% активности</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-lg border-l-4 border-l-cyan-500 bg-cyan-50">

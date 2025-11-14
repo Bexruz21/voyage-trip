@@ -110,7 +110,6 @@ export function HeroSection({ selectedRegion, selectedCountry, selectedCity }) {
                             </motion.div>
                         </div>
                     ) : !selectedCountry ? (
-                        // Страница региона
                         <div className="space-y-6 sm:space-y-8">
                             <motion.div
                                 initial={{ y: 20, opacity: 0 }}
@@ -168,7 +167,6 @@ export function HeroSection({ selectedRegion, selectedCountry, selectedCity }) {
                             </motion.div>
                         </div>
                     ) : !selectedCity ? (
-                        // Страница страны
                         <div className="space-y-6 sm:space-y-8">
                             <motion.div
                                 initial={{ y: 20, opacity: 0 }}

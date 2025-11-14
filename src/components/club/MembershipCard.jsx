@@ -85,7 +85,7 @@ export function MembershipCard({ card }) {
 
                             <div className="flex items-center gap-2 text-gray-600">
                                 <Plane className="w-4 h-4" style={{ color: config.color }} />
-                                <span>{card.max_tours} туров</span>
+                                <span>{card.discount_tours + card.extra_discount_tours} туров</span>
                             </div>
                         </div>
                     </div>

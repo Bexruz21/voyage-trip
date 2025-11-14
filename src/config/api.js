@@ -1,29 +1,31 @@
-export const API_BASE_URL = 'https://voyage-trip-api.onrender.com/api';
+export const API_BASE_URL = 'https://voyage-api-mdab.onrender.com/api';
 
 export const API = {
   AUTH: {
-    REGISTER: `${API_BASE_URL}/user/auth/register/`,
-    LOGIN: `${API_BASE_URL}/user/auth/login/`,
-    ME: `${API_BASE_URL}/user/me/`,
-    PROFILE: `${API_BASE_URL}/user/profile/`,
+    REGISTER: `${API_BASE_URL}/users/register`,
+    LOGIN: `${API_BASE_URL}/users/login`,
+    FORGOT_PASSWORD: `${API_BASE_URL}/users/forgot-password`,
+    RESET_PASSWORD: `${API_BASE_URL}/users/reset-password`,
   },
 
-  CARDS: `${API_BASE_URL}/cards/`,
+  USERS: {
+    ME: `${API_BASE_URL}/users/me`,
+    PROFILE: `${API_BASE_URL}/users/profile`,
+  },
+
+  CARDS: `${API_BASE_URL}/memberships/`,
 
   REGIONS: {
-    LIST: `${API_BASE_URL}/regions/`,
-    DETAIL: (id) => `${API_BASE_URL}/regions/${id}/`,
-    COUNTRIES: (regionId) => `${API_BASE_URL}/regions/${regionId}/countries/`,
+    LIST: `${API_BASE_URL}/travel/regions`,
+    COUNTRIES: (regionId) => `${API_BASE_URL}/travel/countries?region=${regionId}`,
   },
-
   COUNTRIES: {
-    LIST: `${API_BASE_URL}/countries/`,
-    DETAIL: (id) => `${API_BASE_URL}/countries/${id}/`,
-    CITIES: (countryId) => `${API_BASE_URL}/countries/${countryId}/cities/`,
+    LIST: `${API_BASE_URL}/countries`,
+    DETAIL: (countryId) => `${API_BASE_URL}/travel/countries?id=${countryId}`,
+    CITIES: (countryId) => `${API_BASE_URL}/travel/cities?country=${countryId}`,
   },
-
   CITIES: {
-    LIST: `${API_BASE_URL}/cities/`,
-    DETAIL: (id) => `${API_BASE_URL}/cities/${id}/`,
-  },
+    LIST: `${API_BASE_URL}/travel/cities`,
+    DETAIL: (cityId) => `${API_BASE_URL}/travel/cities?id=${cityId}`,
+  }
 };

@@ -36,36 +36,42 @@ function Navigation() {
     useEffect(() => {
         setIsClient(true);
 
-        const checkAuthStatus = () => {
-            const accessToken = localStorage.getItem('access');
+        const checkAuthStatus = async () => {
+            try {
+                const accessToken = localStorage.getItem("access");
 
-            if (accessToken) {
-                axios.get(API.AUTH.ME, {
-                    headers: { Authorization: `Bearer ${accessToken}` }
-                })
-                    .then(res => {
-                        setUserData(res.data);
-                        setIsLoggedIn(true);
-                    })
-                    .catch(() => {
-                        setIsLoggedIn(false);
-                        setUserData(null);
-                    });
-            } else {
+                if(!accessToken) return
+
+                const res = await axios.get(API.USERS.ME, {
+                    headers: {
+                        "Authorization": accessToken ? `Bearer ${accessToken}` : "",
+                        "Content-Type": "application/json"
+                    },
+                    withCredentials: true
+                });
+
+                setUserData(res.data);
+                setIsLoggedIn(true);
+            } catch (err) {
                 setIsLoggedIn(false);
                 setUserData(null);
+                localStorage.clear()
             }
         };
 
         checkAuthStatus();
 
-        const handleStorageChange = () => checkAuthStatus();
+        const handleStorageChange = () => {
+            checkAuthStatus();
+        };
+
         window.addEventListener("storage", handleStorageChange);
 
         return () => {
             window.removeEventListener("storage", handleStorageChange);
         };
     }, []);
+
 
 
     const handleLinkClick = () => {
@@ -85,7 +91,7 @@ function Navigation() {
             setIsLoggedIn(false);
             setUserData(null);
             setIsProfileOpen(false);
-            router.push('/login')
+            router.push('/auth/login')
         }
     };
 
@@ -286,7 +292,7 @@ function Navigation() {
                                                         </div>
 
                                                         <Link
-                                                            href="/login"
+                                                            href="/auth/login"
                                                             onClick={() => setIsProfileOpen(false)}
                                                             className="flex items-center space-x-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all duration-200"
                                                         >
@@ -297,7 +303,7 @@ function Navigation() {
                                                         </Link>
 
                                                         <Link
-                                                            href="/register"
+                                                            href="/auth/register"
                                                             onClick={() => setIsProfileOpen(false)}
                                                             className="flex items-center space-x-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all duration-200"
                                                         >

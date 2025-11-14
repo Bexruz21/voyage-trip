@@ -6,8 +6,8 @@ import { AnimatePresence } from 'framer-motion';
 import { HeroSection } from './HeroSection';
 import { Breadcrumbs } from './Breadcrumbs';
 import { LoadingOverlay } from './LoadingOverlay';
-import { RegionsGrid } from './RegionsGrid';
-import { CountriesGrid } from './CountriesGrid';
+import { RegionsGrid } from './regions/RegionsGrid';
+import { CountriesGrid } from './countries/CountriesGrid';
 import { CitiesGrid } from './CitiesGrid';
 import { CityDetail } from './CityDetail';
 import axios from 'axios';
@@ -32,84 +32,181 @@ function DestinationsContent({ searchParams }) {
   const [regions, setRegions] = useState([]);
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   const fetchData = async (url, transform = (data) => data) => {
     try {
       setIsLoading(true);
+      console.log('Fetching from:', url);
       const { data } = await axios.get(url);
-      return transform(data);
+      console.log('Raw response:', data);
+      
+      const resultData = Array.isArray(data) ? data : (data.results || data);
+      return Array.isArray(resultData) ? resultData.map(transform) : [transform(resultData)];
     } catch (error) {
-      console.error('Error fetching data:', error);
-      return null;
+      console.error('Error fetching data from:', url, error);
+      return [];
     } finally {
       setIsLoading(false);
     }
   };
 
   const fetchRegions = () =>
-    fetchData(API.REGIONS.LIST, data => data.map(region => ({
+    fetchData(API.REGIONS.LIST, region => ({
       ...region,
       color: regionConfig[region.name]?.color || "from-blue-500 to-cyan-500",
       icon: regionConfig[region.name]?.icon || "Globe",
       stats: { rating: parseFloat(region.rating) || 4.5 },
-      region: region.name,
+      region: region.display_name || region.name,
       bestTime: region.best_time,
-      countries: region.countries_names || []
-    }))).then(setRegions);
-
-  const fetchCountries = (regionId) =>
-    fetchData(API.REGIONS.COUNTRIES(regionId), data => data.map(c => ({ ...c, cities: [] })))
-      .then(setCountries);
-
-  const fetchCities = (countryId) =>
-    fetchData(API.COUNTRIES.CITIES(countryId), data => data.map(c => ({
-      ...c,
-      bestTime: c.best_time,
-      country: selectedCountry?.name || '',
-      population: 'Не указано'
-    }))).then(setCities);
-
-  const fetchCountryDetails = (countryId) =>
-    fetchData(API.COUNTRIES.DETAIL(countryId), c => ({ ...c, bestTime: c.best_time, cities: c.cities || [] }));
-
-  const fetchCityDetails = (cityId) =>
-    fetchData(API.CITIES.DETAIL(cityId), c => ({
-      ...c,
-      bestTime: c.best_time,
-      country: selectedCountry?.name || '',
-      population: 'Не указано',
-      detailedDescription: c.description
+      countries: region.countries || [],
+      countries_names: region.countries?.map(c => c.name) || []
     }));
 
-  useEffect(() => {
-    fetchRegions();
-  }, []);
+  const fetchCountries = (regionId) =>
+    fetchData(API.REGIONS.COUNTRIES(regionId), country => ({ 
+      ...country, 
+      cities: [] 
+    }));
 
+  const fetchCities = (countryId) =>
+    fetchData(API.COUNTRIES.CITIES(countryId), city => ({
+      ...city,
+      bestTime: city.best_time,
+      country: selectedCountry?.name || '',
+      population: 'Не указано'
+    }));
+
+  const fetchCountryDetails = async (countryId) => {
+    const data = await fetchData(API.COUNTRIES.DETAIL(countryId), country => ({
+      ...country,
+      bestTime: country.best_time,
+      cities: country.cities || []
+    }));
+    return data && data.length > 0 ? data[0] : null;
+  };
+
+  const fetchCityDetails = async (cityId) => {
+    const data = await fetchData(API.CITIES.DETAIL(cityId), city => ({
+      ...city,
+      bestTime: city.best_time,
+      country: selectedCountry?.name || '',
+      population: 'Не указано',
+      detailedDescription: city.description
+    }));
+    return data && data.length > 0 ? data[0] : null;
+  };
+
+  // Восстановление состояния из URL параметров
   useEffect(() => {
-    const restoreSelection = async () => {
+    const restoreStateFromURL = async () => {
       const { region: regionId, country: countryId, city: cityId } = searchParams || {};
-      if (!regions.length || !regionId) return;
+      console.log('Restoring from URL:', { regionId, countryId, cityId });
 
-      const region = regions.find(r => r.id === parseInt(regionId));
-      if (!region) return;
+      if (!regionId) {
+        // Если нет параметров - показываем список регионов
+        setIsInitialized(true);
+        return;
+      }
 
-      setSelectedRegion(region);
-      await fetchCountries(regionId);
+      setIsLoading(true);
 
-      if (countryId) {
-        const country = await fetchCountryDetails(countryId);
-        if (!country) return;
-        setSelectedCountry(country);
-        await fetchCities(countryId);
-
-        if (cityId) {
-          const city = await fetchCityDetails(cityId);
-          city && setSelectedCity(city);
+      try {
+        // 1. Загружаем регионы если еще не загружены
+        if (regions.length === 0) {
+          const regionsData = await fetchRegions();
+          setRegions(regionsData);
         }
+
+        // 2. Восстанавливаем регион
+        let region;
+        if (regions.length > 0) {
+          region = regions.find(r => r.id === parseInt(regionId));
+        } else {
+          // Если регионы еще не загружены, загружаем конкретный регион
+          const regionData = await fetchData(`${API.REGIONS.LIST}?id=${regionId}`, region => ({
+            ...region,
+            color: regionConfig[region.name]?.color || "from-blue-500 to-cyan-500",
+            icon: regionConfig[region.name]?.icon || "Globe",
+            stats: { rating: parseFloat(region.rating) || 4.5 },
+            region: region.display_name || region.name,
+            bestTime: region.best_time,
+            countries: region.countries || [],
+            countries_names: region.countries?.map(c => c.name) || []
+          }));
+          region = regionData && regionData.length > 0 ? regionData[0] : null;
+        }
+
+        if (!region) {
+          console.error('Region not found:', regionId);
+          setIsInitialized(true);
+          return;
+        }
+
+        setSelectedRegion(region);
+
+        // 3. Загружаем страны региона
+        const countriesData = await fetchCountries(regionId);
+        setCountries(countriesData);
+
+        if (!countryId) {
+          // Если есть только регион - показываем страны
+          setIsInitialized(true);
+          return;
+        }
+
+        // 4. Восстанавливаем страну
+        const country = await fetchCountryDetails(countryId);
+        if (!country) {
+          console.error('Country not found:', countryId);
+          setIsInitialized(true);
+          return;
+        }
+
+        setSelectedCountry(country);
+
+        // 5. Загружаем города страны
+        const citiesData = await fetchCities(countryId);
+        setCities(citiesData);
+
+        if (!cityId) {
+          // Если есть регион и страна - показываем города
+          setIsInitialized(true);
+          return;
+        }
+
+        // 6. Восстанавливаем город
+        const city = await fetchCityDetails(cityId);
+        if (!city) {
+          console.error('City not found:', cityId);
+          setIsInitialized(true);
+          return;
+        }
+
+        setSelectedCity(city);
+        
+      } catch (error) {
+        console.error('Error restoring state from URL:', error);
+      } finally {
+        setIsInitialized(true);
+        setIsLoading(false);
       }
     };
-    restoreSelection();
-  }, [searchParams, regions]);
+
+    if (!isInitialized) {
+      restoreStateFromURL();
+    }
+  }, [searchParams, isInitialized, regions]);
+
+  // Первоначальная загрузка регионов
+  useEffect(() => {
+    if (!isInitialized && regions.length === 0) {
+      fetchRegions().then(data => {
+        setRegions(data);
+        setIsInitialized(true);
+      });
+    }
+  }, [isInitialized, regions.length]);
 
   const resetSelection = () => {
     setSelectedRegion(null);
@@ -125,7 +222,8 @@ function DestinationsContent({ searchParams }) {
     setSelectedCountry(null);
     setSelectedCity(null);
     setCities([]);
-    await fetchCountries(region.id);
+    const countriesData = await fetchCountries(region.id);
+    setCountries(countriesData);
     router.push(`/destinations?region=${region.id}`);
   };
 
@@ -134,7 +232,8 @@ function DestinationsContent({ searchParams }) {
     if (!countryDetails) return;
     setSelectedCountry(countryDetails);
     setSelectedCity(null);
-    await fetchCities(country.id);
+    const citiesData = await fetchCities(country.id);
+    setCities(citiesData);
     router.push(`/destinations?region=${selectedRegion.id}&country=${country.id}`);
   };
 
@@ -145,9 +244,22 @@ function DestinationsContent({ searchParams }) {
     router.push(`/destinations?region=${selectedRegion.id}&country=${selectedCountry.id}&city=${city.id}`);
   };
 
+  // Показываем loading пока не инициализированы
+  if (!isInitialized) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-cyan-100">
+        <LoadingOverlay isLoading={true} />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-cyan-100">
-      <HeroSection selectedRegion={selectedRegion} selectedCountry={selectedCountry} selectedCity={selectedCity} />
+      <HeroSection 
+        selectedRegion={selectedRegion} 
+        selectedCountry={selectedCountry} 
+        selectedCity={selectedCity} 
+      />
       <LoadingOverlay isLoading={isLoading} />
       <div className="container mx-auto px-4 sm:px-16 py-16">
         <Breadcrumbs
@@ -163,9 +275,15 @@ function DestinationsContent({ searchParams }) {
           {!selectedRegion ? (
             <RegionsGrid regions={regions} onRegionSelect={handleSelectRegion} />
           ) : !selectedCountry ? (
-            <CountriesGrid region={{ ...selectedRegion, countriesData: countries }} onCountrySelect={handleSelectCountry} />
+            <CountriesGrid 
+              region={{ ...selectedRegion, countriesData: countries }} 
+              onCountrySelect={handleSelectCountry} 
+            />
           ) : !selectedCity ? (
-            <CitiesGrid country={{ ...selectedCountry, cities }} onCitySelect={handleSelectCity} />
+            <CitiesGrid 
+              country={{ ...selectedCountry, cities }} 
+              onCitySelect={handleSelectCity} 
+            />
           ) : (
             <CityDetail city={selectedCity} country={selectedCountry} />
           )}

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Globe, Star, Calendar } from './icons/Icons';
+import { Globe, Star, Calendar } from '../icons/Icons';
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
@@ -46,28 +46,43 @@ export function RegionCard({ region, onSelect }) {
         </div>
 
         <div className="p-4 sm:p-6 bg-gradient-to-br from-white to-gray-50">
-          <div className="flex items-center justify-between mb-3 sm:mb-4">
-            <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
-              <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>Лучшее время: {region.bestTime}</span>
+          <div className="flex items-center gap-3 mb-6 text-gray-700">
+            <div className="p-2.5 bg-sky-100 rounded-lg">
+              <Calendar className="w-5 h-5 text-sky-600" />
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 uppercase tracking-wide">Лучшее время</p>
+              <p className="font-semibold text-sm">{region.bestTime}</p>
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
-            {region.highlights.slice(0, 2).map((highlight, idx) => (
-              <span key={idx} className="bg-cyan-50 text-cyan-700 px-2 sm:px-3 py-1 rounded-full text-xs border border-cyan-200">
-                {highlight}
-              </span>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 1 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mb-6"
+          >
+            <p className="text-xs uppercase tracking-wide text-gray-500 mb-3">Главные достопримечательности</p>
+            <div className="flex flex-wrap gap-2">
+              {region.highlights.map((highlight, idx) => (
+                <motion.span
+                  key={idx}
+                  whileHover={{ scale: 1.08, y: -2 }}
+                  className="bg-gradient-to-r from-sky-100 to-teal-100 text-teal-700 px-2 py-1 rounded-full text-xs border border-teal-200 hover:border-teal-300 cursor-default transition-colors"
+                >
+                  {highlight}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
 
           <motion.div
             whileHover={{ x: 3 }}
-            className="flex items-center justify-between p-2 sm:p-3 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg sm:rounded-xl border border-cyan-100 cursor-pointer group"
+            className="flex items-center justify-between p-2 sm:p-3 bg-gradient-to-r from-sky-500 via-teal-500 to-cyan-500 rounded-lg sm:rounded-xl border border-cyan-100 cursor-pointer group"
           >
-            <span className="text-cyan-700 font-semibold text-xs sm:text-sm">Исследовать регион</span>
+            <span className="text-white font-semibold text-xs sm:text-sm">Исследовать регион</span>
             <div className="flex items-center">
-              <svg className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 sm:w-4 sm:h-4 text-white transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </div>
