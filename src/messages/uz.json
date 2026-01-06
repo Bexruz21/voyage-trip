@@ -54,7 +54,7 @@
         "hero": {
             "slides": [
                 {
-                    "title": "VOYAGE TRIP bilan dunyoni kashf eting",
+                    "title": "VOYAGE TRIP bilan dunyo bo‘ylab sayohat qiling",
                     "subtitle": "Hayotingizni o‘zgartiradigan sayohatlar"
                 },
                 {
@@ -73,7 +73,7 @@
             "button": "O‘zingizga mos sayohatni toping"
         },
         "features": {
-            "title": "Nega tanlashadi",
+            "title": "Nega aynan",
             "subtitle": "Biz umr bo‘yi esda qoladigan sayohatlar yaratamiz",
             "items": {
                 "security": {
@@ -152,7 +152,7 @@
     },
     "destinations": {
         "hero": {
-            "title": "O‘z dunyoingizni kashf eting",
+            "title": "Dunyo bo‘ylab sayohat qiling",
             "subtitle": "Butun dunyo bo‘ylab hayratlanarli yo‘nalishlarni o‘rganing. Qadimiy ibodatxonalardan tortib zamonaviy megapolislargacha — mukammal sayohatingizni toping.",
             "button": "Sayohatni boshlash",
             "stats": {
@@ -166,7 +166,7 @@
             }
         },
         "regions": {
-            "title": "Mintaqalar bo‘yicha kashf eting",
+            "title": "Mintaqalar bo‘yicha sayohatlar",
             "subtitle": "Sayohatingizni qit’ani tanlashdan boshlang. Har bir mintaqa o‘ziga xos madaniyat, manzara va unutilmas taassurotlarni taqdim etadi.",
             "card": {
                 "countries": "davlat",
