@@ -306,7 +306,7 @@ export default function RegionDetail({ params }) {
             )}
 
             {/* Cities Grid */}
-            <div className="container mx-auto px-6 py-12">
+            <div className="container mx-auto px-4 py-3 sm:px-6 py-12">
                 {filteredCities.length === 0 ? (
                     <div className="text-center py-20">
                         <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
