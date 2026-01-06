@@ -220,7 +220,7 @@
             "highlights": "Highlights",
             "attractions": "Attractions",
             "mustSee": "Must-see attraction",
-            "bookNow": "Book Now",
+            "bookNow": "Submit application",
             "perPerson": "per person",
             "days": "days",
             "freeCancellation": "Free cancellation",
@@ -238,6 +238,21 @@
                     "item-3": "Public transport is recommended"
                 }
             }
+        },
+        "successModal": {
+            "title": "Your request has been successfully sent",
+            "description": "Our operators or managers will contact you shortly",
+            "button": "Close"
+        },
+        "booking": {
+            "title": "Trip to {{city}}",
+            "name": "Name",
+            "phone": "Phone",
+            "message": {
+                "label": "Message",
+                "placeholder": "Leave additional requests or questions about this tour"
+            },
+            "submit": "Send"
         }
     },
     "about": {

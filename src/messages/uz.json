@@ -220,7 +220,7 @@
             "highlights": "Asosiy jihatlar",
             "attractions": "Diqqatga sazovor joylar",
             "mustSee": "Albatta ko‘rish kerak",
-            "bookNow": "Bron qilish",
+            "bookNow": "Ariza topshirish",
             "perPerson": "1 kishi uchun",
             "days": "kun",
             "freeCancellation": "Bepul bekor qilish",
@@ -238,6 +238,21 @@
                     "item-3": "Jamoat transportidan foydalanish tavsiya etiladi"
                 }
             }
+        },
+        "successModal": {
+            "title": "So‘rovingiz muvaffaqiyatli yuborildi",
+            "description": "Operatorlarimiz yoki menejerlarimiz tez orada siz bilan bog‘lanishadi",
+            "button": "Yopish"
+        },
+        "booking": {
+            "title": "{{city}} shahriga sayohat",
+            "name": "Ism",
+            "phone": "Telefon",
+            "message": {
+                "label": "Xabar",
+                "placeholder": "Ushbu tur bo‘yicha qo‘shimcha istaklaringiz yoki savollaringizni yozing"
+            },
+            "submit": "Yuborish"
         }
     },
     "about": {

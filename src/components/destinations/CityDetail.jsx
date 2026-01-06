@@ -2,26 +2,20 @@
 
 import { useState } from "react"
 import { useLang } from "@/context/LangContext"
-import {
-  ArrowLeft,
-  MapPin,
-  Star,
-  Calendar,
-  Clock,
-  Navigation,
-  Info,
-  Award,
-  Landmark,
-  Shield,
-  Plane,
-  CheckCircle,
-  X
-} from 'lucide-react'
+import { ArrowLeft, MapPin, Star, Calendar, Clock, Navigation, Info, Award, Landmark, Shield, Plane, CheckCircle, X } from 'lucide-react'
 
 export const CityDetail = ({ city, setSelectedCity }) => {
   const { t, lang } = useLang()
   const [openBooking, setOpenBooking] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    city: city.name[lang],
+    price: city.price,
+    message: ''
+  });
 
   const renderRatingStars = (rating) => {
     const stars = []
@@ -41,11 +35,62 @@ export const CityDetail = ({ city, setSelectedCity }) => {
     return stars
   }
 
-  const handleSubmit = (e) => {
+  const sendToTelegram = async (formData) => {
+    const BOT_TOKEN = '8040202032:AAGCUG-b-Gykt-YOa3O122z0rVFGzL-rB3E';
+    const CHAT_ID = '-1003127772145';
+
+    const message = `
+🎯 *Новая заявка на тур*
+
+👤 *Имя:* ${formData.name}
+📧 *Email:* ${formData.email}
+📞 *Телефон:* ${formData.phone || 'Не указан'}
+
+🌍 *Город:* ${formData.city}
+💰 *Цена:* $${formData.price}
+
+💬 *Сообщение:*
+${formData.message}
+
+⏰ *Время отправки:* ${new Date().toLocaleString('ru-RU')}
+  `;
+
+    const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: message,
+        parse_mode: 'Markdown'
+      })
+    });
+
+    if (!response.ok) throw new Error('Ошибка отправки в Telegram');
+    return true;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setOpenBooking(false)
     setSuccess(true)
+    await sendToTelegram(formData)
+    setFormData(prev => ({
+      ...prev,
+      name: '',
+      email: '',
+      phone: '',
+      message: ''
+    }))
   }
+
 
   return (
     <div className="min-h-screen bg-white">
@@ -244,14 +289,14 @@ export const CityDetail = ({ city, setSelectedCity }) => {
         </div>
       </div>
 
-      {/* Booking Modal - Mobile optimized */}
       {openBooking && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm">
           <div className="bg-white rounded-t-2xl sm:rounded-2xl w-full max-w-md sm:max-w-md p-4 sm:p-6 relative max-h-[90vh] overflow-y-auto sm:max-h-[80vh]">
             <div className="sticky top-0 bg-white pb-2 sm:static sm:pb-0">
               <div className="flex justify-between items-center mb-4 sm:mb-6">
                 <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
-                  Бронирование
+                  {t('destinations.booking.title').replace("{{city}}", city.name[lang])}
+
                 </h3>
                 <button
                   onClick={() => setOpenBooking(false)}
@@ -264,12 +309,15 @@ export const CityDetail = ({ city, setSelectedCity }) => {
 
             <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
               <div>
-                <label className="text-xs sm:text-sm text-gray-600">Имя</label>
+                <label className="text-xs sm:text-sm text-gray-600">{t('destinations.booking.name')}</label>
                 <input
                   required
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   className="w-full mt-1 px-3 py-2 sm:px-4 sm:py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm sm:text-base"
-                  placeholder="John Doe"
+                  placeholder=""
                 />
               </div>
 
@@ -278,27 +326,36 @@ export const CityDetail = ({ city, setSelectedCity }) => {
                 <input
                   required
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="w-full mt-1 px-3 py-2 sm:px-4 sm:py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm sm:text-base"
-                  placeholder="john@email.com"
+                  placeholder="example@gmail.com"
                 />
               </div>
 
               <div>
-                <label className="text-xs sm:text-sm text-gray-600">Телефон</label>
+                <label className="text-xs sm:text-sm text-gray-600">{t('destinations.booking.phone')}</label>
                 <input
                   required
                   type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
                   className="w-full mt-1 px-3 py-2 sm:px-4 sm:py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-sm sm:text-base"
                   placeholder="+998 90 123 45 67"
                 />
               </div>
 
               <div>
-                <label className="text-xs sm:text-sm text-gray-600">Сообщение</label>
+                <label className="text-xs sm:text-sm text-gray-600">{t('destinations.booking.message.label')}</label>
                 <textarea
                   rows="3"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   className="w-full mt-1 px-3 py-2 sm:px-4 sm:py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 resize-none text-sm sm:text-base"
-                  placeholder="Опишите ваше идеальное путешествие..."
+                  placeholder={t('destinations.booking.message.placeholder')}
                 />
               </div>
 
@@ -306,7 +363,7 @@ export const CityDetail = ({ city, setSelectedCity }) => {
                 type="submit"
                 className="w-full mt-3 sm:mt-4 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors text-sm sm:text-base"
               >
-                Отправить
+                {t('destinations.booking.submit')}
               </button>
             </form>
           </div>
@@ -322,18 +379,18 @@ export const CityDetail = ({ city, setSelectedCity }) => {
             </div>
 
             <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
-              Заявка успешно отправлена
+              {t('destinations.successModal.title')}
             </h3>
 
             <p className="text-gray-600 text-xs sm:text-sm mb-6">
-              Наши операторы или менеджеры свяжутся с вами в ближайшее время
+              {t('destinations.successModal.description')}
             </p>
 
             <button
               onClick={() => setSuccess(false)}
               className="w-full py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors text-sm sm:text-base"
             >
-              Понятно
+              {t('destinations.successModal.button')}
             </button>
           </div>
         </div>
