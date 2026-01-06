@@ -1,106 +1,95 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+'use client';
 
-const slides = [
-    {
-        image: "https://images.unsplash.com/photo-1589561454226-796a8aa89b05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2031&q=80",
-        title: "Откройте мир с VOYAGE TRIP",
-        subtitle: "Путешествия, которые меняют жизнь"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        title: "Экзотические направления",
-        subtitle: "От тропических пляжей до заснеженных вершин"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        title: "Премиум сервис",
-        subtitle: "Все заботы о путешествии мы берем на себя"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        title: "Незабываемые впечатления",
-        subtitle: "Создаем моменты, которые останутся с вами навсегда"
-    }
+import { useState, useEffect, useCallback, useRef } from 'react';
+import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useLang } from '@/context/LangContext';
+
+const SLIDE_DURATION = 7000;
+const SLIDE_IMAGES = [
+    'https://images.unsplash.com/photo-1589561454226-796a8aa89b05',
+    'https://images.unsplash.com/photo-1469474968028-56623f02e42e',
+    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
+    'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4'
 ];
 
 export function HeroSlider() {
+    const { t } = useLang();
     const [currentSlide, setCurrentSlide] = useState(0);
+    const intervalRef = useRef(null);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentSlide((i) => (i + 1) % slides.length);
-        }, 7000);
-        return () => clearInterval(interval);
+    const nextSlide = useCallback(() => {
+        setCurrentSlide(prev => (prev + 1) % SLIDE_IMAGES.length);
     }, []);
 
+    useEffect(() => {
+        intervalRef.current = setInterval(nextSlide, SLIDE_DURATION);
+        
+        return () => {
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+            }
+        };
+    }, [nextSlide]);
 
-    const scrollToTours = () => {
-        const element = document.getElementById('tours');
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
+    useEffect(() => {
+        const nextIndex = (currentSlide + 1) % SLIDE_IMAGES.length;
+        const img = new Image();
+        img.src = SLIDE_IMAGES[nextIndex];
+    }, [currentSlide]);
+
+    const currentImage = SLIDE_IMAGES[currentSlide];
 
     return (
         <div className="relative h-screen overflow-hidden">
-            <AnimatePresence mode="popLayout">
+            <AnimatePresence mode="wait">
                 <motion.div
                     key={currentSlide}
-                    initial={{ opacity: 0, scale: 1.05 }}
+                    initial={{ opacity: 0, scale: 1.03 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 1 }}
-                    transition={{ duration: 1, ease: "easeOut" }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5, ease: 'linear' }}
                     className="absolute inset-0"
                 >
                     <img
-                        src={slides[currentSlide].image}
-                        alt={slides[currentSlide].title}
+                        src={currentImage}
+                        alt={t(`home.hero.slides.${currentSlide}.title`)}
                         className="w-full h-full object-cover"
+                        loading="eager"
+                        draggable={false}
                     />
 
-                    {/* Градиентный оверлей - более светлый */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-black/40 flex items-center justify-center">
-                        <div className="text-center text-white max-w-4xl px-4 sm:px-6">
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                        <div className="text-center text-white max-w-4xl px-6">
                             <motion.h1
-                                key={`title-${currentSlide}`}
-                                initial={{ opacity: 0, y: 40, filter: "blur(1px)" }}
-                                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                                exit={{ opacity: 0, y: -40, filter: "blur(1px)" }}
-                                transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-                                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight text-white drop-shadow-2xl"
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3, duration: 0.7 }}
+                                className="text-4xl sm:text-6xl font-bold mb-4"
                             >
-                                {slides[currentSlide].title}
+                                {t(`home.hero.slides.${currentSlide}.title`)}
                             </motion.h1>
 
                             <motion.p
-                                key={`subtitle-${currentSlide}`}
-                                initial={{ opacity: 0, y: 30, filter: "blur(1px)" }}
-                                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                                exit={{ opacity: 0, y: -30, filter: "blur(1px)" }}
-                                transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
-                                className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-gray-100 drop-shadow-xl max-w-2xl mx-auto leading-relaxed"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5, duration: 0.6 }}
+                                className="text-lg sm:text-2xl mb-8 text-gray-200"
                             >
-                                {slides[currentSlide].subtitle}
+                                {t(`home.hero.slides.${currentSlide}.subtitle`)}
                             </motion.p>
 
                             <motion.div
-                                key={`button-${currentSlide}`}
-                                initial={{ opacity: 0, y: 30, filter: "blur(1px)" }}
-                                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                                exit={{ opacity: 0, y: -30, filter: "blur(1px)" }}
-                                transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
-                                className="flex justify-center"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.7, duration: 0.5 }}
                             >
-                                <button
-                                    onClick={scrollToTours}
-                                    className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 border-2 border-white/20"
+                                <Link
+                                    href="/destinations"
+                                    className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform"
                                 >
-                                    <span>Найти свое путешествие</span>
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                    </svg>
-                                </button>
+                                    {t('home.hero.button')}
+                                </Link>
                             </motion.div>
                         </div>
                     </div>

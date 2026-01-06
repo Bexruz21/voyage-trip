@@ -9,14 +9,22 @@ import {
   HeadphonesIcon,
   Coffee,
 } from "lucide-react";
+import { useLang } from '@/context/LangContext';
+
 
 const office = {
   city: "Ташкент",
-  address:
-    "г. Ташкент, Seoul Plaza Business Centre, Мирабадский р-н, ул. Шазрисабз, 5А",
+  address: {
+    ru: "г. Ташкент, Seoul Plaza Business Centre, Мирабадский р-н, ул. Шазрисабз, 5А",
+    uz: "Toshkent sh., Seoul Plaza Business Centre, Mirabad tumani, Shahrisabz ko‘chasi, 5A",
+    en: "Tashkent, Seoul Plaza Business Centre, Mirabad district, Shahrisabz street, 5A",
+  },
   phones: [
-    { type: "Горячая линия", numbers: ["+998 (90) 881-03-33"] },
-    { type: "Визовая поддержка", numbers: ["+998 (90) 940-43-33", "+998 (95) 940-43-33"] },
+    { type: "hotline", numbers: ["+998 (90) 881-03-33"] },
+    {
+      type: "visa",
+      numbers: ["+998 (90) 940-43-33", "+998 (95) 940-43-33"],
+    },
   ],
   messengers: [
     {
@@ -38,11 +46,17 @@ const office = {
 
   ],
   email: "info@voyagetrip.uz",
-  hours: "Пн–Пт: 9:00–21:00, Сб–Вс: 10:00–20:00",
-  features: ["Бесплатная парковка", "Wi-Fi", "Кофе-бар"],
+  hours: {
+    ru: "Пн–Пт: 9:00–21:00, Сб–Вс: 10:00–20:00",
+    uz: "Du–Ju: 9:00–21:00, Sha–Yak: 10:00–20:00",
+    en: "Mon–Fri: 9:00–21:00, Sat–Sun: 10:00–20:00",
+  },
+
+  features: ["parking", "wifi", "coffee"],
 };
 
 export function ContactInfo() {
+  const { t, lang } = useLang();
   return (
     <div className="flex flex-col gap-8">
       {/* ===== Контактная информация ===== */}
@@ -53,19 +67,23 @@ export function ContactInfo() {
             <Building className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Наш офис</h2>
-            <p className="text-gray-600 text-sm">Приходите обсудить ваше путешествие</p>
+            <h2 className="text-2xl font-bold text-gray-900">{t('contacts.info.title')}</h2>
+            <p className="text-gray-600 text-sm">{t('contacts.info.subtitle')}</p>
           </div>
         </div>
 
         {/* Info Blocks */}
         <div className="divide-y divide-gray-200">
-          <InfoRow icon={MapPin} title="Адрес">
-            {office.address}
+          <InfoRow icon={MapPin} title={t('contacts.info.address_title')}>
+            {office.address[lang]}
           </InfoRow>
 
           {office.phones.map((group, i) => (
-            <InfoRow key={i} icon={Phone} title={group.type}>
+            <InfoRow
+              key={i}
+              icon={Phone}
+              title={t(`contacts.info.phone_types.${group.type}`)}
+            >
               {group.numbers.map((n, j) => (
                 <p key={j}>{n}</p>
               ))}
@@ -81,8 +99,8 @@ export function ContactInfo() {
             </a>
           </InfoRow>
 
-          <InfoRow icon={Clock} title="Часы работы">
-            {office.hours}
+          <InfoRow icon={Clock} title={t('contacts.info.hours_title')}>
+            {office.hours[lang]}
           </InfoRow>
         </div>
 
@@ -90,7 +108,7 @@ export function ContactInfo() {
         <div className="mt-8">
           <h3 className="font-semibold text-gray-900 mb-3 flex items-center">
             <HeadphonesIcon className="w-5 h-5 text-cyan-600 mr-2" />
-            Мессенджеры
+            {t('contacts.info.messengers_title')}
           </h3>
           <div className="flex flex-col sm:flex-row gap-3">
             {office.messengers.map((m, i) => (
@@ -119,7 +137,7 @@ export function ContactInfo() {
         <div className="mt-8">
           <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
             <Coffee className="w-5 h-5 text-cyan-600 mr-2" />
-            Удобства
+            {t('contacts.info.features_title')}
           </h4>
           <div className="flex flex-wrap gap-2">
             {office.features.map((f, i) => (
@@ -127,21 +145,17 @@ export function ContactInfo() {
                 key={i}
                 className="px-3 py-1.5 bg-cyan-50 text-cyan-700 text-sm rounded-lg border border-cyan-100"
               >
-                {f}
+                {t(`contacts.info.features.${f}`)}
               </span>
             ))}
           </div>
         </div>
       </div>
 
-      {/* ===== Карта (отдельный блок) ===== */}
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-        {/* Header (с отступами) */}
         <div className="py-4 px-6 border-b border-gray-100">
-          <h3 className="text-xl font-semibold text-gray-900">Мы на карте</h3>
+          <h3 className="text-xl font-semibold text-gray-900">{t('contacts.info.map_title')}</h3>
         </div>
-
-        {/* Content (без паддингов) */}
         <div className="border-t border-gray-200">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d749.2919366029774!2d69.28302441245825!3d41.30521424995097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8ad5cad60c4f%3A0x2569478729648ff8!2z0YPQu9C40YbQsCDQqNCw0YXRgNC40YHQsNCx0LcgNdCQLCAxMDAwMDAsINCi0LDRiNC60LXQvdGCLCBUYXNoa2VudCwg0KPQt9Cx0LXQutC40YHRgtCw0L0!5e0!3m2!1sru!2s!4v1759674609171!5m2!1sru!2s"

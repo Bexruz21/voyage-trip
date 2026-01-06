@@ -1,0 +1,443 @@
+{
+    "nav": {
+        "logo": "Premium travel",
+        "home": "Home",
+        "destinations": "Destinations",
+        "club": "Club",
+        "about": "About us",
+        "faq": "FAQ",
+        "contacts": "Contacts"
+    },
+    "footer": {
+        "description": "We create modern journeys around the world.\nTrust your dream to professionals.",
+        "quickLinks": "Quick links",
+        "contacts": "Contacts",
+        "hotline": "Hotline",
+        "visa": "Visa support",
+        "email": "Email",
+        "addressTitle": "Tashkent, Seoul Plaza Business Centre",
+        "address": "Mirabad district, Shahrisabz st., 5A",
+        "license": "License",
+        "rights": "All rights reserved.",
+        "licenseFull": "Tourism activity license"
+    },
+    "pages": {
+        "hero": {
+            "contacts": {
+                "title": "Contact",
+                "highlighted": "us",
+                "description": "We create dream journeys. Let’s discuss your perfect adventure!"
+            },
+            "faq": {
+                "title": "Frequently asked",
+                "highlighted": "questions",
+                "description": "Find answers to the most popular questions about our tours and services"
+            },
+            "club": {
+                "title": "Club cards",
+                "highlighted": "Voyage Trip",
+                "description": "Your personal key to exclusive travel benefits"
+            },
+            "about": {
+                "title": "About",
+                "highlighted": "VOYAGE TRIP",
+                "description": "We create unique journeys that inspire and open new horizons"
+            },
+            "directions": {
+                "title": "Travel",
+                "highlighted": "destinations",
+                "description": "Discover the most amazing places in the world with our exclusive tours"
+            }
+        }
+    },
+    "home": {
+        "hero": {
+            "slides": [
+                {
+                    "title": "Discover the world with VOYAGE TRIP",
+                    "subtitle": "Journeys that change your life"
+                },
+                {
+                    "title": "Exotic destinations",
+                    "subtitle": "From tropical beaches to mountain peaks"
+                },
+                {
+                    "title": "Premium service",
+                    "subtitle": "We take care of every detail"
+                },
+                {
+                    "title": "Unforgettable experiences",
+                    "subtitle": "Moments that stay with you forever"
+                }
+            ],
+            "button": "Find your perfect trip"
+        },
+        "features": {
+            "title": "Why choose",
+            "subtitle": "We create journeys that stay in your memory forever",
+            "items": {
+                "security": {
+                    "title": "Safety",
+                    "description": "All partners are verified, with insurance and 24/7 support"
+                },
+                "quality": {
+                    "title": "Quality",
+                    "description": "We carefully select hotels and routes for your comfort"
+                },
+                "expertise": {
+                    "title": "Expertise",
+                    "description": "Professional guides with deep knowledge of each destination"
+                },
+                "reliability": {
+                    "title": "Reliability",
+                    "description": "Full support from booking to your return home"
+                }
+            }
+        },
+        "tours": {
+            "title": "Our destinations",
+            "subtitle": "Discover the most exciting regions of the planet. Each destination is a unique story filled with culture, natural beauty, and unforgettable experiences.",
+            "highlights": "Key highlights",
+            "countries": "Countries in the region",
+            "rating": "rating",
+            "price": "price",
+            "price_start": "from",
+            "bestTime": "Best time",
+            "selectTour": "Choose a tour to",
+            "idealTour": "Perfect tour to",
+            "customProgram": "We will create a personalized program",
+            "noImage": "Image not available",
+            "ctaTitle": "Ready for an unforgettable journey?",
+            "ctaText": "Our team of experts will help you choose the perfect tour tailored just for you. Discover the world with comfort and confidence.",
+            "exploreAll": "Explore all destinations"
+        },
+        "about": {
+            "title": "Discover the world together with",
+            "text1": "We are a young and ambitious team of professionals who believe that travel should be accessible, safe, and unforgettable.",
+            "text2": "Our mission is to open the most amazing corners of the planet for you by creating unique routes and delivering the highest level of service.",
+            "contacts": {
+                "hotline": "Hotline",
+                "visa": "Visa support",
+                "email": "Email"
+            }
+        },
+        "cta": {
+            "title": "Ready for an unforgettable journey?",
+            "subtitle": "Our experts will select the perfect tour tailored to your wishes",
+            "primary": "Get a consultation",
+            "secondary": "View all tours"
+        },
+        "advantages": {
+            "title": "Our advantages",
+            "subtitle": "What makes our journeys special",
+            "items": {
+                "personal": {
+                    "title": "Personal approach",
+                    "description": "We create routes tailored to your interests and preferences"
+                },
+                "prices": {
+                    "title": "Best prices",
+                    "description": "Direct contracts with hotels and airlines"
+                },
+                "service": {
+                    "title": "Full service",
+                    "description": "From visa support to transfers — everything included"
+                },
+                "support": {
+                    "title": "24/7 support",
+                    "description": "Always available to resolve any issue"
+                }
+            }
+        }
+    },
+    "destinations": {
+        "hero": {
+            "title": "Discover Your World",
+            "subtitle": "Explore breathtaking destinations across continents. From ancient temples to modern metropolises, find your perfect getaway.",
+            "button": "Start Exploring",
+            "stats": {
+                "destinations": "Destinations",
+                "support": "Support",
+                "travelers": "Travelers",
+                "countries": "Countries"
+            },
+            "image": {
+                "alt": "Tropical beach"
+            }
+        },
+        "regions": {
+            "title": "Explore by Region",
+            "subtitle": "Start your journey by selecting a continent. Each region offers unique cultures, landscapes, and experiences waiting to be discovered.",
+            "card": {
+                "countries": "countries",
+                "highlights": "Highlights",
+                "popularCities": "Popular Cities",
+                "more": "more",
+                "exploreNow": "Explore Now",
+                "explore": "Explore"
+            }
+        },
+        "regionHero": {
+            "back": "All Regions",
+            "discover": "Travel across the countries of this magnificent region",
+            "bestTime": "BEST TIME TO VISIT",
+            "topCities": "TOP CITIES",
+            "countries": "COUNTRIES"
+        },
+        "regionFilters": {
+            "title": "Cities in",
+            "searchPlaceholder": "Search cities...",
+            "allCountries": "All Countries",
+            "sort": {
+                "default": "Sort options",
+                "low": "Lowest price",
+                "high": "Highest price",
+                "rating": "Top rated"
+            },
+            "filters": "Filters",
+            "apply": "Apply Filters"
+        },
+        "emptyState": {
+            "title": "No cities found",
+            "subtitle": "Try adjusting your filters or search term"
+        },
+        "cityStats": {
+            "cities": "cities",
+            "available": "Available Now",
+            "startingPrice": "Starting Price",
+            "highestRating": "Highest Rating"
+        },
+        "cityCard": {
+            "from": "From",
+            "mustSee": "Must-see",
+            "bestTime": "Best Time",
+            "duration": "Duration",
+            "days": "days"
+        },
+        "cityDetail": {
+            "back": "Back to Cities",
+            "about": "About",
+            "highlights": "Highlights",
+            "attractions": "Attractions",
+            "mustSee": "Must-see attraction",
+            "bookNow": "Book Now",
+            "perPerson": "per person",
+            "days": "days",
+            "freeCancellation": "Free cancellation",
+            "bestPrice": "Best price guarantee",
+            "essentials": "Essentials",
+            "bestTime": "Best Time",
+            "duration": "Duration",
+            "rating": "Rating",
+            "defaultTagline": "Discover the essence of this destination",
+            "tips": {
+                "title": "Tips",
+                "items": {
+                    "item-1": "Book accommodations 2–3 months in advance",
+                    "item-2": "Use local currency for better rates",
+                    "item-3": "Public transport is recommended"
+                }
+            }
+        }
+    },
+    "about": {
+        "mission": {
+            "title": "Our Mission",
+            "description1": "We believe that travel should be accessible, safe, and unforgettable. Our goal is to open the most amazing corners of the planet for you by creating unique routes and providing the highest level of service.",
+            "description2": "Our team consists of experienced travelers and tourism professionals who know every destination inside out and are ready to share their knowledge with you.",
+            "philosophy": {
+                "title": "Our Philosophy",
+                "subtitle": "Every journey should be unique and memorable"
+            },
+            "imageAlt": "Our Team",
+            "support": {
+                "value": "100%",
+                "label": "Support Guarantee"
+            },
+            "tabs": {
+                "mission": "Mission",
+                "goals": "Goals",
+                "advantages": "Advantages"
+            }
+        },
+        "goals": {
+            "title": "Our Goals and Plans"
+        },
+        "advantages": {
+            "title": "Our Advantages"
+        },
+        "values": {
+            "title": "Our values",
+            "subtitle": "Principles that guide our work and relationships with clients"
+        },
+        "team": {
+            "title": "Our Team",
+            "subtitle": "Experienced professionals who will make your journey perfect",
+            "expertise": "Areas of Expertise"
+        },
+        "cta": {
+            "title": "Ready to start your journey?",
+            "subtitle": "Entrust your dream to a young and ambitious team of professionals",
+            "buttons": {
+                "findTour": "Find a tour",
+                "consultation": "Get a consultation"
+            }
+        }
+    },
+    "faq": {
+        "search": {
+            "placeholder": "Search questions..."
+        },
+        "categories": {
+            "all": "All questions",
+            "booking": "Booking",
+            "documents": "Documents",
+            "travel": "Travel",
+            "payments": "Payments"
+        },
+        "empty": {
+            "title": "No questions found",
+            "subtitle": "Try changing your search query or selecting a different category"
+        },
+        "contacts": {
+            "title": "Didn't find an answer?",
+            "highlight": "Contact us!",
+            "contact": "Contact",
+            "subtitle": "Our expert team is ready to help you with any questions",
+            "methods": {
+                "phone": {
+                    "title": "Phone",
+                    "description": "Daily from 9:00 AM to 9:00 PM"
+                },
+                "email": {
+                    "title": "Email",
+                    "description": "We reply within 2 hours"
+                },
+                "telegram": {
+                    "title": "Telegram",
+                    "description": "Fast communication"
+                },
+                "whatsapp": {
+                    "title": "WhatsApp",
+                    "description": "Available 24/7"
+                }
+            },
+            "footer": {
+                "response": "Average response time",
+                "availability": "Availability",
+                "minute": "minute"
+            }
+        }
+    },
+    "contacts": {
+        "stats": {
+            "items": [
+                {
+                    "value": "150+",
+                    "label": "Destinations worldwide"
+                },
+                {
+                    "value": "Personal",
+                    "label": "Approach to every client"
+                },
+                {
+                    "value": "Premium",
+                    "label": "Service quality"
+                },
+                {
+                    "value": "Guarantee",
+                    "label": "Reliability and support"
+                }
+            ]
+        },
+        "form": {
+            "title": "Start your journey",
+            "subtitle": "Tell us about your plans, and we will create the perfect tour",
+            "fields": {
+                "data": "Your details",
+                "name": "Your name",
+                "email": "Email",
+                "phone": "Phone",
+                "contact_method": "Preferred contact method",
+                "travel_type": "Type of travel",
+                "budget": "Travel budget",
+                "helper_budget": "(per person)",
+                "message": "Message",
+                "message_helper": "Describe your ideal trip, preferred dates, number of travelers, and any other wishes..."
+            },
+            "contactMethod": {
+                "phone": "Phone",
+                "email": "Email",
+                "telegram": "Telegram",
+                "whatsapp": "WhatsApp"
+            },
+            "travelType": {
+                "beach": "Beach vacation",
+                "mountain": "Mountain tourism",
+                "city": "City tours",
+                "exotic": "Exotic destinations",
+                "cruise": "Cruises",
+                "other": "Other"
+            },
+            "budget": {
+                "low": "Economy (up to $500)",
+                "medium": "Standard ($500–$1000)",
+                "high": "Premium (from $1000)",
+                "luxury": "Luxury (from $2000)"
+            },
+            "benefits": {
+                "manager": "Personal manager",
+                "fast": "Tour selection in 15 minutes",
+                "price": "Best prices guaranteed",
+                "support": "24/7 support"
+            },
+            "submit": "Submit request",
+            "sending": "Sending...",
+            "success_title": "Request sent!",
+            "success_subtitle": "We will contact you within 15 minutes",
+            "ok": "Got it"
+        },
+        "info": {
+            "title": "Our office",
+            "subtitle": "Visit us to discuss your journey",
+            "address_title": "Address",
+            "hours_title": "Working hours",
+            "messengers_title": "Messengers",
+            "features_title": "Amenities",
+            "map_title": "We are on the map",
+            "phone_types": {
+                "hotline": "Hotline",
+                "visa": "Visa support"
+            },
+            "features": {
+                "parking": "Free parking",
+                "wifi": "Wi-Fi",
+                "coffee": "Coffee bar"
+            }
+        },
+        "cta": {
+            "title": "Ready for an adventure?",
+            "description": "Call us now and get a personal consultation",
+            "button": "Call now"
+        }
+    },
+    "license": {
+        "title": "Tour Operator License",
+        "subtitle": "Official license of our travel company",
+        "details": {
+            "title": "License Details",
+            "number": "Number",
+            "issueDate": "Issue Date",
+            "status": "Status",
+            "statusActive": "Active"
+        },
+        "actions": {
+            "downloadPdf": "Download PDF",
+            "openNewTab": "Open in New Tab"
+        },
+        "image": {
+            "alt": "Tour Operator License",
+            "title": "Tour Operator License"
+        }
+    }
+}

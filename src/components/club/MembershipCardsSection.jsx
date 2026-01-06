@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { MembershipCard } from './MembershipCard';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import { API } from '@/config/api';
+import { API } from '@/api/api';
 
 export function MembershipCardsSection() {
     const [cards, setCards] = useState(null)
@@ -12,7 +12,6 @@ export function MembershipCardsSection() {
     useEffect(() => {
         axios.get(API.CARDS).then(res => {
             setCards(res.data)
-            console.log(res.data)
         })
     }, [])
 

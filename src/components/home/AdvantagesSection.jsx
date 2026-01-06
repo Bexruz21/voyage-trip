@@ -1,35 +1,37 @@
 import { CheckCircle } from 'lucide-react';
+import { useLang } from '@/context/LangContext';
 
 const advantages = [
   {
-    title: "Индивидуальный подход",
-    description: "Создаем маршруты с учетом ваших интересов и предпочтений"
+    title: 'home.advantages.items.personal.title',
+    description: 'home.advantages.items.personal.description'
   },
   {
-    title: "Лучшие цены",
-    description: "Прямые контракты с отелями и авиакомпаниями"
+    title: 'home.advantages.items.prices.title',
+    description: 'home.advantages.items.prices.description'
   },
   {
-    title: "Полный сервис",
-    description: "От визовой поддержки до трансферов - все включено"
+    title: 'home.advantages.items.service.title',
+    description: 'home.advantages.items.service.description'
   },
   {
-    title: "Поддержка 24/7",
-    description: "Всегда на связи чтобы решить любой вопрос"
+    title: 'home.advantages.items.support.title',
+    description: 'home.advantages.items.support.description'
   }
 ];
 
+
 export function AdvantagesSection() {
+  const { t } = useLang();
   return (
     <section className="py-10 sm:py-20 bg-gradient-to-r from-cyan-500 to-blue-500 text-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center mb-4">
-          Наши преимущества
+          {t('home.advantages.title')}
         </h2>
         <p className="text-xl text-cyan-100 text-center mb-12 max-w-2xl mx-auto">
-          Что делает наши путешествия особенными
+          {t('home.advantages.subtitle')}
         </p>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {advantages.map((advantage, index) => (
             <div key={index} className="flex items-start space-x-4">
@@ -37,8 +39,8 @@ export function AdvantagesSection() {
                 <CheckCircle className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h3 className="text-xl font-bold mb-2">{advantage.title}</h3>
-                <p className="text-cyan-100">{advantage.description}</p>
+                <h3 className="text-xl font-bold mb-2">{t(advantage.title)}</h3>
+                <p className="text-cyan-100">{t(advantage.description)}</p>
               </div>
             </div>
           ))}

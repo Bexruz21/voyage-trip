@@ -40,7 +40,7 @@ const cardFeatures = [
   }
 ];
 
-export function CardFeaturesSection({ isClient }) {
+export function CardFeaturesSection() {
   return (
     <section className="py-16 bg-white/60 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,33 +53,14 @@ export function CardFeaturesSection({ isClient }) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {cardFeatures.map((feature, index) => (
-            isClient ? (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center"
-              >
-                <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-2xl mb-4`}>
-                  <feature.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </motion.div>
-            ) : (
-              <div
-                key={index}
-                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center"
-              >
-                <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-2xl mb-4`}>
-                  <feature.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+            <div key={index} className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center">
+              <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-2xl mb-4`}>
+                <feature.icon className="w-8 h-8 text-white" />
               </div>
-            )
+              <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
+              <p className="text-gray-600">{feature.description}</p>
+            </div>
+
           ))}
         </div>
       </div>

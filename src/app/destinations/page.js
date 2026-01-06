@@ -1,7 +1,7 @@
 import DestinationsContent from "@/components/destinations/DestinationsContent";
 
-export default function Destinations({searchParams}) {
-  return <DestinationsContent searchParams={searchParams} />;
+export default function Destinations() {
+  return <DestinationsContent />;
 }
 
 export const metadata = {

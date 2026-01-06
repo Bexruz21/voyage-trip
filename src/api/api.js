@@ -1,4 +1,5 @@
-export const API_BASE_URL = 'https://voyage-api-mdab.onrender.com/api';
+// export const API_BASE_URL = 'https://voyage-api-mdab.onrender.com/api';
+export const API_BASE_URL = 'http://127.0.0.1:8000/api';
 
 export const API = {
   AUTH: {
@@ -17,7 +18,7 @@ export const API = {
 
   REGIONS: {
     LIST: `${API_BASE_URL}/travel/regions`,
-    COUNTRIES: (regionId) => `${API_BASE_URL}/travel/countries?region=${regionId}`,
+    DETAIL: (regionId) => `${API_BASE_URL}/travel/regions/${regionId}/`,
   },
   COUNTRIES: {
     LIST: `${API_BASE_URL}/countries`,

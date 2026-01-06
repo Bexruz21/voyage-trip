@@ -1,3 +1,4 @@
+import { useLang } from '@/context/LangContext';
 import { motion } from 'framer-motion';
 import { HelpCircle, Key, Compass, Phone, MapPin } from 'lucide-react';
 
@@ -28,8 +29,8 @@ const heroConfig = {
   },
   about: {
     icon: Compass,
-    title: "О",
-    highlighted: "компании",
+    title: "О компании",
+    highlighted: "VOYAGE TRIP",
     description: "Мы создаем уникальные путешествия, которые вдохновляют и открывают новые горизонты",
     gradient: "from-blue-600 to-cyan-600",
     iconGradient: "from-blue-500 to-cyan-500"
@@ -45,6 +46,7 @@ const heroConfig = {
 };
 
 export function HeroSection({ page = 'contacts' }) {
+  const { t } = useLang();
   const config = heroConfig[page] || heroConfig.contacts;
   const IconComponent = config.icon;
 
@@ -73,20 +75,19 @@ export function HeroSection({ page = 'contacts' }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          {config.title}{' '}
+          {t(`pages.hero.${page}.title`)}{' '}
           <span className={`text-transparent bg-clip-text bg-gradient-to-r ${config.gradient}`}>
-            {config.highlighted}
+            {t(`pages.hero.${page}.highlighted`)}
           </span>
         </motion.h1>
 
-        {/* Animated Description */}
         <motion.p
           className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          {config.description}
+          {t(`pages.hero.${page}.description`)}
         </motion.p>
       </div>
     </motion.div>

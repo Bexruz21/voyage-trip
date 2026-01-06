@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Mail, X, AlertCircle, Loader, CheckCircle, Lock } from "lucide-react";
-import { API } from "@/config/api";
+import { API } from "@/api/api";
 
 export default function ForgotPassword() {
     const router = useRouter();

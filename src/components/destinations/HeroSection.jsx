@@ -1,294 +1,76 @@
-import { motion } from 'framer-motion';
-import { Building, Users, Star, Calendar, MapPin, Sparkles } from './icons/Icons';
+'use client'
 
-export function HeroSection({ selectedRegion, selectedCountry, selectedCity }) {
+import { useLang } from "@/context/LangContext";
+
+export const HeroSection = () => {
+    const scrollToRegions = () => {
+        document.getElementById('regions').scrollIntoView({ behavior: 'smooth' })
+    }
+    const { t } = useLang();
+
     return (
-        <section className="relative min-h-[70vh] sm:min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <div className="relative overflow-hidden min-h-screen flex items-center">
             <div className="absolute inset-0">
-                {!selectedRegion ? (
-                    <div className="relative w-full h-full">
-                        <img
-                            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-                            alt="Путешествия по миру"
-                            className="absolute inset-0 w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-black/40"></div>
-                    </div>
-                ) : selectedRegion && !selectedCountry ? (
-                    <div className="relative w-full h-full">
-                        <img
-                            src={selectedRegion.image}
-                            alt={selectedRegion.name}
-                            className="absolute inset-0 w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/20" />
-                    </div>
-                ) : selectedCountry && !selectedCity ? (
-                    <div className="relative w-full h-full">
-                        <img
-                            src={selectedCountry.image}
-                            alt={selectedCountry.name}
-                            className="absolute inset-0 w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/20" />
-                    </div>
-                ) : selectedCity && (
-                    <div className="relative w-full h-full">
-                        <img
-                            src={selectedCity.image}
-                            alt={selectedCity.name}
-                            className="absolute inset-0 w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/20" />
-                    </div>
-                )}
-
-                {/* Дополнительный градиент поверх изображений */}
-                {(selectedRegion || selectedCountry || selectedCity) && (
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/50" />
-                )}
+                <img
+                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                    alt="Tropical beach"
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
             </div>
 
-            {/* Контент */}
-            <div className="container mx-auto px-4 sm:px-6 relative z-10">
-                <motion.div
-                    initial={{ y: 50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 1, ease: "easeOut" }}
-                    className="text-center max-w-4xl mx-auto text-white"
-                >
-                    {!selectedRegion ? (
-                        // Главная страница направлений
-                        <div className="space-y-6 sm:space-y-8">
-                            <motion.div
-                                initial={{ scale: 0.9, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ delay: 0.2, duration: 0.8 }}
-                                className="space-y-4"
-                            >
-                                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20 mb-4">
-                                    <Sparkles className="w-4 h-4" />
-                                    <span className="text-sm font-medium">Исследуйте мир с нами</span>
-                                </div>
+            {/* Основной контент */}
+            <div className="container mx-auto px-4 py-20 relative z-10">
+                <div className="max-w-4xl mx-auto text-center">
+                    <div className="flex justify-center mb-8">
+                        <div className="w-24 h-1 bg-white rounded-full" />
+                    </div>
 
-                                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                                    Все{' '}
-                                    <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
-                                        направления
-                                    </span>
-                                </h1>
+                    <h1 className="text-5xl md:text-7xl font-bold mb-8 text-white">
+                        {t("destinations.hero.title")}
+                    </h1>
 
-                                <motion.p
-                                    initial={{ y: 20, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: 0.4, duration: 0.8 }}
-                                    className="text-lg sm:text-xl md:text-2xl leading-relaxed opacity-90 max-w-3xl mx-auto"
-                                >
-                                    Откройте для себя уникальные уголки планеты. Каждое направление - это новая история,
-                                    наполненная культурой, природными красотами и незабываемыми впечатлениями.
-                                </motion.p>
-                            </motion.div>
+                    <p className="text-2xl text-gray-100 mb-12 leading-relaxed max-w-3xl mx-auto">
+                        {t("destinations.hero.subtitle")}
+                    </p>
 
-                            <motion.div
-                                initial={{ y: 30, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.6, duration: 0.8 }}
-                                className="flex flex-wrap justify-center gap-3 sm:gap-4 pt-4"
-                            >
-                                <div className="flex items-center gap-2 text-sm sm:text-base opacity-80">
-                                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
-                                    <span>7 регионов мира</span>
-                                </div>
-                                <div className="flex items-center gap-2 text-sm sm:text-base opacity-80">
-                                    <Star className="w-4 h-4 sm:w-5 sm:h-5" />
-                                    <span>50+ стран</span>
-                                </div>
-                                <div className="flex items-center gap-2 text-sm sm:text-base opacity-80">
-                                    <Building className="w-4 h-4 sm:w-5 sm:h-5" />
-                                    <span>100+ городов</span>
-                                </div>
-                            </motion.div>
+                    <div className="flex flex-wrap gap-4 justify-center">
+                        <button
+                            onClick={scrollToRegions}
+                            className="group px-10 py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-full font-bold text-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 hover:from-emerald-600 hover:to-cyan-600 relative overflow-hidden"
+                        >
+                            <span className="relative z-10 flex items-center justify-center gap-2">
+                                {t("destinations.hero.button")}
+                                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        </button>
+                    </div>
+
+                    {/* Статистика */}
+                    <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+                        <div className="text-center">
+                            <div className="text-3xl font-bold text-emerald-300">150+</div>
+                            <div className="text-emerald-100">{t("destinations.hero.stats.destinations")}</div>
                         </div>
-                    ) : !selectedCountry ? (
-                        <div className="space-y-6 sm:space-y-8">
-                            <motion.div
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.3 }}
-                                className="space-y-4"
-                            >
-                                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
-                                    <MapPin className="w-4 h-4" />
-                                    <span className="text-sm font-medium">{selectedRegion.region}</span>
-                                </div>
-
-                                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                                    {selectedRegion.name}
-                                </h1>
-
-                                <p className="text-base sm:text-lg md:text-xl leading-relaxed opacity-90 max-w-3xl mx-auto">
-                                    {selectedRegion.description}
-                                </p>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.5 }}
-                                className="flex flex-wrap justify-center gap-2 sm:gap-3"
-                            >
-                                {selectedRegion.highlights.slice(0, 3).map((highlight, idx) => (
-                                    <motion.span
-                                        key={idx}
-                                        initial={{ scale: 0 }}
-                                        animate={{ scale: 1 }}
-                                        transition={{ delay: 0.7 + idx * 0.1 }}
-                                        className="bg-white/20 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm border border-white/30 hover:bg-white/30 transition-all duration-300"
-                                    >
-                                        {highlight}
-                                    </motion.span>
-                                ))}
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.8 }}
-                                className="flex items-center justify-center gap-4 sm:gap-6 text-sm sm:text-base opacity-90"
-                            >
-                                <span className="flex items-center gap-2">
-                                    <Calendar className="w-4 h-4" />
-                                    Лучшее время: {selectedRegion.bestTime}
-                                </span>
-                                <span className="flex items-center gap-2">
-                                    <Star className="w-4 h-4" />
-                                    Рейтинг: {selectedRegion.stats.rating}
-                                </span>
-                            </motion.div>
+                        <div className="text-center">
+                            <div className="text-3xl font-bold text-cyan-300">24/7</div>
+                            <div className="text-cyan-100">{t("destinations.hero.stats.support")}</div>
                         </div>
-                    ) : !selectedCity ? (
-                        <div className="space-y-6 sm:space-y-8">
-                            <motion.div
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.3 }}
-                                className="space-y-4"
-                            >
-                                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
-                                    <MapPin className="w-4 h-4" />
-                                    <span className="text-sm font-medium">{selectedRegion.name}</span>
-                                </div>
-
-                                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                                    {selectedCountry.name}
-                                </h1>
-
-                                <p className="text-base sm:text-lg md:text-xl leading-relaxed opacity-90 max-w-3xl mx-auto">
-                                    {selectedCountry.description}
-                                </p>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.5 }}
-                                className="flex flex-wrap justify-center gap-3 sm:gap-4"
-                            >
-                                <motion.span
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    transition={{ delay: 0.7 }}
-                                    className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm border border-white/30 flex items-center gap-2 hover:bg-white/30 transition-all duration-300"
-                                >
-                                    <Building className="w-4 h-4" />
-                                    Столица: {selectedCountry.capital}
-                                </motion.span>
-                                <motion.span
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    transition={{ delay: 0.8 }}
-                                    className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm border border-white/30 flex items-center gap-2 hover:bg-white/30 transition-all duration-300"
-                                >
-                                    <Users className="w-4 h-4" />
-                                    Население: {selectedCountry.population}
-                                </motion.span>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.9 }}
-                                className="flex flex-wrap justify-center gap-2 sm:gap-3 pt-2"
-                            >
-                                {selectedCountry.highlights.slice(0, 2).map((highlight, idx) => (
-                                    <span
-                                        key={idx}
-                                        className="bg-white/10 backdrop-blur-sm px-3 py-1 rounded-full text-xs border border-white/20"
-                                    >
-                                        {highlight}
-                                    </span>
-                                ))}
-                            </motion.div>
+                        <div className="text-center">
+                            <div className="text-3xl font-bold text-teal-300">1000+</div>
+                            <div className="text-teal-100">{t("destinations.hero.stats.travelers")}</div>
                         </div>
-                    ) : (
-                        // Страница города
-                        <div className="space-y-6 sm:space-y-8">
-                            <motion.div
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.3 }}
-                                className="space-y-4"
-                            >
-                                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
-                                    <MapPin className="w-4 h-4" />
-                                    <span className="text-sm font-medium">{selectedCountry.name}</span>
-                                </div>
-
-                                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                                    {selectedCity.name}
-                                </h1>
-
-                                <p className="text-base sm:text-lg md:text-xl leading-relaxed opacity-90 max-w-3xl mx-auto">
-                                    {selectedCity.description}
-                                </p>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.5 }}
-                                className="flex flex-wrap justify-center gap-3 sm:gap-4"
-                            >
-                                <motion.span
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    transition={{ delay: 0.8 }}
-                                    className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm border border-white/30 flex items-center gap-2 hover:bg-white/30 transition-all duration-300"
-                                >
-                                    <Star className="w-4 h-4" />
-                                    Рейтинг: {selectedCity.rating}
-                                </motion.span>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.9 }}
-                                className="flex flex-wrap justify-center gap-2 sm:gap-3 pt-2"
-                            >
-                                {selectedCity.highlights.slice(0, 3).map((highlight, idx) => (
-                                    <span
-                                        key={idx}
-                                        className="bg-white/10 backdrop-blur-sm px-3 py-1 rounded-full text-xs border border-white/20"
-                                    >
-                                        {highlight}
-                                    </span>
-                                ))}
-                            </motion.div>
+                        <div className="text-center">
+                            <div className="text-3xl font-bold text-emerald-300">50+</div>
+                            <div className="text-emerald-100">{t("destinations.hero.stats.countries")}</div>
                         </div>
-                    )}
-                </motion.div>
+                    </div>
+                </div>
             </div>
-        </section>
-    );
+        </div>
+    )
 }

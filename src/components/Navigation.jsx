@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import axios from "axios";
-import { API } from "@/config/api";
+import { API } from "@/api/api";
 
 function Navigation() {
     const pathname = usePathname();
@@ -28,9 +28,9 @@ function Navigation() {
     ];
 
     const languages = [
-        { code: "ru", label: "Русский", flag: "🇷🇺" },
-        { code: "en", label: "English", flag: "🇺🇸" },
-        { code: "uz", label: "O'zbek", flag: "🇺🇿" }
+        { code: "ru", label: "Русский", },
+        { code: "en", label: "English", },
+        { code: "uz", label: "O'zbek", }
     ];
 
     useEffect(() => {
@@ -40,7 +40,7 @@ function Navigation() {
             try {
                 const accessToken = localStorage.getItem("access");
 
-                if(!accessToken) return
+                if (!accessToken) return
 
                 const res = await axios.get(API.USERS.ME, {
                     headers: {
@@ -102,124 +102,7 @@ function Navigation() {
             <header className="bg-white shadow-xl py-1 sticky top-0 z-50 transition-all duration-500">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center py-2">
-                        {/* Logo - Compact */}
-                        <div className="flex items-center space-x-3">
-                            <Link href="/" className="group">
-                                <div className="relative">
-                                    <img
-                                        src="/logo.png"
-                                        alt="VOYAGE TRIP"
-                                        className="w-14 h-14 object-contain transform group-hover:scale-105 transition-transform duration-300"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-blue-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                </div>
-                            </Link>
-                            <div className="flex flex-col">
-                                <Link href="/">
-                                    <h1 className="m-0 text-xl sm:text-2xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent tracking-tight">
-                                        VOYAGE TRIP
-                                    </h1>
-                                </Link>
-                                <p className="text-xs text-gray-500 tracking-wide">Премиум путешествия</p>
-                            </div>
-                        </div>
-
-                        {/* Desktop Menu */}
-                        <nav className="hidden lg:flex items-center space-x-1">
-                            {navItems.map((item) => {
-                                const isActive = pathname === item.path;
-                                const linkClass = `relative px-6 py-3 rounded-lg font-semibold transition-all duration-300 group overflow-hidden ${isActive
-                                    ? "text-cyan-600"
-                                    : "text-gray-600 hover:text-cyan-700"
-                                    }`;
-
-                                return (
-                                    <Link
-                                        key={item.path}
-                                        href={item.path}
-                                        className={linkClass}
-                                    >
-                                        <span className="relative z-10 flex items-center text-sm">
-                                            {item.label}
-                                        </span>
-
-                                        {isActive && isClient && (
-                                            <motion.div
-                                                className="absolute inset-0 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg border border-cyan-200/80 shadow-sm"
-                                                initial={{ opacity: 0, scale: 0.9 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                exit={{ opacity: 0, scale: 0.9 }}
-                                                transition={{ duration: 0.3 }}
-                                            />
-                                        )}
-                                    </Link>
-                                );
-                            })}
-                        </nav>
-
-                        {/* Right Side - Language & Profile */}
                         <div className="flex items-center space-x-2">
-                            {/* Language Selector */}
-                            <div className="relative hidden lg:flex">
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-                                    className="flex items-center space-x-2 px-3 py-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-all duration-200"
-                                >
-                                    <span className="text-xs font-medium text-gray-700 uppercase">
-                                        {currentLang?.code}
-                                    </span>
-                                    <motion.svg
-                                        animate={{ rotate: isLanguageOpen ? 180 : 0 }}
-                                        transition={{ duration: 0.2 }}
-                                        className="w-3 h-3 text-gray-500"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                    </motion.svg>
-                                </motion.button>
-
-                                <AnimatePresence>
-                                    {isLanguageOpen && (
-                                        <>
-                                            <motion.div
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                exit={{ opacity: 0 }}
-                                                className="fixed inset-0 z-40"
-                                                onClick={() => setIsLanguageOpen(false)}
-                                            />
-                                            <motion.div
-                                                initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                                exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                                transition={{ duration: 0.2 }}
-                                                className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50"
-                                            >
-                                                {languages.map((language) => (
-                                                    <button
-                                                        key={language.code}
-                                                        onClick={() => handleLanguageChange(language.code)}
-                                                        className={`flex items-center space-x-3 w-full px-4 py-2 text-sm transition-all duration-200 ${currentLanguage === language.code
-                                                            ? "bg-cyan-50 text-cyan-600"
-                                                            : "text-gray-700 hover:bg-gray-50"
-                                                            }`}
-                                                    >
-                                                        <span>{language.label}</span>
-                                                        {currentLanguage === language.code && (
-                                                            <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full ml-auto" />
-                                                        )}
-                                                    </button>
-                                                ))}
-                                            </motion.div>
-                                        </>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-
                             {/* Profile Menu */}
                             <div className="relative hidden lg:flex">
                                 <motion.button
@@ -321,39 +204,30 @@ function Navigation() {
                             </div>
 
                             {/* Mobile Menu Button */}
-                            {isClient ? (
-                                <motion.button
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                    className={`lg:hidden p-3 rounded-lg transition-all duration-300 ${isMobileMenuOpen
-                                        ? "bg-cyan-50 text-cyan-600"
-                                        : "bg-gray-50 text-gray-600 hover:bg-gray-100"
-                                        }`}
-                                >
-                                    <div className="w-5 h-5 flex flex-col justify-center space-y-1">
-                                        <motion.span
-                                            className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
-                                                }`}
-                                        />
-                                        <motion.span
-                                            className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "opacity-0 -translate-x-2" : "opacity-100"
-                                                }`}
-                                        />
-                                        <motion.span
-                                            className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
-                                                }`}
-                                        />
-                                    </div>
-                                </motion.button>
-                            ) : (
-                                <button className="lg:hidden p-3 bg-gray-100 text-gray-600 rounded-lg">
-                                    <div className="w-5 h-5 flex flex-col justify-center space-y-1">
-                                        <span className="block w-5 h-0.5 bg-gray-600" />
-                                        <span className="block w-5 h-0.5 bg-gray-600" />
-                                        <span className="block w-5 h-0.5 bg-gray-600" />
-                                    </div>
-                                </button>
-                            )}
+                            <motion.button
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                className={`lg:hidden p-3 rounded-lg transition-all duration-300 ${isMobileMenuOpen
+                                    ? "bg-cyan-50 text-cyan-600"
+                                    : "bg-gray-50 text-gray-600 hover:bg-gray-100"
+                                    }`}
+                            >
+                                <div className="w-5 h-5 flex flex-col justify-center space-y-1">
+                                    <motion.span
+                                        className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
+                                            }`}
+                                    />
+                                    <motion.span
+                                        className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "opacity-0 -translate-x-2" : "opacity-100"
+                                            }`}
+                                    />
+                                    <motion.span
+                                        className={`block w-5 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
+                                            }`}
+                                    />
+                                </div>
+                            </motion.button>
+
                         </div>
                     </div>
                 </div>

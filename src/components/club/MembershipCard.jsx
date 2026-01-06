@@ -48,7 +48,6 @@ export function MembershipCard({ card }) {
                 )}
 
                 <div className="p-8 flex flex-col h-full">
-                    {/* Иконка и название */}
                     <div className="flex flex-col items-center mb-6">
                         <div
                             className="w-16 h-16 rounded-xl flex items-center justify-center mb-4"
@@ -68,13 +67,10 @@ export function MembershipCard({ card }) {
                             {card.description}
                         </p>
                     </div>
-
-                    {/* Цена */}
                     <div className="text-center mb-6">
                         <div className="text-4xl font-bold text-gray-900 mb-4">
                             ${card.price}
                         </div>
-
                         <div className="flex items-center justify-center gap-6 text-sm">
                             <div className="flex items-center gap-2 text-gray-600">
                                 <Calendar className="w-4 h-4" style={{ color: config.color }} />
@@ -89,8 +85,6 @@ export function MembershipCard({ card }) {
                             </div>
                         </div>
                     </div>
-
-                    {/* Features */}
                     <div className="flex-grow mb-6 min-h-[280px]">
                         <div className="space-y-3">
                             {card.features.map((feature, idx) => (
@@ -110,8 +104,6 @@ export function MembershipCard({ card }) {
                             ))}
                         </div>
                     </div>
-
-                    {/* Кнопка */}
                     <motion.button
                         onClick={() => openTelegram(card.name)}
                         whileHover={{ scale: 1.02 }}

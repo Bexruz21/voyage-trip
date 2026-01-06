@@ -1,4 +1,3 @@
-import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 
 const categories = [
@@ -9,17 +8,18 @@ const categories = [
   { id: 'payments', name: 'Оплата', count: 2, icon: HelpCircle }
 ];
 
-export function FaqItem({ item, isOpen, onToggle, isClient }) {
-  const categoryName = categories.find(cat => cat.id === item.category)?.name;
+export function FaqItem({ item, isOpen, onToggle }) {
+  const categoryName = categories.find(cat => cat.id === item.category)?.id;
 
   return (
     <div className="border-b border-gray-200 last:border-b-0">
-      <div
+      <button
         onClick={() => onToggle(item.id)}
-        className="w-full p-5 sm:p-8 text-left flex justify-between items-center hover:bg-gray-50 transition-all duration-300 group cursor-pointer select-none"
+        className="w-full p-5 sm:p-8 text-left flex justify-between items-center hover:bg-gray-50 transition-colors cursor-pointer"
+        aria-expanded={isOpen}
       >
-        <div className="flex items-start space-x-4">
-          <div className="text-left">
+        <div className="flex items-start space-x-4 flex-1 min-w-0">
+          <div className="text-left flex-1">
             <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
               {item.question}
             </h3>
@@ -30,66 +30,29 @@ export function FaqItem({ item, isOpen, onToggle, isClient }) {
             </div>
           </div>
         </div>
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2, type: "tween" }}
-          className="flex-shrink-0"
-        >
-          <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white">
+        <div className="flex-shrink-0 ml-4">
+          <div 
+            className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white transition-transform"
+            style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          >
             <ChevronDown className="w-4 h-4" />
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </button>
       
-      {isClient ? (
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ 
-                opacity: 0, 
-                height: 0,
-                marginBottom: 0
-              }}
-              animate={{ 
-                opacity: 1, 
-                height: "auto",
-                marginBottom: 24
-              }}
-              exit={{ 
-                opacity: 0, 
-                height: 0,
-                marginBottom: 0
-              }}
-              transition={{ 
-                duration: 0.25,
-                ease: "easeInOut",
-                height: { duration: 0.25 },
-                opacity: { duration: 0.2 }
-              }}
-              className="overflow-hidden"
-              style={{ willChange: "transform, opacity, height" }}
-            >
-              <div className="px-5 sm:px-8 pb-2">
-                <div className="prose prose-lg max-w-none">
-                  <div className="whitespace-pre-line text-gray-700 leading-relaxed text-sm sm:text-base">
-                    {item.answer}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      ) : (
-        isOpen && (
-          <div className="px-5 sm:px-8 pb-6">
-            <div className="prose prose-lg max-w-none">
-              <div className="whitespace-pre-line text-gray-700 leading-relaxed">
-                {item.answer}
-              </div>
-            </div>
+      <div 
+        className="overflow-hidden transition-all duration-300 ease-in-out"
+        style={{ 
+          maxHeight: isOpen ? '1000px' : '0',
+          opacity: isOpen ? 1 : 0
+        }}
+      >
+        <div className="px-5 sm:px-8 pb-6">
+          <div className="whitespace-pre-line text-gray-700 leading-relaxed text-sm sm:text-base">
+            {item.answer}
           </div>
-        )
-      )}
+        </div>
+      </div>
     </div>
   );
 }

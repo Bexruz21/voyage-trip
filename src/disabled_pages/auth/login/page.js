@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Mail, X, AlertCircle, Loader } from "lucide-react";
-import { API } from "@/config/api";
+import { API } from "@/api/api";
 
 export default function Login() {
     const router = useRouter();

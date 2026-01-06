@@ -1,0 +1,443 @@
+{
+    "nav": {
+        "logo": "Premium sayohatlar",
+        "home": "Bosh sahifa",
+        "destinations": "Yo‘nalishlar",
+        "club": "Klub",
+        "about": "Biz haqimizda",
+        "faq": "FAQ",
+        "contacts": "Aloqa"
+    },
+    "footer": {
+        "description": "Biz butun dunyo bo‘ylab zamonaviy sayohatlar yaratamiz.\nOrzularingizni professionallarga ishonib topshiring.",
+        "quickLinks": "Tezkor havolalar",
+        "contacts": "Aloqa",
+        "hotline": "Ishonch telefoni",
+        "visa": "Viza yordami",
+        "email": "Elektron pochta",
+        "addressTitle": "Toshkent, Seoul Plaza Business Centre",
+        "address": "Mirobod tumani, Shahrisabz ko‘chasi, 5A",
+        "license": "Litsenziya",
+        "rights": "Barcha huquqlar himoyalangan.",
+        "licenseFull": "Turizm faoliyati uchun litsenziya"
+    },
+    "pages": {
+        "hero": {
+            "contacts": {
+                "title": "Biz bilan",
+                "highlighted": "bog‘laning",
+                "description": "Biz orzudagi sayohatlarni yaratamiz. Mukammal sarguzashtingizni birga muhokama qilaylik!"
+            },
+            "faq": {
+                "title": "Ko‘p beriladigan",
+                "highlighted": "savollar",
+                "description": "Turlarimiz va xizmatlarimiz bo‘yicha eng mashhur savollarga javob toping"
+            },
+            "club": {
+                "title": "Klub kartalari",
+                "highlighted": "Voyage Trip",
+                "description": "Sayohat uchun maxsus shartlarga sizning shaxsiy kalitingiz"
+            },
+            "about": {
+                "title": "Kompaniya haqida",
+                "highlighted": "VOYAGE TRIP",
+                "description": "Biz ilhomlantiradigan va yangi ufqlarni ochadigan noyob sayohatlar yaratamiz"
+            },
+            "directions": {
+                "title": "Sayohat",
+                "highlighted": "yo‘nalishlari",
+                "description": "Bizning eksklyuziv turlarimiz bilan dunyoning eng ajoyib maskanlarini kashf eting"
+            }
+        }
+    },
+    "home": {
+        "hero": {
+            "slides": [
+                {
+                    "title": "VOYAGE TRIP bilan dunyoni kashf eting",
+                    "subtitle": "Hayotingizni o‘zgartiradigan sayohatlar"
+                },
+                {
+                    "title": "Ekzotik yo‘nalishlar",
+                    "subtitle": "Tropik plyajlardan tog‘ cho‘qqilarigacha"
+                },
+                {
+                    "title": "Premium xizmat",
+                    "subtitle": "Barcha tashvishlarni biz o‘z zimmamizga olamiz"
+                },
+                {
+                    "title": "Unutilmas taassurotlar",
+                    "subtitle": "Butun umr esda qoladigan lahzalar"
+                }
+            ],
+            "button": "O‘zingizga mos sayohatni toping"
+        },
+        "features": {
+            "title": "Nega tanlashadi",
+            "subtitle": "Biz umr bo‘yi esda qoladigan sayohatlar yaratamiz",
+            "items": {
+                "security": {
+                    "title": "Xavfsizlik",
+                    "description": "Barcha hamkorlar tekshirilgan, sug‘urta va 24/7 qo‘llab-quvvatlash mavjud"
+                },
+                "quality": {
+                    "title": "Sifat",
+                    "description": "Qulayligingiz uchun mehmonxonalar va yo‘nalishlarni sinchkovlik bilan tanlaymiz"
+                },
+                "expertise": {
+                    "title": "Tajriba",
+                    "description": "Har bir yo‘nalishni mukammal biladigan professional gidlar"
+                },
+                "reliability": {
+                    "title": "Ishonchlilik",
+                    "description": "Bronlashdan uyga qaytguningizgacha to‘liq hamrohlik"
+                }
+            }
+        },
+        "tours": {
+            "title": "Bizning yo‘nalishlar",
+            "subtitle": "Sayyoramizning eng hayajonli hududlarini kashf eting. Har bir yo‘nalish madaniyat, tabiat va unutilmas taassurotlarga boy noyob hikoyadir.",
+            "highlights": "Asosiy taassurotlar",
+            "countries": "Mintaqa davlatlari",
+            "rating": "reyting",
+            "price": "narx",
+            "priceAfter": "dan",
+            "bestTime": "Eng yaxshi vaqt",
+            "selectTour": "Sayohatni tanlang:",
+            "idealTour": "Mukammal sayohat:",
+            "customProgram": "Siz uchun individual dastur tuzamiz",
+            "noImage": "Rasm mavjud emas",
+            "ctaTitle": "Unutilmas sayohatga tayyormisiz?",
+            "ctaText": "Mutaxassislarimiz siz uchun eng mos sayohatni tanlashda yordam beradi. Dunyo bilan qulaylik va ishonch bilan tanishing.",
+            "exploreAll": "Barcha yo‘nalishlarni ko‘rish"
+        },
+        "about": {
+            "title": "Birga dunyoni kashf etamiz",
+            "text1": "Biz — sayohatlar qulay, xavfsiz va unutilmas bo‘lishi kerak deb ishonadigan yosh va intiluvchan mutaxassislar jamoasimiz.",
+            "text2": "Bizning vazifamiz — siz uchun sayyoramizning eng go‘zal maskanlarini ochish, noyob yo‘nalishlar yaratish va yuqori darajadagi xizmat ko‘rsatishdir.",
+            "contacts": {
+                "hotline": "Issiq liniya",
+                "visa": "Viza yordami",
+                "email": "Elektron pochta"
+            }
+        },
+        "cta": {
+            "title": "Unutilmas sayohatga tayyormisiz?",
+            "subtitle": "Mutaxassislarimiz sizning istaklaringizga mos ideal turni tanlab berishadi",
+            "primary": "Maslahat olish",
+            "secondary": "Barcha turlarni ko‘rish"
+        },
+        "advantages": {
+            "title": "Bizning afzalliklarimiz",
+            "subtitle": "Sayohatlarimizni o‘ziga xos qiladigan jihatlar",
+            "items": {
+                "personal": {
+                    "title": "Individual yondashuv",
+                    "description": "Qiziqishlaringiz va istaklaringizga mos yo‘nalishlar yaratamiz"
+                },
+                "prices": {
+                    "title": "Eng yaxshi narxlar",
+                    "description": "Mehmonxonalar va aviakompaniyalar bilan to‘g‘ridan-to‘g‘ri shartnomalar"
+                },
+                "service": {
+                    "title": "To‘liq servis",
+                    "description": "Vizadan tortib transferlargacha — hammasi kiritilgan"
+                },
+                "support": {
+                    "title": "24/7 qo‘llab-quvvatlash",
+                    "description": "Har qanday masalani hal qilish uchun doim aloqadamiz"
+                }
+            }
+        }
+    },
+    "destinations": {
+        "hero": {
+            "title": "O‘z dunyoingizni kashf eting",
+            "subtitle": "Butun dunyo bo‘ylab hayratlanarli yo‘nalishlarni o‘rganing. Qadimiy ibodatxonalardan tortib zamonaviy megapolislargacha — mukammal sayohatingizni toping.",
+            "button": "Sayohatni boshlash",
+            "stats": {
+                "destinations": "Yo‘nalishlar",
+                "support": "Qo‘llab-quvvatlash",
+                "travelers": "Sayohatchilar",
+                "countries": "Davlatlar"
+            },
+            "image": {
+                "alt": "Tropik plyaj"
+            }
+        },
+        "regions": {
+            "title": "Mintaqalar bo‘yicha kashf eting",
+            "subtitle": "Sayohatingizni qit’ani tanlashdan boshlang. Har bir mintaqa o‘ziga xos madaniyat, manzara va unutilmas taassurotlarni taqdim etadi.",
+            "card": {
+                "countries": "davlat",
+                "highlights": "Asosiy jihatlar",
+                "popularCities": "Mashhur shaharlar",
+                "more": "yana",
+                "exploreNow": "Kashf eting",
+                "explore": "Batafsil"
+            }
+        },
+        "regionHero": {
+            "back": "Barcha mintaqalar",
+            "discover": "Ushbu ajoyib mintaqadagi mamlakatlarga sayohat qiling",
+            "bestTime": "TASHRIF UCHUN ENG YAXSHI VAQT",
+            "topCities": "ENG MASHHUR SHAHARLAR",
+            "countries": "MAMLAKATLAR"
+        },
+        "regionFilters": {
+            "title": "dagi shaharlar",
+            "searchPlaceholder": "Shaharlarni qidirish...",
+            "allCountries": "Barcha mamlakatlar",
+            "sort": {
+                "default": "Saralash variantlari",
+                "low": "Eng arzonidan",
+                "high": "Eng qimmatidan",
+                "rating": "Eng yuqori baholangan"
+            },
+            "filters": "Saralash",
+            "apply": "Qo‘llash"
+        },
+        "emptyState": {
+            "title": "Shaharlar topilmadi",
+            "subtitle": "Filtrlarni yoki qidiruv soʻzini oʻzgartirib koʻring"
+        },
+        "cityStats": {
+            "cities": "shahar",
+            "available": "Hozir mavjud",
+            "startingPrice": "Boshlang‘ich narx",
+            "highestRating": "Eng yuqori reyting"
+        },
+        "cityCard": {
+            "from": "Narx:",
+            "mustSee": "Albatta ko‘rish kerak",
+            "bestTime": "Eng yaxshi vaqt",
+            "duration": "Davomiyligi",
+            "days": "kun"
+        },
+        "cityDetail": {
+            "back": "Shaharlarga qaytish",
+            "about": "Shahar haqida",
+            "highlights": "Asosiy jihatlar",
+            "attractions": "Diqqatga sazovor joylar",
+            "mustSee": "Albatta ko‘rish kerak",
+            "bookNow": "Bron qilish",
+            "perPerson": "1 kishi uchun",
+            "days": "kun",
+            "freeCancellation": "Bepul bekor qilish",
+            "bestPrice": "Eng yaxshi narx kafolati",
+            "essentials": "Muhim ma’lumotlar",
+            "bestTime": "Eng yaxshi vaqt",
+            "duration": "Davomiyligi",
+            "rating": "Reyting",
+            "defaultTagline": "Ushbu yo‘nalishning haqiqiy ruhini kashf eting",
+            "tips": {
+                "title": "Maslahatlar",
+                "items": {
+                    "item-1": "Turar joyni safardan 2–3 oy oldin bron qiling",
+                    "item-2": "Yaxshiroq narxlar uchun mahalliy valyutadan foydalaning",
+                    "item-3": "Jamoat transportidan foydalanish tavsiya etiladi"
+                }
+            }
+        }
+    },
+    "about": {
+        "mission": {
+            "title": "Bizning missiyamiz",
+            "description1": "Biz sayohatlar qulay, xavfsiz va unutilmas bo‘lishi kerak deb hisoblaymiz. Bizning maqsadimiz — siz uchun dunyoning eng ajoyib maskanlarini ochish, noyob marshrutlar yaratish va yuqori darajadagi xizmat ko‘rsatishdir.",
+            "description2": "Bizning jamoamiz tajribali sayohatchilar va turizm sohasi mutaxassislaridan iborat bo‘lib, har bir yo‘nalishni mukammal biladi va o‘z bilimlarini siz bilan bo‘lishishga tayyor.",
+            "philosophy": {
+                "title": "Bizning falsafamiz",
+                "subtitle": "Har bir sayohat noyob va esda qolarli bo‘lishi kerak"
+            },
+            "imageAlt": "Bizning jamoa",
+            "support": {
+                "value": "100%",
+                "label": "Qo‘llab-quvvatlash kafolati"
+            },
+            "tabs": {
+                "mission": "Missiya",
+                "goals": "Maqsadlar",
+                "advantages": "Afzalliklar"
+            }
+        },
+        "goals": {
+            "title": "Bizning maqsad va rejalarimiz"
+        },
+        "advantages": {
+            "title": "Bizning afzalliklarimiz"
+        },
+        "values": {
+            "title": "Bizning qadriyatlarimiz",
+            "subtitle": "Faoliyatimiz va mijozlar bilan munosabatlarimizni belgilovchi tamoyillar"
+        },
+        "team": {
+            "title": "Bizning jamoa",
+            "subtitle": "Sayohatingizni mukammal qiladigan tajribali mutaxassislar",
+            "expertise": "Faoliyat yo‘nalishlari"
+        },
+        "cta": {
+            "title": "Sayohatga tayyormisiz?",
+            "subtitle": "Orzuingizni yosh va maqsadli professional jamoaga ishonib topshiring",
+            "buttons": {
+                "findTour": "Sayohatni topish",
+                "consultation": "Maslahat olish"
+            }
+        }
+    },
+    "faq": {
+        "search": {
+            "placeholder": "Savollar bo‘yicha qidirish..."
+        },
+        "categories": {
+            "all": "Barcha savollar",
+            "booking": "Bron qilish",
+            "documents": "Hujjatlar",
+            "travel": "Sayohat",
+            "payments": "To‘lovlar"
+        },
+        "empty": {
+            "title": "Savollar topilmadi",
+            "subtitle": "Qidiruv so‘rovini o‘zgartirib ko‘ring yoki boshqa toifani tanlang"
+        },
+        "contacts": {
+            "title": "Javob topilmadimi?",
+            "highlight": "Biz bilan bog‘laning!",
+            "contact": "Bog‘lanish",
+            "subtitle": "Mutaxassislar jamoamiz sizga har qanday savolda yordam berishga tayyor",
+            "methods": {
+                "phone": {
+                    "title": "Telefon",
+                    "description": "Har kuni 9:00 dan 21:00 gacha"
+                },
+                "email": {
+                    "title": "Email",
+                    "description": "2 soat ichida javob beramiz"
+                },
+                "telegram": {
+                    "title": "Telegram",
+                    "description": "Tezkor aloqa"
+                },
+                "whatsapp": {
+                    "title": "WhatsApp",
+                    "description": "24/7 mavjud"
+                }
+            },
+            "footer": {
+                "response": "O‘rtacha javob vaqti",
+                "availability": "Mavjudlik",
+                "minute": "daqiqa"
+            }
+        }
+    },
+    "contacts": {
+        "stats": {
+            "items": [
+                {
+                    "value": "150+",
+                    "label": "Butun dunyo bo‘ylab yo‘nalishlar"
+                },
+                {
+                    "value": "Individual",
+                    "label": "Har bir mijozga yondashuv"
+                },
+                {
+                    "value": "Premium",
+                    "label": "Xizmat sifati"
+                },
+                {
+                    "value": "Kafolat",
+                    "label": "Ishonchlilik va qo‘llab-quvvatlash"
+                }
+            ]
+        },
+        "form": {
+            "title": "Sayohatingizni boshlang",
+            "subtitle": "Rejalaringiz haqida ayting, biz siz uchun mukammal tur yaratamiz",
+            "fields": {
+                "data": "Maʼlumotlaringiz",
+                "name": "Ismingiz",
+                "email": "Email",
+                "phone": "Telefon",
+                "contact_method": "Qulay aloqa usuli",
+                "travel_type": "Sayohat turi",
+                "budget": "Sayohat byudjeti",
+                "helper_budget": "(1 kishi uchun)",
+                "message": "Xabar",
+                "message_helper": "Ideal sayohatingizni, sanalar bo‘yicha istaklaringizni, odamlar sonini va boshqa xohishlaringizni yozing..."
+            },
+            "contactMethod": {
+                "phone": "Telefon",
+                "email": "Email",
+                "telegram": "Telegram",
+                "whatsapp": "WhatsApp"
+            },
+            "travelType": {
+                "beach": "Dengiz bo‘yidagi dam olish",
+                "mountain": "Tog‘ turizmi",
+                "city": "Shahar turlari",
+                "exotic": "Ekzotik yo‘nalishlar",
+                "cruise": "Kruizlar",
+                "other": "Boshqa"
+            },
+            "budget": {
+                "low": "Tejamkor ( $500 gacha )",
+                "medium": "Standart ( $500–$1000 )",
+                "high": "Premium ( $1000 dan boshlab )",
+                "luxury": "Lyuks ( $2000 dan boshlab )"
+            },
+            "benefits": {
+                "manager": "Shaxsiy menejer",
+                "fast": "15 daqiqada tur tanlash",
+                "price": "Eng yaxshi narxlar kafolatlanadi",
+                "support": "24/7 qo‘llab-quvvatlash"
+            },
+            "submit": "Ariza yuborish",
+            "sending": "Yuborilmoqda...",
+            "success_title": "Ariza yuborildi!",
+            "success_subtitle": "15 daqiqa ichida siz bilan bog‘lanamiz",
+            "ok": "Tushunarli"
+        },
+        "info": {
+            "title": "Bizning ofis",
+            "subtitle": "Sayohatingizni muhokama qilish uchun tashrif buyuring",
+            "address_title": "Manzil",
+            "hours_title": "Ish vaqti",
+            "messengers_title": "Messenjerlar",
+            "features_title": "Qulayliklar",
+            "map_title": "Biz xaritada",
+            "phone_types": {
+                "hotline": "Aloqa liniyasi",
+                "visa": "Viza yordami"
+            },
+            "features": {
+                "parking": "Bepul avtoturargoh",
+                "wifi": "Wi-Fi",
+                "coffee": "Qahva bar"
+            }
+        },
+        "cta": {
+            "title": "Sarguzashtga tayyormisiz?",
+            "description": "Hoziroq bizga qo‘ng‘iroq qiling va shaxsiy maslahat oling",
+            "button": "Hozir qo‘ng‘iroq qilish"
+        }
+    },
+    "license": {
+        "title": "Turoperator litsenziyasi",
+        "subtitle": "Turistik kompaniyamizning rasmiy litsenziyasi",
+        "details": {
+            "title": "Litsenziya ma’lumotlari",
+            "number": "Raqam",
+            "issueDate": "Berilgan sana",
+            "status": "Holati",
+            "statusActive": "Faol"
+        },
+        "actions": {
+            "downloadPdf": "PDF yuklab olish",
+            "openNewTab": "Yangi oynada ochish"
+        },
+        "image": {
+            "alt": "Turoperator litsenziyasi",
+            "title": "Turoperator litsenziyasi"
+        }
+    }
+}

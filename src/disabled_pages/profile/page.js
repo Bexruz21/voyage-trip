@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import { API } from '@/config/api';
+import { API } from '@/api/api';
 import { User, Mail, Wallet, Users, Copy, Gift, Check, Crown, Star, CreditCard, Zap, TrendingUp, Plane, Loader2 } from 'lucide-react';
 
 export default function ProfilePage() {
