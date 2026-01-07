@@ -39,17 +39,18 @@ export const RegionCard = ({ region }) => {
                     <div className="mb-4">
                         <h4 className="text-sm font-semibold text-gray-700 mb-2">{t("destinations.regions.card.highlights")}</h4>
                         <div className="flex flex-wrap gap-1.5">
-                            {region.highlights[lang].slice(0, 3).map((highlight, idx) => (
+                            {region.highlights[lang].slice(0, 2).map((highlight, idx) => (
                                 <span
                                     key={idx}
-                                    className="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full border border-blue-100"
+                                    className="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full border border-blue-100 truncate max-w-[40%]"
                                 >
                                     {highlight}
                                 </span>
                             ))}
-                            {region.highlights.length > 3 && (
+                      
+                            {region.highlights[lang].length > 2 && (
                                 <span className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full">
-                                    +{region.highlights[lang].length - 3}
+                                    +{region.highlights[lang].length - 2}
                                 </span>
                             )}
                         </div>
@@ -61,7 +62,6 @@ export const RegionCard = ({ region }) => {
                                 <div key={idx} className="flex items-center gap-1.5">
                                     <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
                                     <span className="text-sm text-gray-600">{city.name[lang]}</span>
-                                    {idx < 2 && <span className="text-gray-300">•</span>}
                                 </div>
                             ))}
                             {region.popular_cities.length > 3 && (

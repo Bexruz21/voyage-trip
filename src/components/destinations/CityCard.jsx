@@ -66,7 +66,7 @@ export const CityCard = ({ city, setSelectedCity }) => {
                         {city.highlights[lang].slice(0, 2).map((highlight, idx) => (
                             <span
                                 key={idx}
-                                className="px-2.5 py-1 sm:px-3 sm:py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 rounded-full text-xs sm:text-sm font-medium border border-blue-100 truncate max-w-[45%] sm:max-w-none"
+                                className="px-2.5 py-1 sm:px-3 sm:py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 rounded-full text-xs sm:text-sm font-medium border border-blue-100 truncate max-w-[40%]"
                                 title={highlight}
                             >
                                 {highlight}
