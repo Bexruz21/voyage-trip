@@ -291,7 +291,7 @@ ${formData.message}
 
       {openBooking && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="bg-white rounded-t-2xl sm:rounded-2xl w-full max-w-md sm:max-w-md p-4 sm:p-6 relative max-h-[90vh] overflow-y-auto sm:max-h-[80vh]">
+          <div className="bg-white rounded-t-2xl sm:rounded-2xl w-full max-w-md sm:max-w-md p-4 sm:p-6 relative max-h-[100vh] sm:max-h-[90vh]">
             <div className="sticky top-0 bg-white pb-2 sm:static sm:pb-0">
               <div className="flex justify-between items-center mb-4 sm:mb-6">
                 <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
