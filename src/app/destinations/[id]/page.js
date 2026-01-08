@@ -66,10 +66,8 @@ export default function RegionDetail({ params }) {
     }, [])
 
     useEffect(() => {
-        if (selectedCity) {
-            window.scrollTo(0, 0)
-        }
-    }, [selectedCity])
+        window.scrollTo(0, 0)
+    }, [])
 
 
     if (!region) {
