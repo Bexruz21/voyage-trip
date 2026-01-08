@@ -65,6 +65,13 @@ export default function RegionDetail({ params }) {
         })
     }, [])
 
+    useEffect(() => {
+        if (selectedCity) {
+            window.scrollTo(0, 0)
+        }
+    }, [selectedCity])
+
+
     if (!region) {
         return (
             <div className="flex items-center justify-center h-[90vh]">
