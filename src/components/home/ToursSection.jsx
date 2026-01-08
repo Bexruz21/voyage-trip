@@ -75,7 +75,6 @@ export function ToursSection() {
   useEffect(() => {
     axios.get(API.REGIONS.LIST)
       .then(res => {
-        console.log(res.data)
         const regionsWithConfig = res.data.map(region => ({
           ...region,
           color: regionConfig[region.name[lang]]?.color || "from-blue-500 to-cyan-500",
