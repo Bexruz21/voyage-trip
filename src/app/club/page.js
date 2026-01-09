@@ -1,7 +1,8 @@
-import VoyageClubPremium from "@/components/club/Club";
+// import VoyageClubPremium from "@/components/club/Club";
+import ClubContent from "@/components/club/ClubContent";
 
 export default function Club() {
-  return < VoyageClubPremium/>;
+  return < ClubContent/>
 }
 
 export const metadata = {
