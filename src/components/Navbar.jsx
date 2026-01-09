@@ -10,7 +10,7 @@ import { User, LogOut, LogIn, UserPlus, ChevronDown } from 'lucide-react';
 const navLinks = [
     { href: '/', label: 'nav.home' },
     { href: '/destinations', label: 'nav.destinations' },
-    // { href: '/club', label: 'nav.club' },
+    { href: '/club', label: 'nav.club' },
     { href: '/about', label: 'nav.about' },
     { href: '/faq', label: 'nav.faq' },
     { href: '/contacts', label: 'nav.contacts' }
