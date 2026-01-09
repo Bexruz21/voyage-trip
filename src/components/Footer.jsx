@@ -43,7 +43,7 @@ function Footer() {
 
     const quickLinks = [
         { key: 'nav.destinations', href: '/' },
-        // { key: 'nav.club', href: '/club' },
+        { key: 'nav.club', href: '/club' },
         { key: 'nav.about', href: '/about' },
         { key: 'nav.faq', href: '/faq' },
         { key: 'nav.contacts', href: '/contacts' },
