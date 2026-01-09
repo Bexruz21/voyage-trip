@@ -16,7 +16,7 @@ export function MembershipCardsSection() {
     }, [])
 
     return (
-        <section className="py-16 bg-white/50" id='membership-cards-section'>
+        <section className="py-16 bg-gray-50" id='membership-cards-section'>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">
                     Выберите свою <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">карту</span>

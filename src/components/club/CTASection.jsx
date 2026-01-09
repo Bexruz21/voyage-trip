@@ -3,7 +3,7 @@ import { Key } from 'lucide-react';
 
 export function CTASection() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-gray-50">
       <div className="max-w-4xl mx-auto text-center px-4">
         <Key className="w-16 h-16 text-amber-600 mx-auto mb-6" />
         <h2 className="text-4xl font-bold text-gray-900 mb-4">
