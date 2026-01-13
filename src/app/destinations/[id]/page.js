@@ -332,7 +332,7 @@ export default function RegionDetail({ params }) {
                     </div>
                 ) : (
                     <>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-10">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-10">
                             {/* Статистика городов */}
                             <div className="group relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-200 p-4 md:p-6 hover:shadow-lg md:hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 md:hover:-translate-y-1">
                                 <div className="absolute top-3 md:top-4 right-3 md:right-4 w-12 h-12 md:w-16 md:h-16 bg-blue-100 rounded-full blur-xl md:blur-2xl opacity-60 group-hover:opacity-80 transition-opacity" />
@@ -361,7 +361,7 @@ export default function RegionDetail({ params }) {
                             </div>
 
                             {/* Статистика цены */}
-                            <div className="group relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-200 p-4 md:p-6 hover:shadow-lg md:hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 md:hover:-translate-y-1">
+                            {/* <div className="group relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-200 p-4 md:p-6 hover:shadow-lg md:hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 md:hover:-translate-y-1">
                                 <div className="absolute top-3 md:top-4 right-3 md:right-4 w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full blur-xl md:blur-2xl opacity-60 group-hover:opacity-80 transition-opacity" />
 
                                 <div className="relative z-10 flex items-start gap-3 md:gap-4">
@@ -383,7 +383,7 @@ export default function RegionDetail({ params }) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* Статистика рейтинга */}
                             <div className="group relative overflow-hidden rounded-xl md:rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-200 p-4 md:p-6 hover:shadow-lg md:hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 md:hover:-translate-y-1">

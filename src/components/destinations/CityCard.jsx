@@ -22,10 +22,10 @@ export const CityCard = ({ city, setSelectedCity }) => {
                 />
 
                 {/* Price Tag - Mobile optimized */}
-                <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg">
+                {/* <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg">
                     <div className="text-xs sm:text-sm text-gray-600">{t('destinations.cityCard.from')}</div>
                     <div className="text-lg sm:text-2xl font-bold text-blue-600">${city.price}</div>
-                </div>
+                </div> */}
 
                 {/* Rating Badge - Mobile optimized */}
                 <div className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-black/80 text-white px-2.5 py-1 sm:px-3 sm:py-1 rounded-full flex items-center">

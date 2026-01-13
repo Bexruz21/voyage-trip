@@ -237,10 +237,10 @@ export function ToursSection() {
                       <div className="text-xs text-yellow-500">{t('home.tours.rating')}</div>
                     </div>
 
-                    <div className="inline-flex items-center gap-1 bg-cyan-50 px-3 py-1 rounded-lg border border-cyan-200">
+                    {/* <div className="inline-flex items-center gap-1 bg-cyan-50 px-3 py-1 rounded-lg border border-cyan-200">
                       <div className="text-base lg:text-lg font-bold text-cyan-600">{t('home.tours.price_start') != 'home.tours.price_start' ? t('home.tours.price_start') : ''} ${region.price} {t('home.tours.priceAfter') != 'home.tours.priceAfter' ? t('home.tours.priceAfter') : ''}</div>
                       <div className="text-xs text-cyan-500">{t('home.tours.price')}</div>
-                    </div>
+                    </div> */}
                   </div>
 
                   {/* Информация о туре */}

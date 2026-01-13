@@ -206,8 +206,8 @@ ${formData.message}
             {/* Price Card */}
             <div className="bg-white border border-gray-200 text-gray-800 rounded-xl p-4 sm:p-6">
               <div className="text-center mb-4 sm:mb-6">
-                <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2 text-gray-900">${city.price}</div>
-                <div className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">{t('destinations.cityDetail.perPerson')}, {city.duration} {t('destinations.cityDetail.days')}</div>
+                {/* <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2 text-gray-900">${city.price}</div> */}
+                {/* <div className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">{t('destinations.cityDetail.perPerson')}, {city.duration} {t('destinations.cityDetail.days')}</div> */}
 
                 <button
                   onClick={() => setOpenBooking(true)}
