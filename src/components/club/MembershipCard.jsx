@@ -33,6 +33,7 @@ export function MembershipCard({ card }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
+            className='w-128'
         >
             <div
                 className="relative h-full bg-white rounded-2xl border-2 hover:shadow-xl transition-all duration-300 flex flex-col"
